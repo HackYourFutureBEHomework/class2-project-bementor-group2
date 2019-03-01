@@ -21,29 +21,29 @@ This project will test your skill & knowledge on everything you've learned so fa
 
 The application has the following structure:
 
-`client`
+`client`  
 Folder for everything front-end related. Houses the React application.
 
-`client/src/App.jsx`
+`client/src/App.jsx`  
 Application entrypoint with `react-router` definitions.
 
-`client/src/api`
+`client/src/api`  
 One file per resource (e.g. module, path, user) that has `XHR`/`fetch` functions for retreiving and manipulating data from the API.
 
-`client/src/assets/css`
+`client/src/assets/css`  
 All of your styles, the methodology/flavouring/preprocessor you use, is all up to you.
 
-`client/src/assets/images`
+`client/src/assets/images`  
 
-`client/src/components`
+`client/src/components`  
 All of your components, group these up per page.
 
 
 
-`server`
+`server`  
 Folder for everything back-end related. Houses a decoupled, Node API
 
-`server/src/controller`
-`server/src/model`
-`server/src/route`
+`server/src/controller`  
+`server/src/model`  
+`server/src/route`  
 Each of these folders have one file per resource.
