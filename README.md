@@ -1,8 +1,7 @@
 # HackYourFutureBE Class 2 Project - BeMentor
 
-<project info>
-
-### Goals for the project
+BeMentor is a mentoring platform that aims to get and keep women in the information technology sector. It is being developed by students and the coordination team of HackYourFuture at BeCentral. BeCentral is a digital campus in the heart of Brussels, and will also be the physical meeting place to facilitate mentorships as a result of BeMentor.
+The initial version of the platform will focus mostly on matchmaking and first steps towards in-person mentorships.
 
 
 ### Goals for the students
