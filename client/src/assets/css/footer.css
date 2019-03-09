@@ -1,0 +1,28 @@
+/* Style the footer */
+.footer {
+  background-color: #009688;
+  padding: 15px;
+  text-align: left;
+  font-size: 15px;
+  color: white;
+  margin-right: 0px;
+  margin-left: 0px;
+  position: 0px;
+  display: flex; /* or inline-flex */
+  flex-direction: column;
+  justify-content: space-around;
+}
+/*table.space {
+  border: 1px solid #009688;
+  border-spacing: 5px 10px;
+}*/
+
+/*.td {
+  display: flex; /* or inline-flex */
+/*flex-direction: column;
+  justify-content: space-around;
+}*/
+
+/*.item {
+  flex-grow: 4; /* default 0 
+}*/
