@@ -1,0 +1,43 @@
+.footer {
+  height: 11rem;
+  position: absolute;
+  background: rgb(89, 219, 128);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10rem 5rem;
+}
+
+.footer_icons {
+  color: rgb(255, 255, 255);
+  font-size: 3rem;
+  display: flex;
+  align-content: center;
+}
+
+.footer_icons a {
+  align-self: center;
+  margin-right: 2rem;
+}
+
+.footer_logo {
+  display: flex;
+  align-content: center;
+}
+
+.footer_logo a {
+  display: block;
+  width: 7rem;
+  align-self: center;
+  margin-left: 10rem;
+}
+
+.footer_logo a:first-child {
+  width: 10rem;
+}
+
+.footer_logo img {
+  width: 100%;
+}
