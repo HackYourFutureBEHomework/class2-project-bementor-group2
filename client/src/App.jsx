@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/:path(|index|home|start)" component={(Home, Header)} />
+          <Route path="/:path(|index|home|start)" component={(Home)} />
           <Route render={() => <p>Page not found</p>} />
         </Switch>
       </BrowserRouter>
