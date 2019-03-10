@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./index.css";
+import "../assets/css/Header.css";
 
 class Header extends Component {
   myFunction() {
@@ -14,19 +14,15 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <div className="container">
-          <div className="centered">BeMentor</div>
+        <div className="header_image">
+          <div className="header_title">BeMentor</div>
         </div>
         <div className="topnav" id="myTopnav">
           <Link to="/login">LOGIN</Link>
           <Link to="/contact">CONTACT</Link>
           <Link to="/connect">CONNECT</Link>
           <Link to="/home">HOME</Link>
-          <a
-            href="javascript:void(0);"
-            className="icon"
-            onClick={this.myFunction}
-          >
+          <a href="#" className="icon" onClick={this.myFunction}>
             <i className="fa fa-bars" />
           </a>
         </div>

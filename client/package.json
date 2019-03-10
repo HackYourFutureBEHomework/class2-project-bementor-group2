@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-brands-svg-icons": "^5.7.2",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "bootstrap": "^4.3.1",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
@@ -21,5 +26,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.2"
+  }
 }
