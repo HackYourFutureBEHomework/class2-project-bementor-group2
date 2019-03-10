@@ -11,13 +11,20 @@ main {
   padding-left: 30px;
 }
 
+main > header {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 999;
+}
+
 .topnav {
   overflow: hidden;
   background-color: #4caf50;
 }
 
 .topnav a {
-  float: left;
+  float: right;
   display: block;
   color: #f2f2f2;
   text-align: center;
@@ -41,7 +48,7 @@ main {
 }
 
 @media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {
+  .topnav a {
     display: none;
   }
   .topnav a.icon {

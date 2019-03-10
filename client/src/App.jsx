@@ -14,10 +14,15 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Switch>
-          <Route path="/:path(|index|home|start)" component={(Home, Header)} />
-          <Route render={() => <p>Page not found</p>} />
-        </Switch>
+        <div className="App">
+          <main>
+            <Header />
+            <Switch>
+              <Route path="/:path(|index|home|start)" component={Home} />
+              <Route render={() => <p>Page not found</p>} />
+            </Switch>
+          </main>
+        </div>
       </BrowserRouter>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./index.css";
-import bg from "./pattern.gif";
 
 class Header extends Component {
   myFunction() {
@@ -13,29 +13,24 @@ class Header extends Component {
   }
   render() {
     return (
-      <div>
+      <header>
         <div className="container">
-          {/*<img src={bg} />*/}
           <div className="centered">BeMentor</div>
         </div>
-        <header>
-          <div className="topnav" id="myTopnav">
-            <a href="#home" className="active">
-              Home
-            </a>
-            <a href="#login">LOGIN</a>
-            <a href="#contact">CONTACT</a>
-            <a href="#connect">CONNECT</a>
-            <a
-              href="javascript:void(0);"
-              className="icon"
-              onClick={this.myFunction}
-            >
-              <i className="fa fa-bars" />
-            </a>
-          </div>
-        </header>
-      </div>
+        <div className="topnav" id="myTopnav">
+          <Link to="/login">LOGIN</Link>
+          <Link to="/contact">CONTACT</Link>
+          <Link to="/connect">CONNECT</Link>
+          <Link to="/home">HOME</Link>
+          <a
+            href="javascript:void(0);"
+            className="icon"
+            onClick={this.myFunction}
+          >
+            <i className="fa fa-bars" />
+          </a>
+        </div>
+      </header>
     );
   }
 }
