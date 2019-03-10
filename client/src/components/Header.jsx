@@ -3,31 +3,39 @@ import "./index.css";
 import bg from "./pattern.gif";
 
 class Header extends Component {
+  myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
   render() {
     return (
-      <article>
-        <div class="container">
+      <div>
+        <div className="container">
           {/*<img src={bg} />*/}
           <div className="centered">BeMentor</div>
         </div>
         <header>
-          <nav>
-            <ul>
-              <ul>
-                <li>
-                  <a href="#login">LOGIN</a>
-                </li>
-                <li>
-                  <a href="#connect">CONNECT</a>
-                </li>
-                <li>
-                  <a href="#contact">CONTACT</a>
-                </li>
-              </ul>
-            </ul>
-          </nav>
+          <div className="topnav" id="myTopnav">
+            <a href="#home" className="active">
+              Home
+            </a>
+            <a href="#login">LOGIN</a>
+            <a href="#contact">CONTACT</a>
+            <a href="#connect">CONNECT</a>
+            <a
+              href="javascript:void(0);"
+              className="icon"
+              onClick={this.myFunction}
+            >
+              <i className="fa fa-bars" />
+            </a>
+          </div>
         </header>
-      </article>
+      </div>
     );
   }
 }
