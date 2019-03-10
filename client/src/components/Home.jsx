@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../assets/css/Body.css";
 import Foto from "../assets/images/ticket.jpg";
 
 const Home = props => {
@@ -12,7 +12,7 @@ const Home = props => {
       fringilla pellentesque erat eleifend integer magna condimentum, placerat
       quam quod. Et risus placerat proin eros, nunc sed quisque ac donec,
       pellentesque enim lectus quam quis morbi et <br />
-      <img src={Foto} alt="random photo" width="25%" />
+      <img className="imgResponsive content" src={Foto} alt="BeCentral" />
       <br />
     </p>
   );

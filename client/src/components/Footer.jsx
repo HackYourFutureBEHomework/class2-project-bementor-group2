@@ -60,14 +60,14 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src={OKB} alt="OKB logo" />
+          <img src={OKB} alt="OKB logo" className="imgResponsive" />
         </a>
         <a
           href="https://becentral.org/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src={BeCentral} alt="BeCentral logo" />
+          <img src={BeCentral} alt="BeCentral logo" className="imgResponsive" />
         </a>
       </div>
     </footer>
