@@ -17,7 +17,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: rgb(23, 233, 93);
+  background-color: #00b265;
 }
 
 li {
@@ -51,7 +51,7 @@ li a:hover:not(.active) {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: rgb(23, 233, 93);
+  color: #00b265;
   background-color: white;
   font-size: 50px;
   font-family: "Poppins", sans-serif;
