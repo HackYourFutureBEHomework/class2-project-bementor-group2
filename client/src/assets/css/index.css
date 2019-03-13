@@ -28,3 +28,8 @@ h2 {
 h3 {
   font-size: 1.9rem;
 }
+
+.imgResponsive {
+  width: 100%;
+  height: auto;
+}

@@ -1,0 +1,7 @@
+.body {
+  display: flex;
+  padding: 20rem 1rem 0rem 1rem;
+}
+img.content {
+  padding: 2rem;
+}

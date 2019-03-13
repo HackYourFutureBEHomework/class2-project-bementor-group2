@@ -1,28 +1,34 @@
-import React from "react";
-import "../assets/css/Header.css";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "../assets/css/Header.css";
 
-const Header = () => {
-  return (
-    <header>
-      <div className="header_image">
-        <h1 className="header_title">BE MENTOR</h1>
-      </div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="#Connect">Connect</Link>
-          </li>
-          <li>
-            <Link to="#Contact">Contact</Link>
-          </li>
-          <li>
-            <Link to="#Login">Login</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
-};
+class Header extends Component {
+  myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  render() {
+    return (
+      <header>
+        <div className="header_image">
+          <div className="header_title">BeMentor</div>
+        </div>
+        <div className="topnav" id="myTopnav">
+          <Link to="/login">LOGIN</Link>
+          <Link to="/contact">CONTACT</Link>
+          <Link to="/connect">CONNECT</Link>
+          <Link to="/home">HOME</Link>
+          <a href="#" className="icon" onClick={this.myFunction}>
+            <i className="fa fa-bars" />
+          </a>
+        </div>
+      </header>
+    );
+  }
+}
 
-  export default Header;
+export default Header;

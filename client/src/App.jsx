@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { getMentors } from "./api/mentors";
-import Home from "./components/Home";
+import { BrowserRouter } from "react-router-dom";
+
 import Header from "./components/Header";
+import Body from "./components/Body";
+import Footer from "./components/Footer";
+
+import { getMentors } from "./api/mentors";
 
 class App extends Component {
   componentDidMount() {
@@ -14,10 +17,13 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Switch>
-          <Route path="/:path(|index|home|start)" component={(Home)} />
-          <Route render={() => <p>Page not found</p>} />
-        </Switch>
+        <div className="App">
+          <main>
+            <Header />
+            <Body />
+            <Footer />
+          </main>
+        </div>
       </BrowserRouter>
     );
   }
