@@ -9,21 +9,13 @@ class Footer extends Component {
           <div container>
             <div className="footer">
               <footer>
-                <table>
-                  <td>
-                    <i className="fab fa-twitter" />{" "}
-                  </td>
-                  <td>
-                    <i className="fab fa-facebook-f" />{" "}
-                  </td>
-                  <td>
-                    <i className="fab fa-github" />{" "}
-                  </td>
-                  <td>
-                    <i className="copyright" />
-                    {"eMighty - Powerfull Coding"}
-                  </td>
-                </table>
+                <i className="fab fa-twitter" />{" "}
+                <i className="fab fa-facebook-f" />{" "}
+                <i className="fab fa-github" />{" "}
+                <span>
+                  <i className="copyright" />
+                  {"eMighty - Powerfull Coding"}
+                </span>
               </footer>
             </div>
           </div>
