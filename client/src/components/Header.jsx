@@ -5,11 +5,7 @@ import "../assets/css/Header.css";
 class Header extends Component {
   myFunction() {
     var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-      x.className += " responsive";
-    } else {
-      x.className = "topnav";
-    }
+    x.className = x.className === "topnav" ? "topnav responsive" : "topnav";
   }
   render() {
     return (
