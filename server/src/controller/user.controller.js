@@ -7,7 +7,7 @@ const errHandler = err => {
 };
 
 // Allow to search for a text case insensitive
-const regExpHandler = text => new RegExp("^" + text + "$", "i");
+const containNoCaseHandler = text => new RegExp(text, "i");
 
 exports.findAll = (req, res) => {
   User.find()
@@ -44,20 +44,20 @@ exports.delete = (req, res) => {
 exports.search = (req, res) => {
   const searchParams = {};
   if (req.query.firstName) {
-    searchParams["firstName"] = req.query.firstName;
+    searchParams["firstName"] = containNoCaseHandler(req.query.firstName);
   }
   if (req.query.secondName) {
-    searchParams["secondName"] = req.query.secondName;
+    searchParams["secondName"] = containNoCaseHandler(req.query.secondName);
   }
   if (req.query.location) {
-    searchParams["location"] = req.query.location;
+    searchParams["location"] = containNoCaseHandler(req.query.location);
   }
   /* TODO: query arrays */
   if (req.query.interests) {
-    searchParams["interests"] = regExpHandler(req.query.interests);
+    searchParams["interests"] = containNoCaseHandler(req.query.interests);
   }
   if (req.query.skills) {
-    searchParams["skills"] = regExpHandler(req.query.skills);
+    searchParams["skills"] = containNoCaseHandler(req.query.skills);
   }
   if (req.query.email) {
     searchParams["e-mail"] = req.query.email;

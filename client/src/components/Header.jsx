@@ -17,6 +17,7 @@ class Header extends Component {
           <Link to="/login">LOGIN</Link>
           <Link to="/contact">CONTACT</Link>
           <Link to="/connect">CONNECT</Link>
+          <Link to="/search">SEARCH</Link>
           <Link to="/home">HOME</Link>
           <a href="#" className="icon" onClick={this.myFunction}>
             <i className="fa fa-bars" />
