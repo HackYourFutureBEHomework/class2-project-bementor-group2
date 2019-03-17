@@ -20,7 +20,8 @@ main > header {
 
 .topnav {
   overflow: hidden;
-  background-color: #4caf50;
+  background-color: #00b265;
+  padding: 0px 20px;
 }
 
 .topnav a {
@@ -28,18 +29,22 @@ main > header {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 15px 20px;
   text-decoration: none;
-  font-size: 17px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 200;
 }
 
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 9px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+  color: #00b256;
 }
 
 .active {
   background-color: black;
+  padding: 15px;
   color: white;
 }
 
@@ -92,4 +97,5 @@ main > header {
   background-color: white;
   font-size: 50px;
   font-family: "Poppins", sans-serif;
+  font-weight: 700;
 }
