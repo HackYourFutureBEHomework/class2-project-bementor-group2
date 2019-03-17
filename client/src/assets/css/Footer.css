@@ -17,7 +17,7 @@
 .footer_icons a {
   color: rgb(255, 255, 255);
   align-self: center;
-  margin-right: 2rem;
+  margin-left: 2rem;
 }
 
 .footer_logo {
@@ -29,7 +29,7 @@
   display: block;
   width: 7rem;
   align-self: center;
-  margin-left: 10rem;
+  margin-right: 3rem;
 }
 
 .footer_logo a:first-child {
