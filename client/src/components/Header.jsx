@@ -15,6 +15,7 @@ class Header extends Component {
         </div>
         <div className="topnav" id="myTopnav">
           <Link to="/login">LOGIN</Link>
+          <Link to="/user">USER</Link>
           <Link to="/contact">CONTACT</Link>
           <Link to="/connect">CONNECT</Link>
           <Link to="/home">HOME</Link>
