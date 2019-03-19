@@ -1,28 +1,83 @@
-import React, { Component } from "react";
-import styles from "/home/hyfbe16/class2-project-bementor-group2/client/src/assets/css/footer.css";
+import React from "react";
+import "../assets/css/Footer.css";
+import OKB from "../assets/images/OKB.svg";
+import BeCentral from "../assets/images/BeCentral.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTwitter,
+  faFacebook,
+  faLinkedin,
+  faInstagram
+} from "@fortawesome/free-brands-svg-icons";
 
-class Footer extends Component {
-  render() {
-    return (
-      <div id="container">
-        <div className="header">
-          <div container>
-            <div className="footer">
-              <footer>
-                <i className="fab fa-twitter" />{" "}
-                <i className="fab fa-facebook-f" />{" "}
-                <i className="fab fa-github" />{" "}
-                <span>
-                  <i className="copyright" />
-                  {"eMighty - Powerfull Coding"}
-                </span>
-              </footer>
-            </div>
-          </div>
-        </div>
+const Footer = () => {
+  return (
+    <footer className="footer">
+      <div className="footer_icons">
+        <a
+          href="https://www.linkedin.com/company/be-central-brussels/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i>
+            <FontAwesomeIcon icon={faLinkedin} />
+          </i>
+        </a>
+        <a
+          href="https://www.facebook.com/becentral/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i>
+            <FontAwesomeIcon
+              icon={faFacebook}
+              href="https://www.facebook.com/becentral/"
+            />
+          </i>
+        </a>
+        <a
+          href="https://twitter.com/becentralbxl/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i>
+            <FontAwesomeIcon icon={faTwitter} />
+          </i>
+        </a>
+        <a
+          href="https://www.instagram.com/becentral/?hl=fr"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i>
+            <FontAwesomeIcon icon={faInstagram} />
+          </i>
+        </a>
+        {/* TO BE INTEGRATED */}
+        {/*
+        <span>
+          <i className="copyright">eMighty - Powerfull Coding</i>
+        </span>
+        */}
       </div>
-    );
-  }
-}
+      <div className="footer_logo">
+        <a
+          href="https://be.okfn.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={OKB} alt="OKB logo" className="imgResponsive" />
+        </a>
+        <a
+          href="https://becentral.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={BeCentral} alt="BeCentral logo" className="imgResponsive" />
+        </a>
+      </div>
+    </footer>
+  );
+};
 
 export default Footer;

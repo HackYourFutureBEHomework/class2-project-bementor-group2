@@ -3,7 +3,9 @@ html {
   font-size: 62.5%;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -25,4 +27,9 @@ h2 {
 
 h3 {
   font-size: 1.9rem;
+}
+
+.imgResponsive {
+  width: 100%;
+  height: auto;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import styles from "/home/hyfbe16/class2-project-bementor-group2/client/src/assets/css/user.css";
+
+import "../assets/css/user.css";
 
 class User extends Component {
   render() {
@@ -19,7 +20,6 @@ class User extends Component {
             </td>
             <td>
               <br />
-
               <br />
               <h2 className="mySummary">
                 It always seems impossible untill it is done
