@@ -87,6 +87,10 @@ main > header {
   height: 150px;
 }
 
+img.profileLogo {
+  position: absolute;
+}
+
 /* Centered text */
 .header_title {
   position: absolute;
@@ -98,4 +102,86 @@ main > header {
   font-size: 50px;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
+}
+/* Search form */
+.search__form {
+  float: right;
+  display: block;
+  background: #00b265;
+  text-align: center;
+  padding: 15px 20px;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 200;
+  margin: -3px;
+}
+
+/* input#search_input {
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 200;
+  padding: 0;
+  margin: 0;
+  height: 22px; */
+/* } */
+input#search_input {
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  font-weight: 200;
+  height: 22px;
+  font-size: 16px;
+  margin: 0;
+  display: inline-block;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  padding-right: 0px;
+  width: 0px;
+  position: relative;
+  top: 0;
+  right: 0;
+  background: none;
+  z-index: 3;
+  transition: width 0.4s cubic-bezier(0, 0.795, 0, 1);
+  cursor: pointer;
+}
+
+input#search_input::placeholder {
+  color: white;
+  border: none;
+}
+
+input#search_input:focus:hover {
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+input#search_input:focus {
+  width: 200px;
+  z-index: 1;
+  border-bottom: 1px solid rgb(255, 255, 255);
+  cursor: text;
+}
+
+input#search_submit {
+  height: 20px;
+  width: 20px;
+  float: right;
+  background: url(../images/magnifying-glass.svg) center center no-repeat;
+  background-size: 100% 100%;
+  -webkit-filter: invert(100%);
+  text-indent: -10000px;
+  border: none;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.4s ease;
+}
+#search_submit:hover {
+  color: white;
+  opacity: 0.2;
 }

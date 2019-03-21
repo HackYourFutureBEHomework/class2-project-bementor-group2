@@ -5,4 +5,5 @@ module.exports = app => {
   app.post("/user", users.create);
   // app.patch("/user/:id", users.update);
   // app.delete("/user/:id", users.delete);
+  app.get("user/search", users.search);
 };

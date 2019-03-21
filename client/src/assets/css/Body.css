@@ -1,6 +1,9 @@
 .body {
   display: flex;
+  position: relative;
+  flex-direction: column;
   padding: 20rem 1rem 0rem 1rem;
+  width: 100vw;
 }
 img.content {
   padding: 2rem;

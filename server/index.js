@@ -49,7 +49,7 @@ app.patch("/user/:_id", (req, res) => {
 
 //deleting user to database to paste here ID of user to delete
 app.delete("/user/:_id", (req, res) => {
-  User.findOneAndDelete({ _id: req.params._id })
+  User.remove({ _id: req.params._id })
     .then(() => res.json({ message: "User was deleted" }))
     .catch(err => {
       res.status(500).send({

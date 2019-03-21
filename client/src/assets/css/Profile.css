@@ -1,0 +1,150 @@
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #384047;
+  align-self: center;
+}
+
+.userForm {
+  width: 70%;
+}
+
+form.userForm {
+  max-width: 90vw;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background: #f4f7f8;
+}
+
+h1 {
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 150px;
+  overflow: hidden;
+}
+img.profileLogo {
+  width: 170px;
+  height: 170px;
+  border: 5px solid;
+  border-color: #00b265;
+  border-radius: 50%;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+textarea,
+select {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  font-size: 16px;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  padding: 15px;
+  width: 100%;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+  margin-bottom: 30px;
+}
+
+input.bio,
+textarea.bio {
+  height: 200px;
+}
+
+input[type="checkbox"] {
+  margin: 0 0px 8px 20px;
+  padding: 30px;
+}
+
+button {
+  padding: 19px 39px 18px 39px;
+  color: #fff;
+  background-color: #00b265;
+  font-size: 18px;
+  text-align: center;
+  font-style: normal;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid #3ac162;
+  border-width: 1px 1px 3px;
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+  margin-bottom: 10px;
+}
+
+fieldset {
+  margin-bottom: 30px;
+  border: none;
+}
+
+legend {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+label.light {
+  font-weight: 300;
+  display: inline;
+}
+
+.languages {
+  margin-top: 15px;
+}
+.number {
+  background-color: #00b265;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-right: 4px;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-radius: 100%;
+}
+
+.deleteUser_button {
+  background-color: red;
+  border: 1px solid #da3c3c;
+  position: absolute;
+  text-align: center;
+  padding: 0;
+  bottom: 100px;
+  right: 240px;
+  width: 90px;
+  height: 40px;
+}
+.updateUser_button {
+  background-color: orange;
+  border: 1px solid #ffc74e;
+  position: absolute;
+  text-align: center;
+  padding: 0;
+  bottom: 100px;
+  right: 350px;
+  width: 90px;
+  height: 40px;
+}
