@@ -29,7 +29,7 @@ class Users extends Component {
     const { users } = this.state;
 
     const $users = users.map(user => (
-      <UserCardSmall key={user._id} {...user} />
+      <UserCardSmall key={user._id} user={user} />
     ));
 
     return (
