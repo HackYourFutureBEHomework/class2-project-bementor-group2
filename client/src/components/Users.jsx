@@ -11,6 +11,11 @@ class Users extends Component {
       users: []
     };
   }
+
+  onSearch = users => {
+    this.setState({ users });
+  };
+
   componentDidMount() {
     fetch(`http://localhost:4000/user`)
       .then(res => res.json())
@@ -22,14 +27,15 @@ class Users extends Component {
 
   render() {
     const { users } = this.state;
+
     const $users = users.map(user => (
-      <UserCardSmall key={user._id} user={user} />
+      <UserCardSmall key={user._id} {...user} />
     ));
 
     return (
       <Fragment>
         <div className="searchField">
-          <SearchUser />
+          <SearchUser onSearch={this.onSearch} />
         </div>
 
         <div className="container">{$users}</div>

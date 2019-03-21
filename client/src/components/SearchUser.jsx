@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import "../assets/css/SearchUser.css";
+import { searchUsers } from "../api/users";
 
 class SearchUser extends Component {
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
     console.log(this.state);
+    const users = await searchUsers(this.state.query);
+    this.props.onSearch(users);
   };
 
   handleInputChanged = event => {
