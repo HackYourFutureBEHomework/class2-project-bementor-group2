@@ -14,15 +14,31 @@ class Header extends Component {
           <div className="header_title">BeMentor.</div>
         </div>
         <div className="topnav" id="myTopnav">
-          <Link to="/login">LOGIN</Link>
-          <Link to="/user">USER</Link>
-          <Link to="/contact">CONTACT</Link>
-          <Link to="/connect">CONNECT</Link>
-          <Link to="/search">SEARCH</Link>
-          <Link to="/home">HOME</Link>
-          <a href="#" className="icon" onClick={this.myFunction}>
+          <Link to="/login" onClick={this.myFunction}>
+            LOGIN
+          </Link>
+          <Link to="/user" onClick={this.myFunction}>
+            USER
+          </Link>
+          <Link to="/contact" onClick={this.myFunction}>
+            CONTACT
+          </Link>
+          <Link to="/connect" onClick={this.myFunction}>
+            CONNECT
+          </Link>
+          <Link to="/search" onClick={this.myFunction}>
+            SEARCH
+          </Link>
+          <Link to="/home" onClick={this.myFunction}>
+            HOME
+          </Link>
+          <button
+            type="button"
+            className="link-button icon"
+            onClick={this.myFunction}
+          >
             <i className="fa fa-bars" />
-          </a>
+          </button>
         </div>
       </header>
     );

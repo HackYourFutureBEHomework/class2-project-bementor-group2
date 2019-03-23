@@ -24,7 +24,8 @@ main > header {
   padding: 0px 20px;
 }
 
-.topnav a {
+.topnav a,
+.topnav button {
   float: right;
   display: block;
   color: #f2f2f2;
@@ -36,7 +37,8 @@ main > header {
   font-weight: 200;
 }
 
-.topnav a:hover {
+.topnav a:hover,
+.topnav button:hover {
   background-color: rgb(255, 255, 255);
   box-shadow: 9px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
   color: #00b256;
@@ -56,7 +58,7 @@ main > header {
   .topnav a {
     display: none;
   }
-  .topnav a.icon {
+  .topnav .icon {
     float: right;
     display: block;
   }
@@ -98,4 +100,19 @@ main > header {
   font-size: 50px;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
+}
+
+.link-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.link-button:hover,
+.link-button:focus {
+  text-decoration: none;
 }
