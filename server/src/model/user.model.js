@@ -91,7 +91,11 @@ const UserSchema = mongoose.Schema(
 UserSchema.index({
   firstName: "text",
   lastName: "text",
-  location: "text"
+  location: "text",
+  tagline: "text",
+  location: "text",
+  bio: "text",
+  interests: "text"
 });
 
 module.exports = mongoose.model("User", UserSchema);

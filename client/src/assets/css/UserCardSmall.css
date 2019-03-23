@@ -16,6 +16,7 @@ a {
   /* border-style: solid; */
   box-shadow: 9px 4px 8px 0 rgba(0, 178, 101, 0.12),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  max-width: 270px;
 }
 
 .details__small {
@@ -41,7 +42,7 @@ a {
 }
 
 .details__name {
-  font-size: 1.8em;
+  font-size: 1.2em;
 }
 
 .details__firstName {
@@ -51,7 +52,7 @@ a {
 
 .details__lastName {
   color: #00b265;
-  margin-top: -20px;
+  margin-top: -10px;
   margin-bottom: -15px;
   font-weight: bold;
 }

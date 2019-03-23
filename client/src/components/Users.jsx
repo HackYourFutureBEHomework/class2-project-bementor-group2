@@ -3,6 +3,7 @@ import UserCardSmall from "./UserCardSmall";
 import "../assets/css/Users.css";
 import "../assets/css/UserCardSmall.css";
 import SearchUser from "./SearchUser";
+import { getUsers, searchUsers } from "../api/users";
 
 class Users extends Component {
   constructor(props) {
@@ -12,11 +13,17 @@ class Users extends Component {
     };
   }
 
-  onSearch = users => {
+  onSearch = async query => {
+    const users = await searchUsers(query);
     this.setState({ users });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const users = await getUsers();
+    this.setState({
+      users: users
+    });
+
     fetch(`http://localhost:4000/user`)
       .then(res => res.json())
       .then(users => {
