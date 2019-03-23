@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+import API_PREFIX_URL from "../config";
 
 class Search extends Component {
   constructor(props) {
@@ -21,10 +24,11 @@ class Search extends Component {
 
   search(searchText) {
     const queryString = "firstName=" + searchText.toLowerCase().trim();
-    fetch("http://localhost:4000/users?" + queryString)
+
+    fetch(`${API_PREFIX_URL}/users?${queryString}`)
       .then(response => response.json())
       .then(result => {
-        console.log("componentDidMount: result: ", result);
+        console.log("search: result: ", result);
         this.setState({
           users: result
         });
@@ -38,10 +42,10 @@ class Search extends Component {
         return (
           <div key={_id} className="">
             <div className="clist__name">
-              <div>
+              <Link to={"/search/users/" + _id}>
                 <span className="clist__firstName">{firstName}</span>{" "}
                 <span className="clist__secondName">{secondName}</span>
-              </div>
+              </Link>
               <div className="clist__skills">{skills.join(", ")}</div>
               <div className="clist__email">{email}</div>
               <div className="clist__location">{location}</div>
