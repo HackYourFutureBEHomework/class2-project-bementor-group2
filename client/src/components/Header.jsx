@@ -11,10 +11,11 @@ class Header extends Component {
     return (
       <header>
         <div className="header_image">
-          <div className="header_title">BeMentor</div>
+          <div className="header_title">BeMentor.</div>
         </div>
         <div className="topnav" id="myTopnav">
           <Link to="/login">LOGIN</Link>
+          <Link to="/user">USER</Link>
           <Link to="/contact">CONTACT</Link>
           <Link to="/connect">CONNECT</Link>
           <Link to="/search">SEARCH</Link>
