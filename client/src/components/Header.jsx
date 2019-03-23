@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "../assets/css/Header.css";
 
 class Header extends Component {
@@ -11,9 +11,17 @@ class Header extends Component {
   handleHeaderSubmit = event => {
     event.preventDefault();
     console.log(this.state);
-    console.log(this.props);
-    // this.props.onSearch(this.state.query);
+    // this.state.query && (
+    //   <Redirect
+    //     to={{
+    //       pathname: "/users",
+    //       state: { query: this.state.query }
+    //     }}
+    //   />
+    // );
   };
+  // this.props.onSearch(this.state.query);
+
   handleHeaderInputChanged = event => {
     this.setState({
       query: event.target.value
@@ -48,7 +56,6 @@ class Header extends Component {
           <Link to="/contact">CONTACT</Link>
           <Link to="/users">CONNECT</Link>
           <Link to="/home">HOME</Link>
-
           <a href="#" className="icon" onClick={this.myFunction}>
             <i className="fa fa-bars" />
           </a>

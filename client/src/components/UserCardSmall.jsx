@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Route from "react-router-dom";
 import locationLogo from "../assets/images/otherlogos/location_marker.png";
 import cssLogo from "../assets/images/slills_logos_svg/CSS3_logo.svg";
 import HTMLLogo from "../assets/images/slills_logos_svg/HTML5_logo.svg";
@@ -9,6 +10,10 @@ class UserCardSmall extends Component {
   constructor(props) {
     super(props);
     this.state = { users: [] };
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ users: newProps.users });
   }
 
   deleteUser = userToDelete => {

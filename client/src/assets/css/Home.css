@@ -1,0 +1,10 @@
+.container_mainPage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.container_mainPage > div {
+  width: 40%;
+  margin: 20px;
+}

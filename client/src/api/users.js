@@ -5,7 +5,7 @@ export const getUsers = () => {
 };
 
 export const searchUsers = () => {
-  return fetch(`${API_URL}/user/search?text=&{query}`).then(response =>
+  return fetch(`${API_URL}/user/:search?text=&{query}`).then(response =>
     response.json()
   );
 };
