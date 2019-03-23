@@ -45,9 +45,9 @@ main > header {
 }
 
 .active {
-  background-color: black;
+  background-color: lightgreen;
   padding: 15px;
-  color: white;
+  color: darkslategray !important;
 }
 
 .topnav .icon {

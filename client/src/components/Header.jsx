@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../assets/css/Header.css";
 
 class Header extends Component {
@@ -14,24 +14,48 @@ class Header extends Component {
           <div className="header_title">BeMentor.</div>
         </div>
         <div className="topnav" id="myTopnav">
-          <Link to="/login" onClick={this.myFunction}>
+          <NavLink
+            to="/login"
+            activeClassName="active"
+            onClick={this.myFunction}
+          >
             LOGIN
-          </Link>
-          <Link to="/user" onClick={this.myFunction}>
+          </NavLink>
+          <NavLink
+            to="/user"
+            activeClassName="active"
+            onClick={this.myFunction}
+          >
             USER
-          </Link>
-          <Link to="/contact" onClick={this.myFunction}>
+          </NavLink>
+          <NavLink
+            to="/contact"
+            activeClassName="active"
+            onClick={this.myFunction}
+          >
             CONTACT
-          </Link>
-          <Link to="/connect" onClick={this.myFunction}>
+          </NavLink>
+          <NavLink
+            to="/connect"
+            activeClassName="active"
+            onClick={this.myFunction}
+          >
             CONNECT
-          </Link>
-          <Link to="/search" onClick={this.myFunction}>
+          </NavLink>
+          <NavLink
+            to="/search"
+            activeClassName="active"
+            onClick={this.myFunction}
+          >
             SEARCH
-          </Link>
-          <Link to="/home" onClick={this.myFunction}>
+          </NavLink>
+          <NavLink
+            to="/home"
+            activeClassName="active"
+            onClick={this.myFunction}
+          >
             HOME
-          </Link>
+          </NavLink>
           <button
             type="button"
             className="link-button icon"
