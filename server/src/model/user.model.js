@@ -2,13 +2,25 @@ const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema(
   {
+    mentor: {
+      type: Boolean
+    },
+    mentee: {
+      type: Boolean
+    },
     firstName: {
       type: String,
       required: true
     },
-    secondName: {
+    lastName: {
       type: String,
       required: true
+    },
+    password: {
+      type: String
+    },
+    email: {
+      type: String
     },
     tagline: {
       type: String
@@ -20,30 +32,70 @@ const UserSchema = mongoose.Schema(
       type: String
     },
     interests: {
-      type: [String]
-    },
-    skills: {
-      type: [String]
-    },
-    "e-mail": {
       type: String
     },
-    mentorOrMentee: {
-      type: [String]
+    html: {
+      type: Boolean
     },
-    ranking: {
-      type: String
+    css: {
+      type: Boolean
     },
-    membershipDate: {
-      type: Date
+    js: {
+      type: Boolean
     },
-    spokenLanguage: {
-      type: [String]
+    datab: {
+      type: Boolean
+    },
+    node: {
+      type: Boolean
+    },
+    react: {
+      type: Boolean
+    },
+    cli: {
+      type: Boolean
+    },
+    git: {
+      type: Boolean
+    },
+    eng: {
+      type: Boolean
+    },
+    fr: {
+      type: Boolean
+    },
+    du: {
+      type: Boolean
+    },
+    es: {
+      type: Boolean
+    },
+    ar: {
+      type: Boolean
+    },
+    tr: {
+      type: Boolean
+    },
+    rus: {
+      type: Boolean
+    },
+    script: {
+      type: Boolean
     }
   },
   {
     timestamps: true
   }
 );
+
+UserSchema.index({
+  firstName: "text",
+  lastName: "text",
+  location: "text",
+  tagline: "text",
+  location: "text",
+  bio: "text",
+  interests: "text"
+});
 
 module.exports = mongoose.model("User", UserSchema);

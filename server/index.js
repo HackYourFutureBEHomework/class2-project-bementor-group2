@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const User = require("./src/model/user.model");
 
 require("dotenv").config();
 
@@ -27,6 +26,7 @@ app.get("/", (req, res) => {
   res.json({ message: "API ready" });
 });
 
+/*
 // getting list of users from DB
 app.get("/user", (req, res) => {
   const users = User.find().then(users => {
@@ -49,7 +49,7 @@ app.patch("/user/:_id", (req, res) => {
 
 //deleting user to database to paste here ID of user to delete
 app.delete("/user/:_id", (req, res) => {
-  User.findOneAndDelete({ _id: req.params._id })
+  User.remove({ _id: req.params._id })
     .then(() => res.json({ message: "User was deleted" }))
     .catch(err => {
       res.status(500).send({
@@ -57,6 +57,7 @@ app.delete("/user/:_id", (req, res) => {
       });
     });
 });
+*/
 
 require("./src/route/user.route")(app);
 

@@ -1,0 +1,24 @@
+.searchField {
+  width: 80%;
+  align-self: center;
+}
+
+.searchUser {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.searchUser input[type="text"] {
+  width: 40%;
+  height: 30%;
+}
+
+.searchUser input[type="submit"] {
+  widows: 20%;
+  height: 30%;
+  padding: 17px;
+  margin-left: 7px;
+  background-color: #00b265;
+  color: white;
+}
