@@ -26,6 +26,39 @@ app.get("/", (req, res) => {
   res.json({ message: "API ready" });
 });
 
+/*
+// getting list of users from DB
+app.get("/user", (req, res) => {
+  const users = User.find().then(users => {
+    res.send(users);
+  });
+});
+
+//updating user info to database
+app.patch("/user/:_id", (req, res) => {
+  User.findByIdAndUpdate({ _id: req.params._id }, req.body)
+    .then(() => {
+      res.json({ message: "User info was updated" });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
+    });
+});
+
+//deleting user to database to paste here ID of user to delete
+app.delete("/user/:_id", (req, res) => {
+  User.remove({ _id: req.params._id })
+    .then(() => res.json({ message: "User was deleted" }))
+    .catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
+    });
+});
+*/
+
 require("./src/route/user.route")(app);
 
 const port = process.env.PORT || 4000;

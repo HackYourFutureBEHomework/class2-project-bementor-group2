@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link, Redirect } from "react-router-dom";
 import "../assets/css/Header.css";
 
 class Header extends Component {
@@ -7,6 +7,27 @@ class Header extends Component {
     var x = document.getElementById("myTopnav");
     x.className = x.className === "topnav" ? "topnav responsive" : "topnav";
   }
+
+  handleHeaderSubmit = event => {
+    event.preventDefault();
+    console.log(this.state);
+    // this.state.query && (
+    //   <Redirect
+    //     to={{
+    //       pathname: "/users",
+    //       state: { query: this.state.query }
+    //     }}
+    //   />
+    // );
+  };
+  // this.props.onSearch(this.state.query);
+
+  handleHeaderInputChanged = event => {
+    this.setState({
+      query: event.target.value
+    });
+  };
+
   render() {
     return (
       <header>
@@ -14,55 +35,29 @@ class Header extends Component {
           <div className="header_title">BeMentor.</div>
         </div>
         <div className="topnav" id="myTopnav">
-          <NavLink
-            to="/login"
-            activeClassName="active"
-            onClick={this.myFunction}
+          <form
+            className="search__form"
+            action=""
+            autoComplete="on"
+            onSubmit={this.handleHeaderSubmit}
           >
-            LOGIN
-          </NavLink>
-          <NavLink
-            to="/user"
-            activeClassName="active"
-            onClick={this.myFunction}
-          >
-            USER
-          </NavLink>
-          <NavLink
-            to="/contact"
-            activeClassName="active"
-            onClick={this.myFunction}
-          >
-            CONTACT
-          </NavLink>
-          <NavLink
-            to="/connect"
-            activeClassName="active"
-            onClick={this.myFunction}
-          >
-            CONNECT
-          </NavLink>
-          <NavLink
-            to="/search"
-            activeClassName="active"
-            onClick={this.myFunction}
-          >
-            SEARCH
-          </NavLink>
-          <NavLink
-            to="/home"
-            activeClassName="active"
-            onClick={this.myFunction}
-          >
-            HOME
-          </NavLink>
-          <button
-            type="button"
-            className="link-button icon"
-            onClick={this.myFunction}
-          >
+            <input
+              id="search_input"
+              name="search"
+              type="text"
+              placeholder="Find your Mentor"
+              onChange={this.handleHeaderInputChanged}
+            />
+            <input id="search_submit" value="Search" type="submit" />
+          </form>
+          <Link to="/myprofile">My BeMentor</Link>
+          <Link to="/login">LOGIN</Link>
+          <Link to="/contact">CONTACT</Link>
+          <Link to="/users">CONNECT</Link>
+          <Link to="/home">HOME</Link>
+          <a href="#" className="icon" onClick={this.myFunction}>
             <i className="fa fa-bars" />
-          </button>
+          </a>
         </div>
       </header>
     );

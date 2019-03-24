@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
-
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-
-import { getMentors } from "./api/mentors";
+import { getUsers } from "./api/users";
 
 class App extends Component {
   componentDidMount() {
-    getMentors().then(modules => {
+    getUsers().then(modules => {
       console.log(modules);
     });
   }
