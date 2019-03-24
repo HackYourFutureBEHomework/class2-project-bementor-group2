@@ -4,6 +4,6 @@
 
 1. From the server's folder, execute:
 
-```bash
+```shell
 server$ mongorestore --db bementor dump/bementor/
 ```
