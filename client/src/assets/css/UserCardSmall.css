@@ -97,7 +97,12 @@ a {
 }
 
 .details__languages {
+  display: flex;
   flex: 1;
+  flex-flow: wrap;
+  flex-direction: row;
+  padding-left: 30px;
+  justify-content: center;
 }
 
 .details__languages img {

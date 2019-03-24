@@ -50,3 +50,5 @@ const run = async () => {
   await Promise.all(savePromises);
   await mongoose.disconnect();
 };
+
+run();

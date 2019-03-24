@@ -219,16 +219,16 @@ class MyProfile extends Component {
                   required
                 />
               </label>
+              <label htmlFor="e-mail">e-mail</label>
+              <input
+                className="email"
+                type="text"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                name="email"
+                placeholder="Your e-mail will not be visible for others and used only for notification"
+              />
             </fieldset>
-            <label htmlFor="e-mail">e-mail</label>
-            <input
-              className="email"
-              type="text"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-              name="email"
-              placeholder="Your e-mail will not be visible for others and used only for notification"
-            />
             <fieldset>
               <legend>
                 <span className="number">2</span>Your profile
