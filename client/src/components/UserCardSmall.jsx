@@ -37,7 +37,7 @@ class UserCardSmall extends Component {
 
     return (
       <div className="details">
-        <a ref="#">
+        <a href={`/search/users/${user._id}`}>
           <div className="details__small">
             <div className="details__logo">
               <img

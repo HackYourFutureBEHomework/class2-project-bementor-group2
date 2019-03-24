@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const User = require("./src/model/user.model");
 
 require("dotenv").config();
 
@@ -27,6 +26,7 @@ app.get("/", (req, res) => {
   res.json({ message: "API ready" });
 });
 
+/*
 // getting list of users from DB
 app.get("/user", (req, res) => {
   const users = User.find().then(users => {
@@ -57,6 +57,7 @@ app.delete("/user/:_id", (req, res) => {
       });
     });
 });
+*/
 
 require("./src/route/user.route")(app);
 
