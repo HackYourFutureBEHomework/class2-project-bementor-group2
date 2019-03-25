@@ -43,7 +43,7 @@ class Search extends Component {
           <div key={_id} className="">
             <div className="clist__name">
               <Link to={"/search/users/" + _id}>
-                <span className="clist__firstName">{firstName}</span>{" "}
+                <span className="clist__firstName">{firstName}</span>
                 <span className="clist__secondName">{secondName}</span>
               </Link>
               <div className="clist__skills">{skills.join(", ")}</div>

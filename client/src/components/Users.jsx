@@ -28,7 +28,6 @@ class Users extends Component {
       .then(res => res.json())
       .then(users => {
         this.setState({ users });
-        console.log(this.state);
       });
   }
 

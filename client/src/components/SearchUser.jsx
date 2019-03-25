@@ -21,9 +21,9 @@ class SearchUser extends Component {
         <input
           type="text"
           onChange={this.handleInputChanged}
-          placeholder="Find your Guru"
+          placeholder="Find your Mentor or Mentee"
         />
-        <input type="submit" value="I'm lucky!" />
+        <input type="submit" value="Enter" />
       </form>
     );
   }

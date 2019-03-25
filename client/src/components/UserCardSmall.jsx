@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Route from "react-router-dom";
+// import Route from "react-router-dom";
 import locationLogo from "../assets/images/otherlogos/location_marker.png";
 import cssLogo from "../assets/images/slills_logos_svg/CSS3_logo.svg";
 import HTMLLogo from "../assets/images/slills_logos_svg/HTML5_logo.svg";
@@ -17,7 +17,6 @@ class UserCardSmall extends Component {
   }
 
   deleteUser = userToDelete => {
-    console.log(this.state);
     fetch(`http://localhost:4000/user/${userToDelete._id}`, {
       method: "DELETE"
     })
@@ -29,7 +28,6 @@ class UserCardSmall extends Component {
         });
         users.splice(index, 1);
         this.setState({ users });
-        console.log(this.state);
       });
   };
   render() {
@@ -92,7 +90,7 @@ class UserCardSmall extends Component {
             </div>
           </div>
         </a>
-        <button onClick={() => this.deleteUser(user)}>Delete user</button>
+        <button onClick={() => this.deleteUser(user)}>Delete</button>
       </div>
     );
   }

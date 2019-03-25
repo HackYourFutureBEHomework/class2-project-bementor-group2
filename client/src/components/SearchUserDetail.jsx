@@ -64,13 +64,13 @@ class SearchUserDetail extends Component {
 
     return (
       <div className="searchUserDetail">
-        <label>First Name:</label>{" "}
+        <label>First Name:</label>
         <span className="firstName">{firstName}</span>
         <br />
-        <label>Last Name:</label>{" "}
+        <label>Last Name:</label>
         <span className="secondName">{secondName}</span>
         <br />
-        <label>E-mail:</label>{" "}
+        <label>E-mail:</label>
         <a className="email" href={"mailto:" + email}>
           {email}
         </a>
@@ -100,7 +100,7 @@ class SearchUserDetail extends Component {
         <br />
         <label>Bio:</label> <div className="bio">{bio}</div>
         <br />
-        <label>Member since:</label>{" "}
+        <label>Member since:</label>
         <span className="membershipDate">{membershipDate}</span>
       </div>
     );

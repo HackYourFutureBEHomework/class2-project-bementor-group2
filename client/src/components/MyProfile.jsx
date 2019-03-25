@@ -1,37 +1,11 @@
 import React, { Fragment, Component } from "react";
 import "../assets/css/Profile.css";
-import Users from "./Users";
 
 class MyProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mentor: "",
-      mentee: "",
-      firstName: "",
-      lastName: "",
-      password: "",
-      email: "",
-      tagline: "",
-      location: "",
-      bio: "",
-      interests: "",
-      html: "",
-      css: "",
-      js: "",
-      datab: "",
-      node: "",
-      react: "",
-      cli: "",
-      git: "",
-      eng: "",
-      fr: "",
-      du: "",
-      es: "",
-      ar: "",
-      tr: "",
-      rus: "",
-      script: ""
+      Users: []
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,11 +16,9 @@ class MyProfile extends Component {
   // };
 
   handleInputChange(e) {
-    console.log(e.target);
     this.setState({
       [e.target.name]: e.target.value
     });
-    console.log(this.state);
   }
 
   handleSubmit = event => {
@@ -113,11 +85,9 @@ class MyProfile extends Component {
       })
     })
       .then(res => {
-        console.log(res);
         res.json();
       })
-      .then(res => {
-        console.log(res);
+      .then(() => {
         this.setState({
           mentor,
           mentee,
@@ -146,7 +116,6 @@ class MyProfile extends Component {
           rus,
           script
         });
-        console.log(this.state.user);
       });
   };
 
@@ -207,6 +176,15 @@ class MyProfile extends Component {
                   required
                 />
               </label>
+              <label htmlFor="e-mail">E-mail</label>
+              <input
+                className="email"
+                type="text"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                name="email"
+                placeholder="Your e-mail will not be visible for others and used only for notification"
+              />
               <label htmlFor="password">
                 Password
                 <input
@@ -219,15 +197,6 @@ class MyProfile extends Component {
                   required
                 />
               </label>
-              <label htmlFor="e-mail">e-mail</label>
-              <input
-                className="email"
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-                name="email"
-                placeholder="Your e-mail will not be visible for others and used only for notification"
-              />
             </fieldset>
             <fieldset>
               <legend>
@@ -249,9 +218,9 @@ class MyProfile extends Component {
                 value={this.state.location}
                 onChange={this.handleInputChange}
                 name="location"
-                placeholder="Where you are"
+                placeholder="Where do you live ?"
               />
-              <label htmlFor="bio">BIO</label>
+              <label htmlFor="bio">Bio</label>
               <input
                 className="bio"
                 type="text"
@@ -267,7 +236,7 @@ class MyProfile extends Component {
                 value={this.state.interests}
                 onChange={this.handleInputChange}
                 name="interests"
-                placeholder="What are you for?"
+                placeholder="What are your interests ?"
               />
               <label htmlFor="skills">Skills</label>
               <input
@@ -309,7 +278,7 @@ class MyProfile extends Component {
                 onChange={this.handleInputChange}
                 name="node"
               />
-              Node.JS
+              Node.js
               <input
                 className="react"
                 type="checkbox"
@@ -317,7 +286,7 @@ class MyProfile extends Component {
                 onChange={this.handleInputChange}
                 name="react"
               />
-              React.JS
+              React.js
               <input
                 className="cli"
                 type="checkbox"
@@ -395,11 +364,11 @@ class MyProfile extends Component {
                 value={this.state.script}
                 onChange={this.handleInputChange}
               />
-              JavaScript
+              German
             </fieldset>
           </div>
           <button type="submit" value="let me Be!">
-            let me Be!
+            SUBMIT YOUR INFO
           </button>
         </form>
         <button className="deleteUser_button" type="submit" value="delete_user">
