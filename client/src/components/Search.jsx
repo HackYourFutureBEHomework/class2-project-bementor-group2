@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import API_PREFIX_URL from "../config";
-
 class Search extends Component {
   constructor(props) {
     super(props);

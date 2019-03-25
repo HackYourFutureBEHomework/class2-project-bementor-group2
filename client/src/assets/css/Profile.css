@@ -74,7 +74,7 @@ input[type="checkbox"] {
   padding: 30px;
 }
 
-.submit_button {
+button {
   padding: 19px 39px 18px 39px;
   color: #fff;
   background-color: #00b265;

@@ -11,8 +11,8 @@ const App = () => (
     <BrowserRouter>
       <Switch>
         <Route path="/:path(|index|home|start)" component={Home} />
-        <Route path="/search/users/:id" component={SearchUserDetail} />
-        <Route path="/:path(search|find)" component={Search} />
+        <Route path="users/id" component={SearchUserDetail} />
+        <Route path="/search" component={Search} />
         <Route path="/users" component={Users} />
         <Route path="/myprofile" component={MyProfile} />
         <Route render={() => <p>Page not found</p>} />

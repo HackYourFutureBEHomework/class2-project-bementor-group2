@@ -48,7 +48,6 @@ class SearchUserDetail extends Component {
   }
 
   render() {
-    const { user } = this.state;
     let {
       firstName,
       secondName,
