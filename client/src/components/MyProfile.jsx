@@ -1,4 +1,5 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
+import Container from "./Container";
 import "../assets/css/Profile.css";
 
 class MyProfile extends Component {
@@ -121,7 +122,7 @@ class MyProfile extends Component {
 
   render() {
     return (
-      <Fragment>
+      <Container>
         <form className="userForm" onSubmit={this.handleSubmit}>
           <div className="userForm_container">
             <h1>Welcome to BeMentor</h1>
@@ -367,7 +368,7 @@ class MyProfile extends Component {
               German
             </fieldset>
           </div>
-          <button type="submit" value="let me Be!">
+          <button className="submit_button" type="submit" value="let me Be!">
             SUBMIT YOUR INFO
           </button>
         </form>
@@ -377,7 +378,7 @@ class MyProfile extends Component {
         <button className="updateUser_button" type="submit" value="update_user">
           Update user
         </button>
-      </Fragment>
+      </Container>
     );
   }
 }

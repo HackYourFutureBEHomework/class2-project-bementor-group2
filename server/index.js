@@ -58,8 +58,9 @@ app.delete("/user/:_id", (req, res) => {
     });
 });
 */
-
-require("./src/route/user.route")(app);
+const router = express.Router();
+app.use("/api", router);
+require("./src/route/user.route")(router);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {

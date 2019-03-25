@@ -13,11 +13,11 @@ body {
 }
 
 .userForm {
-  width: 70%;
+  width: 80%;
 }
 
 form.userForm {
-  max-width: 90vw;
+  max-width: 100vw;
   margin: 10px auto;
   padding: 10px 20px;
   background: #f4f7f8;
@@ -74,7 +74,7 @@ input[type="checkbox"] {
   padding: 30px;
 }
 
-button {
+.submit_button {
   padding: 19px 39px 18px 39px;
   color: #fff;
   background-color: #00b265;

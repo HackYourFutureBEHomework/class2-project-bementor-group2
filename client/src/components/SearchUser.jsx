@@ -4,8 +4,6 @@ import "../assets/css/SearchUser.css";
 class SearchUser extends Component {
   handleSubmit = async event => {
     event.preventDefault();
-    console.log(this.state);
-
     this.props.onSearch(this.state.query);
   };
 

@@ -22,19 +22,19 @@ class Search extends Component {
     this.search(searchText);
   }
 
-  search(searchText) {
-    const queryString = "firstName=" + searchText.toLowerCase().trim();
+  // search(searchText) {
+  //   const queryString = "firstName=" + searchText.toLowerCase().trim();
 
-    fetch(`${API_PREFIX_URL}/users?${queryString}`)
-      .then(response => response.json())
-      .then(result => {
-        console.log("search: result: ", result);
-        this.setState({
-          users: result
-        });
-      })
-      .catch(error => console.error(error));
-  }
+  //   fetch(`${API_PREFIX_URL}/users?${queryString}`)
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       console.log("search: result: ", result);
+  //       this.setState({
+  //         users: result
+  //       });
+  //     })
+  //     .catch(error => console.error(error));
+  // }
 
   generateItems() {
     return this.state.users.map(
