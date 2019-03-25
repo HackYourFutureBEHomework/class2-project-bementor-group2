@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink, Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../assets/css/Header.css";
 
 class Header extends Component {
@@ -50,10 +50,10 @@ class Header extends Component {
             />
             <input id="search_submit" value="Search" type="submit" />
           </form>
-          <Link to="/myprofile">My BeMentor</Link>
+          <Link to="/myprofile">MY PROFILE</Link>
           <Link to="/login">LOGIN</Link>
           <Link to="/contact">CONTACT</Link>
-          <Link to="/users">CONNECT</Link>
+          <Link to="/users">SEARCH USERS</Link>
           <Link to="/home">HOME</Link>
           <a href="#" className="icon" onClick={this.myFunction}>
             <i className="fa fa-bars" />

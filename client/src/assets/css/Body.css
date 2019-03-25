@@ -2,9 +2,14 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  padding: 20rem 1rem 0rem 1rem;
-  width: 100vw;
+  padding: 0;
+  width: 100%;
 }
 img.content {
   padding: 2rem;
+}
+
+.container {
+  padding-top: 20rem;
+  width: 150rem;
 }

@@ -1,4 +1,5 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
+import Container from "./Container";
 import UserCardSmall from "./UserCardSmall";
 import "../assets/css/Users.css";
 import "../assets/css/UserCardSmall.css";
@@ -28,7 +29,6 @@ class Users extends Component {
       .then(res => res.json())
       .then(users => {
         this.setState({ users });
-        console.log(this.state);
       });
   }
 
@@ -40,13 +40,13 @@ class Users extends Component {
     ));
 
     return (
-      <Fragment>
+      <Container>
         <div className="searchField">
           <SearchUser onSearch={this.onSearch} />
         </div>
 
         <div className="container">{$users}</div>
-      </Fragment>
+      </Container>
     );
   }
 }

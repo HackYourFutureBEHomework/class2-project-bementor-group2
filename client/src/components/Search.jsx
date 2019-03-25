@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import API_PREFIX_URL from "../config";
-
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -22,19 +20,19 @@ class Search extends Component {
     this.search(searchText);
   }
 
-  search(searchText) {
-    const queryString = "firstName=" + searchText.toLowerCase().trim();
+  // search(searchText) {
+  //   const queryString = "firstName=" + searchText.toLowerCase().trim();
 
-    fetch(`${API_PREFIX_URL}/users?${queryString}`)
-      .then(response => response.json())
-      .then(result => {
-        console.log("search: result: ", result);
-        this.setState({
-          users: result
-        });
-      })
-      .catch(error => console.error(error));
-  }
+  //   fetch(`${API_PREFIX_URL}/users?${queryString}`)
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       console.log("search: result: ", result);
+  //       this.setState({
+  //         users: result
+  //       });
+  //     })
+  //     .catch(error => console.error(error));
+  // }
 
   generateItems() {
     return this.state.users.map(
@@ -43,7 +41,7 @@ class Search extends Component {
           <div key={_id} className="">
             <div className="clist__name">
               <Link to={"/search/users/" + _id}>
-                <span className="clist__firstName">{firstName}</span>{" "}
+                <span className="clist__firstName">{firstName}</span>
                 <span className="clist__secondName">{secondName}</span>
               </Link>
               <div className="clist__skills">{skills.join(", ")}</div>

@@ -21,7 +21,7 @@ main > header {
 .topnav {
   overflow: hidden;
   background-color: #00b265;
-  padding: 0px 20px;
+  padding: 0;
 }
 
 .topnav a,

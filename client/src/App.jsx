@@ -1,30 +1,24 @@
-import React, { Component } from "react";
-import { BrowserRouter } from "react-router-dom";
-import Header from "./components/Header";
-import Body from "./components/Body";
-import Footer from "./components/Footer";
-import { getUsers } from "./api/users";
+import React from "react";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
+import Home from "./components/Home";
+import Search from "./components/Search";
+import SearchUserDetail from "./components/SearchUserDetail";
+import Users from "./components/Users";
+import MyProfile from "./components/MyProfile";
 
-class App extends Component {
-  componentDidMount() {
-    getUsers().then(modules => {
-      console.log(modules);
-    });
-  }
-
-  render() {
-    return (
-      <BrowserRouter>
-        <div className="App">
-          <main>
-            <Header />
-            <Body />
-            <Footer />
-          </main>
-        </div>
-      </BrowserRouter>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <BrowserRouter>
+      <Switch>
+        <Route path="/:path(|index|home|start)" component={Home} />
+        <Route path="users/id" component={SearchUserDetail} />
+        <Route path="/search" component={Search} />
+        <Route path="/users" component={Users} />
+        <Route path="/myprofile" component={MyProfile} />
+        <Route render={() => <p>Page not found</p>} />
+      </Switch>
+    </BrowserRouter>
+  </div>
+);
 
 export default App;

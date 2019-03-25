@@ -29,10 +29,7 @@ const Footer = () => {
           rel="noopener noreferrer"
         >
           <i>
-            <FontAwesomeIcon
-              icon={faFacebook}
-              href="https://www.facebook.com/becentral/"
-            />
+            <FontAwesomeIcon icon={faFacebook} />
           </i>
         </a>
         <a
