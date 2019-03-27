@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../assets/css/Header.css";
 
 class Header extends Component {
@@ -20,7 +20,6 @@ class Header extends Component {
     //   />
     // );
   };
-  // this.props.onSearch(this.state.query);
 
   handleHeaderInputChanged = event => {
     this.setState({

@@ -9,3 +9,7 @@ export const searchUsers = query => {
     response.json()
   );
 };
+
+export const userDetails = id => {
+  return fetch(`${API_URL}/user/${id}`).then(response => response.json());
+};

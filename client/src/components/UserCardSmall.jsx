@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Route from "react-router-dom";
 import locationLogo from "../assets/images/otherlogos/location_marker.png";
 import cssLogo from "../assets/images/slills_logos_svg/CSS3_logo.svg";
 import HTMLLogo from "../assets/images/slills_logos_svg/HTML5_logo.svg";
 import JSLogo from "../assets/images/slills_logos_svg/JavaScript_logo.svg";
 import NodeLogo from "../assets/images/slills_logos_svg/Node.js_logo.svg";
+import { Link } from "react-router-dom";
 
 class UserCardSmall extends Component {
   constructor(props) {
@@ -12,12 +12,8 @@ class UserCardSmall extends Component {
     this.state = { users: [] };
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({ users: newProps.users });
-  }
-
   deleteUser = userToDelete => {
-    console.log(this.state);
+    console.log(userToDelete);
     fetch(`http://localhost:4000/user/${userToDelete._id}`, {
       method: "DELETE"
     })
@@ -32,12 +28,13 @@ class UserCardSmall extends Component {
         console.log(this.state);
       });
   };
+
   render() {
     const { user } = this.props;
 
     return (
       <div className="details">
-        <a ref="#">
+        <Link to={"/user/" + user._id}>
           <div className="details__small">
             <div className="details__logo">
               <img
@@ -91,7 +88,7 @@ class UserCardSmall extends Component {
               </div>
             </div>
           </div>
-        </a>
+        </Link>
         <button onClick={() => this.deleteUser(user)}>Delete user</button>
       </div>
     );

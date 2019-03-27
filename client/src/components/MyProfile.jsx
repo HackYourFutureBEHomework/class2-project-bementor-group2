@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from "react";
 import "../assets/css/Profile.css";
-import Users from "./Users";
 
 class MyProfile extends Component {
   constructor(props) {
@@ -37,9 +36,12 @@ class MyProfile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // deleteUser = userToDelete => {
-  //   console.log(this.state);
-  // };
+  componentDidMount() {
+    document.title = this.state.firstName + " " + this.state.lastName;
+  }
+  componentDidUpdate() {
+    document.title = this.state.firstName + " " + this.state.lastName;
+  }
 
   handleInputChange(e) {
     console.log(e.target);

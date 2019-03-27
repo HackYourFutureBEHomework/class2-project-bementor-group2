@@ -12,6 +12,19 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findUser = (req, res) => {
+  const user = User.findById(req.params._id)
+    .then(user => {
+      res.send(user);
+      console.log(user);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
+    });
+};
+
 exports.create = (req, res) => {
   console.log(req.body);
   const users = new User(req.body);
