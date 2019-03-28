@@ -98,3 +98,32 @@ exports.search = (req, res) => {
       });
     });
 };
+
+function calculateRanking(scores) {
+  const totalScore = scores.reduce(
+    (accumulated, currentArrayValue) => accumulated + currentArrayValue,
+    0
+  );
+  return totalScore / scores.length;
+}
+
+// User Rankings
+exports.updateRanking = (req, res) => {
+  console.log("req.params", req.params);
+  const newScore = req.body.score;
+  User.findById({ _id: req.params.id })
+    .then(user => {
+      // Prevent errors with previously created users
+      if (!user.scores) {
+        user.scores = [];
+      }
+      user.scores.push(newScore);
+      user.ranking = calculateRanking(user.scores);
+
+      user
+        .save()
+        .then(() => res.json({ message: "User scores was updated" }))
+        .catch(err => handleError(err, res));
+    })
+    .catch(err => handleError(err, res));
+};

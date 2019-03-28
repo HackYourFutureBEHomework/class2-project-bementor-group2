@@ -87,6 +87,12 @@ const UserSchema = mongoose.Schema(
     },
     connectedAsMentee: {
       type: [String]
+    },
+    ranking: {
+      type: Number
+    },
+    scores: {
+      type: [Number]
     }
   },
   {
