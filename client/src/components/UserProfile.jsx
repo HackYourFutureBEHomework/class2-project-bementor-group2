@@ -28,18 +28,6 @@ class UserProfile extends Component {
     });
   }
 
-  // updateMyProfile = myProfileToUpdate => {
-  //   console.log(myProfileToUpdate);
-  //   fetch(`http://localhost:4000/user/5c9a236457fbe30d2512f224`, {
-  //     method: "PUT"
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.setState({ user });
-  //       console.log(this.state);
-  //     });
-  // };
-
   render() {
     const {
       mentor,
@@ -71,12 +59,7 @@ class UserProfile extends Component {
     return (
       <div className="userFormFull">
         <Link className="backButton" to="/users" />
-        <button
-          className="addMentor"
-          onClick={() => this.updateMyProfile(user._id)}
-        >
-          Add Mentor
-        </button>
+
         <div className="userFormFull_container">
           <div className="detailsFull__avatar">
             <img

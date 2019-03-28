@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import locationLogo from "../assets/images/otherlogos/location_marker.png";
 import cssLogo from "../assets/images/slills_logos_svg/CSS3_logo.svg";
 import HTMLLogo from "../assets/images/slills_logos_svg/HTML5_logo.svg";
@@ -9,7 +10,6 @@ import DatabaseLogo from "../assets/images/slills_logos_svg/Database.svg";
 import GithubLogo from "../assets/images/slills_logos_svg/Githublogo.svg";
 import ReactLogo from "../assets/images/slills_logos_svg/react_logo.svg";
 import ArabFlag from "../assets/images/otherlogos/arableagueflag.svg";
-import { Link } from "react-router-dom";
 
 class UserCardSmall extends Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class UserCardSmall extends Component {
   }
 
   deleteUser = userToDelete => {
-    console.log(userToDelete);
     fetch(`http://localhost:4000/user/${userToDelete._id}`, {
       method: "DELETE"
     })
@@ -30,7 +29,6 @@ class UserCardSmall extends Component {
         });
         users.splice(index, 1);
         this.setState({ users });
-        console.log(this.state);
       });
   };
 
@@ -39,7 +37,7 @@ class UserCardSmall extends Component {
 
     return (
       <div className="details">
-        <Link to={"/user/" + user._id}>
+        <a href={`/user/${user._id}`}>
           <div className="details__small">
             <div className="details__logo">
               <img
@@ -138,7 +136,7 @@ class UserCardSmall extends Component {
               </div>
             </div>
           </div>
-        </Link>
+        </a>
         <button
           className="userCardSmall__deleteButton"
           onClick={() => this.deleteUser(user)}

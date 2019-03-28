@@ -29,10 +29,7 @@ const Footer = () => {
           rel="noopener noreferrer"
         >
           <i>
-            <FontAwesomeIcon
-              icon={faFacebook}
-              href="https://www.facebook.com/becentral/"
-            />
+            <FontAwesomeIcon icon={faFacebook} />
           </i>
         </a>
         <a
@@ -53,6 +50,12 @@ const Footer = () => {
             <FontAwesomeIcon icon={faInstagram} />
           </i>
         </a>
+        {/* TO BE INTEGRATED */}
+        {/*
+        <span>
+          <i className="copyright">eMighty - Powerfull Coding</i>
+        </span>
+        */}
       </div>
       <div className="footer_logo">
         <a

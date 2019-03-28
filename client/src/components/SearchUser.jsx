@@ -4,8 +4,6 @@ import "../assets/css/SearchUser.css";
 class SearchUser extends Component {
   handleSubmit = async event => {
     event.preventDefault();
-    console.log(this.state);
-
     this.props.onSearch(this.state.query);
   };
 
@@ -21,9 +19,9 @@ class SearchUser extends Component {
         <input
           type="text"
           onChange={this.handleInputChanged}
-          placeholder="Find your Guru"
+          placeholder="Find your Mentor or Mentee"
         />
-        <input type="submit" value="I'm lucky!" />
+        <input type="submit" value="Enter" />
       </form>
     );
   }

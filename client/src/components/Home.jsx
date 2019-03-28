@@ -1,12 +1,13 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
+import Container from "./Container";
+import Foto from "../assets/images/ticket.jpg";
 import "../assets/css/Body.css";
 import "../assets/css/Home.css";
-import Foto from "../assets/images/ticket.jpg";
 
 class Home extends Component {
   render() {
     return (
-      <Fragment>
+      <Container>
         <div className="container_mainPage">
           <div className="main_about">
             <h1>About BeMentor</h1>
@@ -85,7 +86,7 @@ class Home extends Component {
             </p>
           </div>
         </div>
-      </Fragment>
+      </Container>
     );
   }
 }
