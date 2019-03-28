@@ -28,14 +28,24 @@ class UserProfile extends Component {
     });
   }
 
+  // updateMyProfile = myProfileToUpdate => {
+  //   console.log(myProfileToUpdate);
+  //   fetch(`http://localhost:4000/user/5c9a236457fbe30d2512f224`, {
+  //     method: "PUT"
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       this.setState({ user });
+  //       console.log(this.state);
+  //     });
+  // };
+
   render() {
-    console.log(this.state);
     const {
       mentor,
       mentee,
       firstName,
       lastName,
-
       tagline,
       location,
       bio,
@@ -56,9 +66,17 @@ class UserProfile extends Component {
       tr,
       rus
     } = this.state.user;
+    const { user } = this.state;
+
     return (
       <div className="userFormFull">
         <Link className="backButton" to="/users" />
+        <button
+          className="addMentor"
+          onClick={() => this.updateMyProfile(user._id)}
+        >
+          Add Mentor
+        </button>
         <div className="userFormFull_container">
           <div className="detailsFull__avatar">
             <img
@@ -99,14 +117,46 @@ class UserProfile extends Component {
             <div className="skillsFull">
               <div className="detailsFull__skills">
                 <span className="detailsFull__comment">My core skills</span>
-                {css && <img src={cssLogo} alt="CSS skill" />}
-                {html && <img src={HTMLLogo} alt="HTML skill" />}
-                {js && <img src={JSLogo} alt="JS skill" />}
-                {node && <img src={NodeLogo} alt="NODE skill" />}
-                {react && <img src={ReactLogo} alt="ReactJS skill" />}
-                {datab && <img src={DatabaseLogo} alt="Database skill" />}
-                {git && <img src={GithubLogo} alt="GitHub skill" />}
-                {cli && <img src={CLILogo} alt="Command line skill" />}
+                {css && (
+                  <img src={cssLogo} alt="CSS skill" title="CSS skills" />
+                )}
+                {html && (
+                  <img src={HTMLLogo} alt="HTML skill" title="HTML skills" />
+                )}
+                {js && (
+                  <img src={JSLogo} alt="JS skill" title="JavaScript skills" />
+                )}
+                {node && (
+                  <img src={NodeLogo} alt="NODE skill" title="NodeJS skills" />
+                )}
+                {react && (
+                  <img
+                    src={ReactLogo}
+                    alt="ReactJS skill"
+                    title="ReactJs skills"
+                  />
+                )}
+                {datab && (
+                  <img
+                    src={DatabaseLogo}
+                    alt="Database skill"
+                    title="Database skills"
+                  />
+                )}
+                {git && (
+                  <img
+                    src={GithubLogo}
+                    alt="GitHub skill"
+                    title="GitHub skills"
+                  />
+                )}
+                {cli && (
+                  <img
+                    src={CLILogo}
+                    alt="Command line skill"
+                    title="CommandLineInterface skills"
+                  />
+                )}
               </div>
               <div className="detailsFull__languages">
                 <span className="detailsFull__comment">I speak</span>

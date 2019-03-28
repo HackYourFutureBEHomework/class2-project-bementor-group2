@@ -8,17 +8,10 @@ class Header extends Component {
     x.className = x.className === "topnav" ? "topnav responsive" : "topnav";
   }
 
-  handleHeaderSubmit = event => {
+  handleHeaderSubmit = async event => {
     event.preventDefault();
     console.log(this.state);
-    // this.state.query && (
-    //   <Redirect
-    //     to={{
-    //       pathname: "/users",
-    //       state: { query: this.state.query }
-    //     }}
-    //   />
-    // );
+    console.log(this.props);
   };
 
   handleHeaderInputChanged = event => {

@@ -10,6 +10,7 @@ a {
 .details {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 5px;
   margin: 5px;
   border: 1px black;
@@ -57,13 +58,25 @@ a {
   font-weight: bold;
 }
 
-.details__mentorOrMentee {
+.details__mentor {
   font-size: 0.3em;
   margin: 0;
   background: orange;
   color: white;
 }
+.details__mentee {
+  font-size: 0.3em;
+  margin: 0;
+  background: rgb(9, 255, 0);
+  color: white;
+}
 
+.details__separator {
+  font-size: 0.3em;
+  margin: 0;
+
+  color: rgb(136, 133, 133);
+}
 .details__tagline {
   align-self: center;
   background: rgb(34, 69, 223);
@@ -93,7 +106,12 @@ a {
   height: 30px;
 }
 .details__skills {
+  display: flex;
   flex: 1;
+  flex-flow: wrap;
+  flex-direction: row;
+  padding-left: 0px;
+  justify-content: center;
 }
 
 .details__languages {
@@ -101,10 +119,18 @@ a {
   flex: 1;
   flex-flow: wrap;
   flex-direction: row;
-  padding-left: 30px;
+  padding-left: 2em;
   justify-content: center;
+}
+
+.details__skills img {
+  margin: 2px;
 }
 
 .details__languages img {
   border-radius: 100%;
+}
+
+.userCardSmall__deleteButton {
+  align-self: flex-end;
 }

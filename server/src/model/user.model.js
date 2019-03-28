@@ -81,6 +81,12 @@ const UserSchema = mongoose.Schema(
     },
     script: {
       type: Boolean
+    },
+    connectedAsMentor: {
+      type: [String]
+    },
+    connectedAsMentee: {
+      type: [String]
     }
   },
   {
