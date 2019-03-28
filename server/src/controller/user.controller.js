@@ -104,7 +104,7 @@ function calculateRanking(scores) {
     (accumulated, currentArrayValue) => accumulated + currentArrayValue,
     0
   );
-  return totalScore / scores.length;
+  return Math.round(totalScore / scores.length);
 }
 
 // User Rankings
