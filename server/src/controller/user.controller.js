@@ -43,7 +43,7 @@ exports.create = (req, res) => {
   const users = new User(req.body);
   users
     .save()
-    .then(() => res.json(user))
+    .then(user => res.send(user))
     .catch(err => handleError(err, res));
 };
 
