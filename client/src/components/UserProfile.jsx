@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 
 import { userDetails } from "../api/users";
 
+import Ranking from "./Ranking";
+
 class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -52,7 +54,8 @@ class UserProfile extends Component {
       es,
       ar,
       tr,
-      rus
+      rus,
+      ranking
     } = this.state.user;
     const { user } = this.state;
 
@@ -78,6 +81,8 @@ class UserProfile extends Component {
 
               <span className="detailsFull__lastName"> {lastName}</span>
             </div>
+
+            <Ranking id={user._id} ranking={user.ranking} />
 
             <div className="detailsFull__role">
               <span className="detailsFull__comment">...I'm a </span>
