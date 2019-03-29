@@ -122,7 +122,9 @@ exports.updateRanking = (req, res) => {
 
       user
         .save()
-        .then(() => res.json({ message: "User scores was updated" }))
+        .then(() =>
+          res.json({ message: "User ranking and scores were updated" })
+        )
         .catch(err => handleError(err, res));
     })
     .catch(err => handleError(err, res));
