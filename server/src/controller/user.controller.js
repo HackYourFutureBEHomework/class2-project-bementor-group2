@@ -15,11 +15,11 @@ exports.findAll = (req, res) => {
     .catch(err => handleError(err, res));
 };
 
-exports.find = (req, res) => {
-  User.findById(req.params.id, req.body)
-    .then(user => res.send(user))
-    .catch(err => handleError(err, res));
-};
+// exports.find = (req, res) => {
+//   User.findById(req.params.id, req.body)
+//     .then(user => res.send(user))
+//     .catch(err => handleError(err, res));
+// };
 
 exports.update = (req, res) => {
   User.findByIdAndUpdate({ _id: req.params.id }, req.body)
@@ -33,8 +33,13 @@ exports.delete = (req, res) => {
     .catch(err => handleError(err, res));
 };
 
+exports.findUser = (req, res) => {
+  User.findById(req.params._id)
+    .then(user => res.send(user))
+    .catch(err => handleError(err, res));
+};
+
 exports.create = (req, res) => {
-  console.log(req.body);
   const users = new User(req.body);
   users
     .save()
@@ -84,12 +89,6 @@ exports.search = (req, res) => {
 exports.search = (req, res) => {
   const query = req.query.text;
   const users = User.find({ $text: { $search: query } })
-    .then(users => {
-      res.send(users);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message
-      });
-    });
+    .then(users => res.send(users))
+    .catch(err => res.status(500).send({ message: err.message }));
 };

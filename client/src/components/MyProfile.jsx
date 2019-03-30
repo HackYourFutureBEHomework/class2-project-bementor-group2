@@ -12,9 +12,12 @@ class MyProfile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // deleteUser = userToDelete => {
-  //   console.log(this.state);
-  // };
+  componentDidMount() {
+    document.title = this.state.firstName + " " + this.state.lastName;
+  }
+  componentDidUpdate() {
+    document.title = this.state.firstName + " " + this.state.lastName;
+  }
 
   handleInputChange(e) {
     this.setState({

@@ -5,9 +5,11 @@ module.exports = app => {
   // app.get("/users", users.search);
   app.post("/user", users.create);
   app.get("/user/search", users.search);
-  app.get("/user/:id", users.find);
+  // app.get("/user/:id", users.find);
   app.patch("/user/:id", users.update);
   app.delete("/user/:id", users.delete);
   // app.patch("/user/:id", users.update);
   // app.delete("/user/:id", users.delete);
+  // app.get("/user/search", users.search);
+  app.get("/user/:_id", users.findUser);
 };

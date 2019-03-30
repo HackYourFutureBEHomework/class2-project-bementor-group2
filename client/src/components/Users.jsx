@@ -25,11 +25,17 @@ class Users extends Component {
       users: users
     });
 
+    this.mounted = true;
+
     fetch(`http://localhost:4000/user`)
       .then(res => res.json())
       .then(users => {
         this.setState({ users });
       });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   render() {
