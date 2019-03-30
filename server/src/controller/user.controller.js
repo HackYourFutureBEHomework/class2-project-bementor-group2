@@ -89,12 +89,6 @@ exports.search = (req, res) => {
 exports.search = (req, res) => {
   const query = req.query.text;
   const users = User.find({ $text: { $search: query } })
-    .then(users => {
-      res.send(users);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message
-      });
-    });
+    .then(users => res.send(users))
+    .catch(err => res.status(500).send({ message: err.message }));
 };

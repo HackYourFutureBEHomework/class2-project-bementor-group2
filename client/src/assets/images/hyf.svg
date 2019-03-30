@@ -1,0 +1,79 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 262.36 173.74">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #fefe38;
+      }
+
+      .cls-3 {
+        fill: #d92205;
+      }
+
+      .cls-10, .cls-11, .cls-4, .cls-7 {
+        font-size: 58px;
+      }
+
+      .cls-10, .cls-11, .cls-4, .cls-6, .cls-7, .cls-8, .cls-9 {
+        font-family: MrEavesXLModOT-Reg, MrEavesXLModOT-Reg;
+      }
+
+      .cls-4 {
+        letter-spacing: 0.16em;
+      }
+
+      .cls-5, .cls-7 {
+        letter-spacing: 0.2em;
+      }
+
+      .cls-6, .cls-8 {
+        font-size: 59px;
+      }
+
+      .cls-6 {
+        letter-spacing: 0.2em;
+      }
+
+      .cls-8 {
+        letter-spacing: 0.2em;
+      }
+
+      .cls-9 {
+        font-size: 60px;
+        letter-spacing: 0.2em;
+      }
+
+      .cls-10 {
+        letter-spacing: 0.2em;
+      }
+
+      .cls-11 {
+        letter-spacing: 0.2em;
+      }
+    </style>
+  </defs>
+  <title>hyf</title>
+  <rect class="cls-1" x="0.5" y="11.4" width="9" height="36"/>
+  <rect class="cls-1" x="22.5" y="11.4" width="9" height="36"/>
+  <polygon class="cls-1" points="2.5 67.4 16.5 85.4 16.5 104.4 25.5 104.4 25.5 83.4 13.5 67.4 2.5 67.4"/>
+  <rect class="cls-1" x="5.5" y="124.4" width="30" height="9"/>
+  <rect class="cls-1" x="5.5" y="141.4" width="16" height="8"/>
+  <g>
+    <rect class="cls-1" x="186" y="67.89" width="20.84" height="36.66"/>
+    <rect class="cls-2" x="207.32" y="67.47" width="20.84" height="37.49"/>
+    <rect class="cls-3" x="228.16" y="67.47" width="20.84" height="37.49"/>
+  </g>
+  <text class="cls-4" transform="translate(45.5 46.4)">A<tspan class="cls-5" x="42.8" y="0">CK</tspan></text>
+  <text class="cls-6" transform="translate(41 103.9)">O</text>
+  <text class="cls-7" transform="translate(43 158.4)">U</text>
+  <text class="cls-8" transform="translate(88.75 104.15)">U</text>
+  <text class="cls-9" transform="translate(137.25 104.65)">R</text>
+  <text class="cls-10" transform="translate(92.25 159.4)">T</text>
+  <text class="cls-10" transform="translate(134.5 159.15)">U</text>
+  <text class="cls-11" transform="translate(181.75 159.4)">R</text>
+  <text class="cls-11" transform="translate(223.5 159.65)">E</text>
+</svg>

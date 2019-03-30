@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Container from "./Container";
 import Foto from "../assets/images/ticket.jpg";
+import HYFLogo from "../assets/images/hyf.svg";
 import "../assets/css/Body.css";
 import "../assets/css/Home.css";
 
@@ -79,8 +80,8 @@ class Home extends Component {
               quam quis morbi et <br />
               <img
                 className="imgResponsive content"
-                src={Foto}
-                alt="BeCentral"
+                src={HYFLogo}
+                alt="HYFLogo"
               />
               <br />
             </p>
