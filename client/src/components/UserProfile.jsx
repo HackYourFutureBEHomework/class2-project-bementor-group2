@@ -114,7 +114,7 @@ class UserProfile extends Component {
             </div>
 
                 <span className="detailsFull__lastName"> {lastName}</span>
-        
+              </div>
         
               <div className="detailsFull__role">
                 <span className="detailsFull__comment">...I'm a </span>
