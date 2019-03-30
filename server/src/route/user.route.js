@@ -12,4 +12,5 @@ module.exports = app => {
   // app.delete("/user/:id", users.delete);
   // app.get("/user/search", users.search);
   app.get("/user/:_id", users.findUser);
+  app.put("/user/:id/ranking", users.updateRanking);
 };

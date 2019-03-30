@@ -10,6 +10,8 @@ import GithubLogo from "../assets/images/slills_logos_svg/Githublogo.svg";
 import ReactLogo from "../assets/images/slills_logos_svg/react_logo.svg";
 import ArabFlag from "../assets/images/otherlogos/arableagueflag.svg";
 
+import Ranking from "./Ranking";
+
 class UserCardSmall extends Component {
   constructor(props) {
     super(props);
@@ -53,6 +55,7 @@ class UserCardSmall extends Component {
                 <span className="details__separator"> and </span>
               )}
               {user.mentee && <span className="details__mentee">Mentee</span>}
+              <Ranking id={user._id} ranking={user.ranking} />
             </div>
           </div>
           <span className="details__tagline">{user.tagline}</span>

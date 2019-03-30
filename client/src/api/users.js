@@ -13,4 +13,13 @@ export const searchUsers = query => {
 export const userDetails = id => {
   return fetch(`${API_URL}/user/${id}`).then(response => response.json());
 };
-s;
+
+
+export const createUser = user => {
+  return fetch(`${API_URL}/user`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  }).then(response => response.json());
+};
+

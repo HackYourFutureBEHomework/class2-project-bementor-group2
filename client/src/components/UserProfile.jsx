@@ -14,6 +14,8 @@ import { userDetails } from "../api/users";
 import Container from "./Container";
 import UserCardSmall from "./UserCardSmall";
 
+import Ranking from "./Ranking";
+
 class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -74,7 +76,8 @@ class UserProfile extends Component {
       es,
       ar,
       tr,
-      rus
+      rus,
+      ranking
     } = this.state.user;
 
     return (
@@ -101,9 +104,18 @@ class UserProfile extends Component {
                 <span className="detailsFull__comment">Hi, my name is </span>
                 <span className="detailsFull__firstName">{firstName}</span>
 
-                <span className="detailsFull__lastName"> {lastName}</span>
-              </div>
 
+            <Ranking id={user._id} ranking={user.ranking} />
+
+            <div className="detailsFull__role">
+              <span className="detailsFull__comment">...I'm a </span>
+              {mentor && <span className="detailsFull__mentor">Mentor</span>}
+              {mentee && <span className="detailsFull__mentee">Mentee</span>}
+            </div>
+
+                <span className="detailsFull__lastName"> {lastName}</span>
+        
+        
               <div className="detailsFull__role">
                 <span className="detailsFull__comment">...I'm a </span>
                 {mentor && <span className="detailsFull__mentor">Mentor</span>}
