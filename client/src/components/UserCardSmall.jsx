@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import locationLogo from "../assets/images/otherlogos/location_marker.png";
 import cssLogo from "../assets/images/slills_logos_svg/CSS3_logo.svg";
 import HTMLLogo from "../assets/images/slills_logos_svg/HTML5_logo.svg";
@@ -52,7 +51,9 @@ class UserCardSmall extends Component {
               <p className="details__firstName">{user.firstName}</p>
               <p className="details__lastName">{user.lastName}</p>
               {user.mentor && <span className="details__mentor">Mentor</span>}
-              {user.mentor && <span className="details__separator"> and </span>}
+              {user.mentor && user.mentee && (
+                <span className="details__separator"> and </span>
+              )}
               {user.mentee && <span className="details__mentee">Mentee</span>}
               <Ranking id={user._id} ranking={user.ranking} />
             </div>

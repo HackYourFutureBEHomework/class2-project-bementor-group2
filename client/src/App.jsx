@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
 import Search from "./components/Search";
-import SearchUserDetail from "./components/SearchUserDetail";
 import Users from "./components/Users";
 import MyProfile from "./components/MyProfile";
 import UserProfile from "./components/UserProfile";
