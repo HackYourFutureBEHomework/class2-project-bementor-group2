@@ -14,6 +14,7 @@ export const userDetails = id => {
   return fetch(`${API_URL}/user/${id}`).then(response => response.json());
 };
 
+
 export const createUser = user => {
   return fetch(`${API_URL}/user`, {
     method: "POST",
@@ -21,3 +22,4 @@ export const createUser = user => {
     body: JSON.stringify(user)
   }).then(response => response.json());
 };
+
