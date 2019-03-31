@@ -66,10 +66,37 @@ class MyProfile extends Component {
     this.setState({ [propName]: e.target.checked });
   };
 
+  /**
+   * Updates the DB properties for mentee/mentor using the property position.
+   *
+   * @param user
+   */
+  updateMenteeMentor(user) {
+    switch (user.position) {
+      case "mentee":
+        user["mentee"] = true;
+        user["mentor"] = false;
+        break;
+      case "mentor":
+        user["mentee"] = false;
+        user["mentor"] = true;
+        break;
+      default:
+        // Should not happen because the field is required
+        alert("Position is required, check the values.");
+        return;
+    }
+    delete user.position;
+
+    return user;
+  }
+
   handleSubmit = e => {
     e.preventDefault();
 
     const newUser = { ...this.state };
+
+    newUser = this.updateMenteeMentor(newUser);
 
     // TODO: use a nice UI to inform the user
     createUser(newUser)
@@ -107,29 +134,32 @@ class MyProfile extends Component {
                 alt="name"
               />
             </div>
-
+            {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
             <label>I would like to be...</label>
             <label className="inline">
               <input
-                type="checkbox"
-                value="true"
-                name="mentor"
-                onChange={this.handleCheckboxChange}
-                checked={this.state.mentor}
-              />
+                type="radio"
+                value="mentor"
+                name="position"
+                onChange={this.handleInputChange}
+                defaultChecked={this.state.mentor}
+                required
+              />{" "}
               Mentor
-            </label>
+            </label>{" "}
             <label className="inline">
               <input
-                type="checkbox"
-                value="true"
-                name="mentee"
-                onChange={this.handleCheckboxChange}
-                checked={this.state.mentee}
-              />
+                type="radio"
+                value="mentee"
+                name="position"
+                onChange={this.handleInputChange}
+                defaultChecked={this.state.mentee}
+                required
+              />{" "}
               Mentee
             </label>
-
+            <br />
+            <br />
             <fieldset>
               <legend>
                 <span className="number">1</span>Your basic info
