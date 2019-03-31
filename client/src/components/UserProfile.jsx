@@ -54,6 +54,7 @@ class UserProfile extends Component {
   render() {
     console.log(this.state.myUpdatedProfile);
     const {
+      _id,
       mentor,
       mentee,
       firstName,
@@ -105,7 +106,7 @@ class UserProfile extends Component {
                 <span className="detailsFull__firstName">{firstName}</span>
 
 
-            <Ranking id={user._id} ranking={user.ranking} />
+            <Ranking id={_id} ranking={ranking} />
 
             <div className="detailsFull__role">
               <span className="detailsFull__comment">...I'm a </span>

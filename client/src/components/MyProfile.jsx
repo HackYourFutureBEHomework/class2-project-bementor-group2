@@ -108,7 +108,7 @@ class MyProfile extends Component {
               />
             </div>
 
-            <label htmlFor="mentorOrMentee">I would like to be...</label>
+            <label>I would like to be...</label>
             <label className="inline">
               <input
                 type="checkbox"
@@ -134,7 +134,7 @@ class MyProfile extends Component {
               <legend>
                 <span className="number">1</span>Your basic info
               </legend>
-              <label htmlFor="firstName" className="required">
+              <label className="required">
                 First Name
                 <input
                   name="firstName"
@@ -146,7 +146,7 @@ class MyProfile extends Component {
                   required
                 />
               </label>
-              <label htmlFor="lastName" className="required">
+              <label className="required">
                 Family Name
                 <input
                   name="lastName"
@@ -158,16 +158,19 @@ class MyProfile extends Component {
                   required
                 />
               </label>
-              <label htmlFor="e-mail">E-mail</label>
-              <input
-                className="email"
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-                name="email"
-                placeholder="Your e-mail will not be visible for others and used only for notification"
-              />
-              <label htmlFor="password" className="required">
+              <label className="required">
+                E-mail
+                <input
+                  className="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                  name="email"
+                  placeholder="Your e-mail will not be visible for others and used only for notification"
+                  required
+                />
+              </label>
+              <label className="required">
                 Password
                 <input
                   name="password"
@@ -184,47 +187,53 @@ class MyProfile extends Component {
               <legend>
                 <span className="number">2</span>Your profile
               </legend>
-              <label htmlFor="tagline">Tagline</label>
-              <input
-                className="tagline"
-                type="text"
-                value={this.state.tagline}
-                onChange={this.handleInputChange}
-                name="tagline"
-                placeholder="Your motto"
-              />
-              <label htmlFor="location">Location</label>
-              <input
-                className="location"
-                type="text"
-                value={this.state.location}
-                onChange={this.handleInputChange}
-                name="location"
-                placeholder="Where do you live ?"
-              />
-              <label htmlFor="bio">Bio</label>
-              <input
-                className="bio"
-                type="text"
-                value={this.state.bio}
-                onChange={this.handleInputChange}
-                name="bio"
-                placeholder="Describe yourself in few(or more) sentences that might be interesting for others"
-              />
-              <label htmlFor="interests">Interests</label>
-              <input
-                className="interests"
-                type="text"
-                value={this.state.interests}
-                onChange={this.handleInputChange}
-                name="interests"
-                placeholder="What are your interests ?"
-              />
-              <label htmlFor="skills">Skills</label>
-              {this.renderInputs(skills)}
-              <label className="languages" htmlFor="languages">
-                Languages
+              <label>
+                Tagline
+                <input
+                  className="tagline"
+                  type="text"
+                  value={this.state.tagline}
+                  onChange={this.handleInputChange}
+                  name="tagline"
+                  placeholder="Your motto"
+                />
               </label>
+              <label>
+                Location
+                <input
+                  className="location"
+                  type="text"
+                  value={this.state.location}
+                  onChange={this.handleInputChange}
+                  name="location"
+                  placeholder="Where do you live?"
+                />
+              </label>
+              <label>
+                Bio
+                <input
+                  className="bio"
+                  type="text"
+                  value={this.state.bio}
+                  onChange={this.handleInputChange}
+                  name="bio"
+                  placeholder="Describe yourself in few (or more) sentences that might be interesting for others"
+                />
+              </label>
+              <label>
+                Interests
+                <input
+                  className="interests"
+                  type="text"
+                  value={this.state.interests}
+                  onChange={this.handleInputChange}
+                  name="interests"
+                  placeholder="What are your interests?"
+                />
+              </label>
+              <label>Skills</label>
+              {this.renderInputs(skills)}
+              <label className="languages">Languages</label>
               {this.renderInputs(languages)}
             </fieldset>
           </div>

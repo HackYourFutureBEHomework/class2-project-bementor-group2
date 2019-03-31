@@ -23,3 +23,10 @@ export const createUser = user => {
   }).then(response => response.json());
 };
 
+export const updateUserRanking = (id, score) => {
+  return fetch(`${API_URL}/user/${id}/ranking`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ score })
+  }).then(response => response.json());
+};
