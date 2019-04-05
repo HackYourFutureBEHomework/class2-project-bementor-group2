@@ -165,6 +165,7 @@ input#search_input {
   z-index: 3;
   transition: width 0.4s cubic-bezier(0, 0.795, 0, 1);
   cursor: pointer;
+  width: 50px;
 }
 
 input#search_input::placeholder {
@@ -189,7 +190,7 @@ input#search_submit {
   float: right;
   background: url(../images/magnifying-glass.svg) center center no-repeat;
   background-size: 100% 100%;
-  -webkit-filter: invert(100%);
+  filter: invert(100%);
   text-indent: -10000px;
   border: none;
   top: 0;

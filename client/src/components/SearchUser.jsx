@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import "../assets/css/SearchUser.css";
 
 class SearchUser extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { query: props.initialQuery };
+  }
+
   handleSubmit = async event => {
     event.preventDefault();
     this.props.onSearch(this.state.query);
@@ -14,10 +20,15 @@ class SearchUser extends Component {
   };
 
   render() {
+    const { initialQuery } = this.props;
+    const { query } = this.state;
+    const currentQuery = query !== undefined ? query : initialQuery;
+
     return (
       <form className="searchUser" onSubmit={this.handleSubmit}>
         <input
           type="text"
+          value={currentQuery}
           onChange={this.handleInputChanged}
           placeholder="Find your Mentor or Mentee"
         />
