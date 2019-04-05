@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import "../assets/css/Header.css";
 
 class Header extends Component {
@@ -8,8 +8,11 @@ class Header extends Component {
     x.className = x.className === "topnav" ? "topnav responsive" : "topnav";
   }
 
-  handleHeaderSubmit = async event => {
+  handleHeaderSubmit = event => {
     event.preventDefault();
+    this.props.history.push(
+      "./users?search=" + encodeURIComponent(this.state.query)
+    );
     console.log(this.state);
     console.log(this.props);
   };
@@ -36,7 +39,7 @@ class Header extends Component {
             <input
               id="search_input"
               name="search"
-              type="text"
+              type="search"
               placeholder="Find your Mentor"
               onChange={this.handleHeaderInputChanged}
             />
@@ -56,4 +59,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);
