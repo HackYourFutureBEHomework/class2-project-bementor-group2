@@ -44,20 +44,19 @@ class UserCardSmall extends Component {
       });
   };
 
-  renderSkill(userSkill) {
+  renderSkill(userId, userSkill) {
     let skill = skills.find(e => e.name === userSkill.name);
     if (!skill) {
       return "";
     }
 
     return (
-      <span>
-        <img
-          src={skill.img}
-          alt={skill.label + " skill"}
-          title={"Level: " + userSkill.level}
-        />{" "}
-        {userSkill.level}
+      <span
+        key={userId + "_" + userSkill.name}
+        title={"Level " + userSkill.level}
+      >
+        <img src={skill.img} alt={skill.label + " skill"} />{" "}
+        <span className="level">{userSkill.level}</span>
       </span>
     );
   }
@@ -95,7 +94,7 @@ class UserCardSmall extends Component {
           <div className="skills">
             <div className="details__icons">
               <div className="details__skills">
-                {user.skills.map(this.renderSkill)}
+                {user.skills.map(skill => this.renderSkill(user.id, skill))}
               </div>
               <div className="details__languages">
                 {user.eng && (
