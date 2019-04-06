@@ -56,11 +56,16 @@ exports.register = (req, res) => {
   //validate if password is not in plaintext
   //validate if lastname is passed
   //validate if lastname is passed
-
-  const user = new User(req.body);
-  return user
-    .save()
-
+  const { password } = req.body;
+  bcrypt
+    .hash(password, 10)
+    .then(hash => {
+      const user = new User({
+        ...req.body,
+        password: hash
+      });
+      return user.save();
+    })
     .then(() => {
       //send email and verify
       res.status(201).send({
