@@ -13,4 +13,3 @@ export const searchUsers = query => {
 export const userDetails = id => {
   return fetch(`${API_URL}/user/${id}`).then(response => response.json());
 };
-s;

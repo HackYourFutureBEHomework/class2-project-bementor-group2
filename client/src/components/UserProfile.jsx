@@ -60,6 +60,7 @@ class UserProfile extends Component {
       location,
       bio,
       interests,
+
       html,
       css,
       js,
@@ -86,7 +87,7 @@ class UserProfile extends Component {
             <div className="detailsFull__avatar">
               <img
                 className="profileLogoFull"
-                src="https://source.unsplash.com/80x80/?face"
+                src="https://source.unsplash.com/90x90/?face"
                 alt="name"
               />
               <div className="detailsFull__tag">
