@@ -7,5 +7,6 @@ module.exports = app => {
   app.patch("/user/:id", users.update);
   app.delete("/user/:id", users.delete);
   app.get("/user/:_id", users.findUser);
-  app.put("/user/:id/ranking", users.updateRanking);
+  app.put("/user/:id/ranking", users.updateUserRanking);
+  app.put("/user/:id/skills", users.updateSkillLevel);
 };
