@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { userDetails } from "../api/users";
 import Container from "./Container";
 
-import Ranking from "./Ranking";
+import Ranking from "./UserRanking";
 
 const skills = [
   { name: "html", label: "HTML", img: HTMLLogo },
@@ -61,19 +61,33 @@ class UserProfile extends Component {
 
   handleAddMentor = async () => {};
 
-  renderSkill(_id, userSkill) {
+  // updateLevelHandler = (skillName, level) => {
+  //   const { user } = this.state;
+  //   const skill = user.skills.find(s => s.name == skillName);
+  //   skill.level = level;
+  //   this.setState({ user });
+  // };
+
+  renderSkill(userId, userSkill) {
     let skill = skills.find(e => e.name === userSkill.name);
+    if (!skill) {
+      return "";
+    }
 
     return (
-      <span key={skill.name}>
-        <img
-          src={skill.img}
-          alt={skill.label + " skill"}
-          title={"Level: " + userSkill.level}
-        />{" "}
-        {userSkill.level}
-        <Ranking id={_id} ranking={userSkill.level} />
-      </span>
+      <div
+        key={userId + "_" + userSkill.name}
+        title={"Level " + userSkill.level}
+      >
+        <img src={skill.img} alt={skill.label + " skill"} />
+        <span className="level">{userSkill.level}</span>
+        {/* <SkillLevel
+          userId={userId}
+          skillName={userSkill.name}
+          level={userSkill.level}
+          updateLevelHandler={this.updateLevelHandler}
+        /> */}
+      </div>
     );
   }
 

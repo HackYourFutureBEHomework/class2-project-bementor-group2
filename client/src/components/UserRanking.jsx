@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import { updateUserRanking } from "../api/users";
 
-import "../assets/css/Ranking.css";
+import "../assets/css/UserRanking.css";
 
-class Ranking extends Component {
+class UserRanking extends Component {
   constructor(props) {
     super(props);
 
@@ -138,4 +138,4 @@ class Ranking extends Component {
   }
 }
 
-export default Ranking;
+export default UserRanking;
