@@ -17,10 +17,14 @@ const UserSchema = mongoose.Schema(
       required: true
     },
     password: {
-      type: String
+      type: String,
+      required: true,
+      select: false
     },
     email: {
-      type: String
+      type: String,
+      required: true,
+      unique: true
     },
     tagline: {
       type: String

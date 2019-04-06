@@ -1,10 +1,18 @@
 const bcrypt = require("bcrypt");
 const User = require("../model/user.model");
+const jwt = require("jsonwebtoken");
+
+const { JWT_SECRET } = process.env;
 
 const handleError = (err, res) => {
   res.status(500).send({
     message: err.message
   });
+};
+
+//generate jsonwebtoken
+const generateJWT = payload => {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "3 days" });
 };
 
 // Allow to search for a text case insensitive
@@ -66,10 +74,34 @@ exports.register = (req, res) => {
       });
       return user.save();
     })
-    .then(() => {
+    .then(user => {
       //send email and verify
       res.status(201).send({
         message: "Your account has been created successfully"
+      });
+    });
+};
+
+exports.login = (req, res) => {
+  let foundUser = null;
+  User.findOne({ email: req.body.email })
+    .select("+password")
+    .then(user => {
+      foundUser = user;
+      const storedHash = user.password;
+      return bcrypt.compare(req.body.password, storedHash);
+    })
+    .then(authenticationSuccessfull => {
+      if (!authenticationSuccessfull)
+        return res.status(401).send({
+          message: "Incorrect email or password"
+        });
+      return generateJWT({ _id: foundUser._id });
+    })
+    .then(token => {
+      res.status(500).send({
+        token: token,
+        message: "Login successful"
       });
     });
 };
