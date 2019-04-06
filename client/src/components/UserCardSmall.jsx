@@ -12,6 +12,17 @@ import ArabFlag from "../assets/images/otherlogos/arableagueflag.svg";
 
 import Ranking from "./Ranking";
 
+const skills = [
+  { name: "html", label: "HTML", img: HTMLLogo },
+  { name: "css", label: "CSS", img: cssLogo },
+  { name: "js", label: "JavaScript", img: JSLogo },
+  { name: "datab", label: "Database", img: DatabaseLogo },
+  { name: "node", label: "Node.js", img: NodeLogo },
+  { name: "react", label: "React.js", img: ReactLogo },
+  { name: "cli", label: "CLI", img: CLILogo },
+  { name: "git", label: "GitHub", img: GithubLogo }
+];
+
 class UserCardSmall extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +43,24 @@ class UserCardSmall extends Component {
         this.setState({ users });
       });
   };
+
+  renderSkill(userSkill) {
+    let skill = skills.find(e => e.name === userSkill.name);
+    if (!skill) {
+      return "";
+    }
+
+    return (
+      <span>
+        <img
+          src={skill.img}
+          alt={skill.label + " skill"}
+          title={"Level: " + userSkill.level}
+        />{" "}
+        {userSkill.level}
+      </span>
+    );
+  }
 
   render() {
     const { user } = this.props;
@@ -66,38 +95,7 @@ class UserCardSmall extends Component {
           <div className="skills">
             <div className="details__icons">
               <div className="details__skills">
-                {user.css && <img src={cssLogo} alt="CSS slill" />}
-                {user.html && <img src={HTMLLogo} alt="HTML slill" />}
-                {user.js && <img src={JSLogo} alt="JS slill" />}
-                {user.node && <img src={NodeLogo} alt="NODE slill" />}
-                {user.react && (
-                  <img
-                    src={ReactLogo}
-                    alt="ReactJS skill"
-                    title="ReactJs skills"
-                  />
-                )}
-                {user.datab && (
-                  <img
-                    src={DatabaseLogo}
-                    alt="Database skill"
-                    title="Database skills"
-                  />
-                )}
-                {user.git && (
-                  <img
-                    src={GithubLogo}
-                    alt="GitHub skill"
-                    title="GitHub skills"
-                  />
-                )}
-                {user.cli && (
-                  <img
-                    src={CLILogo}
-                    alt="Command line skill"
-                    title="CommandLineInterface skills"
-                  />
-                )}
+                {user.skills.map(this.renderSkill)}
               </div>
               <div className="details__languages">
                 {user.eng && (

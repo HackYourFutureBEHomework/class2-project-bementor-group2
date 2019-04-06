@@ -30,7 +30,9 @@ const languages = [
 class MyProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      skills: []
+    };
   }
 
   setTitle() {
@@ -58,6 +60,20 @@ class MyProfile extends Component {
 
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleSkillChange = e => {
+    const name = e.target.name;
+    const level = e.target.value;
+    let skills = [...this.state.skills];
+    const skill = skills.find(skill => skill.name == name);
+    if (skill) {
+      skill.level = level;
+    } else {
+      skills.push({ name, level });
+    }
+
+    this.setState({ skills });
   };
 
   handleCheckboxChange = e => {
@@ -94,18 +110,25 @@ class MyProfile extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const newUser = { ...this.state };
+    let newUser = { ...this.state };
 
     newUser = this.updateMenteeMentor(newUser);
 
     // TODO: use a nice UI to inform the user
     createUser(newUser)
-      .then(user => this.setState({ ...user }))
-      .then(() => alert("User was successfully created!"));
+      .then(res => {
+        if (res.message) {
+          alert(`Error while creating user: '${res.message}'`);
+          return;
+        }
+        this.setState({ ...res });
+        alert("User was successfully created!");
+      })
+      .catch(err => alert(`Server error: '${err}'`));
   };
 
-  renderInputs(inputs) {
-    return inputs.map(({ name, label }) => {
+  renderLanguages() {
+    return languages.map(({ name, label }) => {
       return (
         <label key={name} className="inline">
           <input
@@ -116,6 +139,28 @@ class MyProfile extends Component {
             checked={this.state[name]}
           />
           {label}
+        </label>
+      );
+    });
+  }
+
+  renderSkills() {
+    return skills.map(({ name, label }) => {
+      return (
+        <label key={name} className="label-select">
+          {label}
+          <select
+            name={name}
+            value={this.state[name]}
+            onChange={this.handleSkillChange}
+          >
+            <option value="">N/A</option>
+            <option value="1">Basic</option>
+            <option value="2">Novice</option>
+            <option value="3">Intermediate</option>
+            <option value="4">Advanced</option>
+            <option value="5">Expert</option>
+          </select>
         </label>
       );
     });
@@ -262,9 +307,9 @@ class MyProfile extends Component {
                 />
               </label>
               <label>Skills</label>
-              {this.renderInputs(skills)}
+              {this.renderSkills()}
               <label className="languages">Languages</label>
-              {this.renderInputs(languages)}
+              {this.renderLanguages()}
             </fieldset>
           </div>
           <button className="submit_button" type="submit" value="let me Be!">

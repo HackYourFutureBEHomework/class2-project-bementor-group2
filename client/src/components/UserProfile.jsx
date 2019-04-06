@@ -12,15 +12,25 @@ import ArabFlag from "../assets/images/otherlogos/arableagueflag.svg";
 import { Link } from "react-router-dom";
 import { userDetails } from "../api/users";
 import Container from "./Container";
-import UserCardSmall from "./UserCardSmall";
 
 import Ranking from "./Ranking";
+
+const skills = [
+  { name: "html", label: "HTML", img: HTMLLogo },
+  { name: "css", label: "CSS", img: cssLogo },
+  { name: "js", label: "JavaScript", img: JSLogo },
+  { name: "datab", label: "Database", img: DatabaseLogo },
+  { name: "node", label: "Node.js", img: NodeLogo },
+  { name: "react", label: "React.js", img: ReactLogo },
+  { name: "cli", label: "CLI", img: CLILogo },
+  { name: "git", label: "GitHub", img: GithubLogo }
+];
 
 class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: [],
+      user: {},
       myProfileId: "5c9cb17304131e3ebd0f80d7",
       myUpdatedProfile: []
     };
@@ -51,8 +61,24 @@ class UserProfile extends Component {
 
   handleAddMentor = async () => {};
 
+  renderSkill(_id, userSkill) {
+    let skill = skills.find(e => e.name === userSkill.name);
+
+    return (
+      <span key={skill.name}>
+        <img
+          src={skill.img}
+          alt={skill.label + " skill"}
+          title={"Level: " + userSkill.level}
+        />{" "}
+        {userSkill.level}
+        <Ranking id={_id} ranking={userSkill.level} />
+      </span>
+    );
+  }
+
   render() {
-    console.log(this.state.myUpdatedProfile);
+    // console.log(this.state.myUpdatedProfile);
     const {
       _id,
       mentor,
@@ -63,14 +89,7 @@ class UserProfile extends Component {
       location,
       bio,
       interests,
-      html,
-      css,
-      js,
-      datab,
-      node,
-      react,
-      cli,
-      git,
+      skills = [],
       eng,
       fr,
       du,
@@ -105,18 +124,21 @@ class UserProfile extends Component {
                 <span className="detailsFull__comment">Hi, my name is </span>
                 <span className="detailsFull__firstName">{firstName}</span>
 
+                <Ranking id={_id} ranking={ranking} />
 
-            <Ranking id={_id} ranking={ranking} />
-
-            <div className="detailsFull__role">
-              <span className="detailsFull__comment">...I'm a </span>
-              {mentor && <span className="detailsFull__mentor">Mentor</span>}
-              {mentee && <span className="detailsFull__mentee">Mentee</span>}
-            </div>
+                <div className="detailsFull__role">
+                  <span className="detailsFull__comment">...I'm a </span>
+                  {mentor && (
+                    <span className="detailsFull__mentor">Mentor</span>
+                  )}
+                  {mentee && (
+                    <span className="detailsFull__mentee">Mentee</span>
+                  )}
+                </div>
 
                 <span className="detailsFull__lastName"> {lastName}</span>
               </div>
-        
+
               <div className="detailsFull__role">
                 <span className="detailsFull__comment">...I'm a </span>
                 {mentor && <span className="detailsFull__mentor">Mentor</span>}
@@ -141,54 +163,7 @@ class UserProfile extends Component {
               <div className="skillsFull">
                 <div className="detailsFull__skills">
                   <span className="detailsFull__comment">My core skills</span>
-                  {css && (
-                    <img src={cssLogo} alt="CSS skill" title="CSS skills" />
-                  )}
-                  {html && (
-                    <img src={HTMLLogo} alt="HTML skill" title="HTML skills" />
-                  )}
-                  {js && (
-                    <img
-                      src={JSLogo}
-                      alt="JS skill"
-                      title="JavaScript skills"
-                    />
-                  )}
-                  {node && (
-                    <img
-                      src={NodeLogo}
-                      alt="NODE skill"
-                      title="NodeJS skills"
-                    />
-                  )}
-                  {react && (
-                    <img
-                      src={ReactLogo}
-                      alt="ReactJS skill"
-                      title="ReactJs skills"
-                    />
-                  )}
-                  {datab && (
-                    <img
-                      src={DatabaseLogo}
-                      alt="Database skill"
-                      title="Database skills"
-                    />
-                  )}
-                  {git && (
-                    <img
-                      src={GithubLogo}
-                      alt="GitHub skill"
-                      title="GitHub skills"
-                    />
-                  )}
-                  {cli && (
-                    <img
-                      src={CLILogo}
-                      alt="Command line skill"
-                      title="CommandLineInterface skills"
-                    />
-                  )}
+                  {skills.map(skill => this.renderSkill(_id, skill))}
                 </div>
                 <div className="detailsFull__languages">
                   <span className="detailsFull__comment">I speak</span>
