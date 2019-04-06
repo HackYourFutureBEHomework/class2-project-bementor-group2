@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const User = require("../model/user.model");
 
 const handleError = (err, res) => {
@@ -46,6 +47,26 @@ exports.search = (req, res) => {
   const users = User.find({ $text: { $search: query } })
     .then(users => res.send(users))
     .catch(err => res.status(500).send({ message: err.message }));
+};
+
+//Register users
+exports.register = (req, res) => {
+  //validate if email exists
+  //validate if email is valid
+  //validate if password is not in plaintext
+  //validate if lastname is passed
+  //validate if lastname is passed
+
+  const user = new User(req.body);
+  return user
+    .save()
+
+    .then(() => {
+      //send email and verify
+      res.status(201).send({
+        message: "Your account has been created successfully"
+      });
+    });
 };
 
 function calculateRanking(scores) {
