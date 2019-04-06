@@ -15,6 +15,11 @@ const generateJWT = payload => {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: "3 days" });
 };
 
+//verify jsonwebtoken
+const verifyJWT = token => {
+  return jwt.verify(token, JWT_SECRET);
+};
+
 // Allow to search for a text case insensitive
 const containNoCaseHandler = text => new RegExp(text, "i");
 
@@ -25,6 +30,15 @@ exports.findAll = (req, res) => {
 };
 
 exports.update = (req, res) => {
+  if (!req.body.token)
+    return res.status(401).send({
+      message: "You need to be logged in to be able to update your profile"
+    });
+  const decoded = verifyJWT(req.body.token);
+  if (!decoded) return res.status(401).send({ message: "Invalid token" });
+  const { id } = req.params;
+  if (!decoded._id !== id)
+    return res.status(403).send({ message: "authentication failed" });
   User.findByIdAndUpdate({ _id: req.params.id }, req.body)
     .then(() => res.json({ message: "User info was updated" }))
     .catch(err => handleError(err, res));
