@@ -7,7 +7,11 @@ require("dotenv").config();
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect(process.env.MONGODB_URL, { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URL, {
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useNewUrlParser: true
+  })
   .then(() => {
     console.log("Database connection established");
   })
@@ -26,38 +30,6 @@ app.get("/", (req, res) => {
   res.json({ message: "API ready" });
 });
 
-/*
-// getting list of users from DB
-app.get("/user", (req, res) => {
-  const users = User.find().then(users => {
-    res.send(users);
-  });
-});
-
-//updating user info to database
-app.patch("/user/:_id", (req, res) => {
-  User.findByIdAndUpdate({ _id: req.params._id }, req.body)
-    .then(() => {
-      res.json({ message: "User info was updated" });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message
-      });
-    });
-});
-
-//deleting user to database to paste here ID of user to delete
-app.delete("/user/:_id", (req, res) => {
-  User.remove({ _id: req.params._id })
-    .then(() => res.json({ message: "User was deleted" }))
-    .catch(err => {
-      res.status(500).send({
-        message: err.message
-      });
-    });
-});
-*/
 // const router = express.Router();
 // app.use("/api", router);
 require("./src/route/user.route")(app);

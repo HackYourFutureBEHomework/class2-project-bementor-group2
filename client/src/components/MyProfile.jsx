@@ -97,7 +97,12 @@ class MyProfile extends Component {
   render() {
     return (
       <Container>
-        <form className="userForm" onSubmit={this.handleSubmit}>
+        <form
+          method="post"
+          action="/register"
+          className="userForm"
+          onSubmit={this.handleSubmit}
+        >
           <div className="userForm_container">
             <h1>Welcome to BeMentor</h1>
             <div className="avatar">
