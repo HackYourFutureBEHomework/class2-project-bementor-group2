@@ -8,7 +8,6 @@ const handleError = (err, res) => {
 
 exports.findAll = (req, res) => {
   User.find()
-    .limit(5)
     .then(users => res.send(users))
     .catch(err => handleError(err, res));
 };
