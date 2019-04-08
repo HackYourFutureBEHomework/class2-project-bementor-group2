@@ -1,57 +1,47 @@
 import React, { Component } from "react";
 
-import { updateUserRanking } from "../api/users";
+import { updateSkillLevel } from "../api/users";
 
-import "../assets/css/Ranking.css";
+import "../assets/css/SkillLevel.css";
 
-class Ranking extends Component {
+/**
+ * TODO: this component is not working properly.
+ * It fails to show the level when used multiple times in the same page.
+ */
+class SkillLevel extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      score: null,
-      newRanking: null,
-      alertClass: "hide"
+      level: this.props.level
     };
   }
 
-  showWarning = () => {
-    this.setState({ alertClass: "alert alert-warning scored-message" });
-  };
-
-  hideWarning = e => {
-    this.setState({ alertClass: "hide" });
-  };
-
-  updateRanking = e => {
+  updateLevel = e => {
     e.stopPropagation();
 
-    if (this.state.score) {
-      this.showWarning();
-      return;
-    }
+    const { userId, skillName } = this.props;
+    const level = e.target.value;
 
-    const { id } = this.props;
-    const score = e.target.value;
-
-    updateUserRanking(id, score).then(res => {
-      this.setState({
-        score,
-        newRanking: res.user.ranking
-      });
+    updateSkillLevel(userId, skillName, level).then(res => {
+      if (res && res.messsage) {
+        alert(`Error updating skill level for ${skillName}: '${res.message}'`);
+        return;
+      }
+      this.props.updateLevelHandler(skillName, level);
+      this.setState({ level });
     });
   };
 
   render() {
-    let { id, ranking } = this.props;
-    if (this.state.score) {
-      ranking = this.state.score;
-    }
+    const { userId, skillName } = this.props;
+    const id = userId + "_" + skillName;
+    const { level } = this.state;
 
     // the empty onChange function is just to avoid React warning about
     // missing onChange which it is already covered by onClick
     return (
-      <div className="ranking">
+      <div className="skill-level">
         <div className="rating">
           <input
             type="radio"
@@ -59,8 +49,8 @@ class Ranking extends Component {
             className="rating__control"
             defaultValue="1"
             id={"rc1_" + id}
-            checked={ranking >= 1}
-            onClick={this.updateRanking}
+            checked={level >= 1}
+            onClick={this.updateLevel}
             onChange={() => {}}
           />
           <input
@@ -69,8 +59,8 @@ class Ranking extends Component {
             className="rating__control"
             defaultValue="2"
             id={"rc2_" + id}
-            checked={ranking >= 2}
-            onClick={this.updateRanking}
+            checked={level >= 2}
+            onClick={this.updateLevel}
             onChange={() => {}}
           />
           <input
@@ -78,9 +68,9 @@ class Ranking extends Component {
             name="rating-star"
             className="rating__control"
             defaultValue="3"
-            id={"rc2_" + id}
-            checked={ranking >= 3}
-            onClick={this.updateRanking}
+            id={"rc3_" + id}
+            checked={level >= 3}
+            onClick={this.updateLevel}
             onChange={() => {}}
           />
           <input
@@ -89,8 +79,8 @@ class Ranking extends Component {
             className="rating__control"
             defaultValue="4"
             id={"rc4_" + id}
-            checked={ranking >= 4}
-            onClick={this.updateRanking}
+            checked={level >= 4}
+            onClick={this.updateLevel}
             onChange={() => {}}
           />
           <input
@@ -99,8 +89,8 @@ class Ranking extends Component {
             className="rating__control"
             defaultValue="5"
             id={"rc5_" + id}
-            checked={ranking >= 5}
-            onClick={this.updateRanking}
+            checked={level >= 5}
+            onClick={this.updateLevel}
             onChange={() => {}}
           />
 
@@ -125,17 +115,9 @@ class Ranking extends Component {
             <span className="rating__label">5</span>
           </label>
         </div>
-
-        <div
-          className={this.state.alertClass}
-          role="alert"
-          onClick={this.hideWarning}
-        >
-          You already scored this profile with: {this.state.score}
-        </div>
       </div>
     );
   }
 }
 
-export default Ranking;
+export default SkillLevel;

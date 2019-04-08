@@ -24,14 +24,6 @@ const run = async () => {
       location: rawUser.location,
       bio: rawUser.bio,
       interests: rawUser.interests,
-      html: rawUser.html,
-      css: rawUser.css,
-      js: rawUser.js,
-      datab: rawUser.datab,
-      node: rawUser.node,
-      react: rawUser.react,
-      cli: rawUser.cli,
-      git: rawUser.git,
       eng: rawUser.eng,
       fr: rawUser.fr,
       du: rawUser.du,
@@ -39,7 +31,9 @@ const run = async () => {
       ar: rawUser.ar,
       tr: rawUser.tr,
       rus: rawUser.rus,
-      script: rawUser.script
+      ranking: rawUser.ranking,
+      scores: rawUser.scores,
+      skills: rawUser.skills
     });
   });
 
