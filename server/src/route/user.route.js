@@ -2,11 +2,13 @@ const users = require("../controller/user.controller");
 
 module.exports = app => {
   app.get("/user", users.findAll);
-  app.post("/user", users.create);
   app.get("/user/search", users.search);
-  app.patch("/user/:id", users.update);
-  app.delete("/user/:id", users.delete);
   app.get("/user/:_id", users.findUser);
-  app.put("/user/:id/ranking", users.updateUserRanking);
+  app.post("/user", users.create);
+  app.post("/user/login", users.login);
+  app.post("/user/register", users.register);
+  app.patch("/user/:id", users.update);
+  app.put("/user/:id/ranking", users.updateRanking);
   app.put("/user/:id/skills", users.updateSkillLevel);
+  app.delete("/user/:id", users.delete);
 };
