@@ -74,6 +74,17 @@ input[type="checkbox"] {
   padding: 30px;
 }
 
+.label-select {
+  padding: 30px;
+  width: 95%;
+  margin: auto;
+}
+
+select {
+  display: block;
+  padding: 30px;
+}
+
 button {
   padding: 19px 39px 18px 39px;
   color: #fff;

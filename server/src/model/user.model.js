@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
 
+const SkillSchema = mongoose.Schema(
+  {
+    name: String,
+    level: Number
+  },
+  { _id: false }
+);
+
 const UserSchema = mongoose.Schema(
   {
     mentor: {
@@ -38,30 +46,6 @@ const UserSchema = mongoose.Schema(
     interests: {
       type: String
     },
-    html: {
-      type: Boolean
-    },
-    css: {
-      type: Boolean
-    },
-    js: {
-      type: Boolean
-    },
-    datab: {
-      type: Boolean
-    },
-    node: {
-      type: Boolean
-    },
-    react: {
-      type: Boolean
-    },
-    cli: {
-      type: Boolean
-    },
-    git: {
-      type: Boolean
-    },
     eng: {
       type: Boolean
     },
@@ -83,9 +67,6 @@ const UserSchema = mongoose.Schema(
     rus: {
       type: Boolean
     },
-    script: {
-      type: Boolean
-    },
     connectedAsMentor: {
       type: [String]
     },
@@ -97,7 +78,8 @@ const UserSchema = mongoose.Schema(
     },
     scores: {
       type: [Number]
-    }
+    },
+    skills: [SkillSchema]
   },
   {
     timestamps: true

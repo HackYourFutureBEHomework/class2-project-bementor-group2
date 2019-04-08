@@ -9,5 +9,6 @@ module.exports = app => {
   app.post("/user/register", users.register);
   app.patch("/user/:id", users.update);
   app.put("/user/:id/ranking", users.updateRanking);
+  app.put("/user/:id/skills", users.updateSkillLevel);
   app.delete("/user/:id", users.delete);
 };

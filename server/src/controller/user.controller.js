@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../model/user.model");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
 
 const { JWT_SECRET } = process.env;
 
@@ -72,6 +72,7 @@ exports.search = (req, res) => {
     .catch(err => res.status(500).send({ message: err.message }));
 };
 
+
 //Register users
 exports.register = (req, res) => {
   // const { firstName, lastName, email, password, password2 } = req.body;
@@ -112,35 +113,36 @@ exports.register = (req, res) => {
     })
     .then(user => {
       //send email and verify
-      const transporter = nodemailer.createTransport({
-        service: "Gmail",
-        secure: false,
-        port: 587,
-        auth: {
-          user: req.body.email,
-          pass: password.hash
-        },
-        tls: {
-          rejectUnauthorized: false
-        }
-      });
+//       const transporter = nodemailer.createTransport({
+//         service: "Gmail",
+//         secure: false,
+//         port: 587,
+//         auth: {
+//           user: req.body.email,
+//           pass: password.hash
+//         },
+//         tls: {
+//           rejectUnauthorized: false
+//         }
+//       });
 
-      const mailtOptions = {
-        from: "BeMentor.be",
-        to: "hassanalihazaraa@gmail.com",
-        subject: "Account activated",
-        text: "Welcome to BEMENTOR"
-      };
-      transporter.sendMail(mailtOptions, (error, info) => {
-        if (error) return console.log(error);
-        console.log("The message was sent");
-        console.log(info);
+//       const mailtOptions = {
+//         from: "BeMentor.be",
+//         to: "hassanalihazaraa@gmail.com",
+//         subject: "Account activated",
+//         text: "Welcome to BEMENTOR"
+//       };
+//       transporter.sendMail(mailtOptions, (error, info) => {
+//         if (error) return console.log(error);
+//         console.log("The message was sent");
+//         console.log(info);
+         res.status(201).send({
+           message: "Your account has been created successfully"
       });
-      res.status(201).send({
-        message: "Your account has been created successfully"
+        });
         // });
         // res.redirect('/user/login');
-      });
+    
     });
 
   exports.login = (req, res) => {
@@ -203,4 +205,34 @@ exports.register = (req, res) => {
       })
       .catch(err => handleError(err, res));
   };
+};
+
+exports.updateSkillLevel = (req, res) => {
+  console.log("req.params", req.params);
+  const { skillName, level } = req.body;
+
+  User.findById({ _id: req.params.id })
+    .then(user => {
+      // Prevent errors with previously created users
+      if (!user.skills) {
+        user.skills = [];
+      }
+
+      const skill = user.skills.find(s => s.name == skillName);
+      if (skill) {
+        skill.level = level;
+      } else {
+        skills.push({ skillName, level });
+      }
+
+      user
+        .save()
+        .then(() =>
+          res.json({
+            skills: user.skills
+          })
+        )
+        .catch(err => handleError(err, res));
+    })
+    .catch(err => handleError(err, res));
 };
