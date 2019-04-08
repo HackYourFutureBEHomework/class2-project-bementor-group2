@@ -143,7 +143,7 @@ exports.register = (req, res) => {
         // });
         // res.redirect('/user/login');
     
-    });
+    };
 
   exports.login = (req, res) => {
     let foundUser = null;
@@ -205,7 +205,6 @@ exports.register = (req, res) => {
       })
       .catch(err => handleError(err, res));
   };
-};
 
 exports.updateSkillLevel = (req, res) => {
   console.log("req.params", req.params);
