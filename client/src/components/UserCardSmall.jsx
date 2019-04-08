@@ -10,7 +10,18 @@ import GithubLogo from "../assets/images/slills_logos_svg/Githublogo.svg";
 import ReactLogo from "../assets/images/slills_logos_svg/react_logo.svg";
 import ArabFlag from "../assets/images/otherlogos/arableagueflag.svg";
 
-import Ranking from "./Ranking";
+import UserRanking from "./UserRanking";
+
+const skills = [
+  { name: "html", label: "HTML", img: HTMLLogo },
+  { name: "css", label: "CSS", img: cssLogo },
+  { name: "js", label: "JavaScript", img: JSLogo },
+  { name: "datab", label: "Database", img: DatabaseLogo },
+  { name: "node", label: "Node.js", img: NodeLogo },
+  { name: "react", label: "React.js", img: ReactLogo },
+  { name: "cli", label: "CLI", img: CLILogo },
+  { name: "git", label: "GitHub", img: GithubLogo }
+];
 
 class UserCardSmall extends Component {
   constructor(props) {
@@ -32,6 +43,23 @@ class UserCardSmall extends Component {
         this.setState({ users });
       });
   };
+
+  renderSkill(userId, userSkill) {
+    let skill = skills.find(e => e.name === userSkill.name);
+    if (!skill) {
+      return "";
+    }
+
+    return (
+      <span
+        key={userId + "_" + userSkill.name}
+        title={"Level " + userSkill.level}
+      >
+        <img src={skill.img} alt={skill.label + " skill"} />{" "}
+        <span className="level">{userSkill.level}</span>
+      </span>
+    );
+  }
 
   render() {
     const { user } = this.props;
@@ -55,7 +83,7 @@ class UserCardSmall extends Component {
                 <span className="details__separator"> and </span>
               )}
               {user.mentee && <span className="details__mentee">Mentee</span>}
-              <Ranking id={user._id} ranking={user.ranking} />
+              <UserRanking id={user._id} ranking={user.ranking} />
             </div>
           </div>
           <span className="details__tagline">{user.tagline}</span>
@@ -66,38 +94,7 @@ class UserCardSmall extends Component {
           <div className="skills">
             <div className="details__icons">
               <div className="details__skills">
-                {user.css && <img src={cssLogo} alt="CSS slill" />}
-                {user.html && <img src={HTMLLogo} alt="HTML slill" />}
-                {user.js && <img src={JSLogo} alt="JS slill" />}
-                {user.node && <img src={NodeLogo} alt="NODE slill" />}
-                {user.react && (
-                  <img
-                    src={ReactLogo}
-                    alt="ReactJS skill"
-                    title="ReactJs skills"
-                  />
-                )}
-                {user.datab && (
-                  <img
-                    src={DatabaseLogo}
-                    alt="Database skill"
-                    title="Database skills"
-                  />
-                )}
-                {user.git && (
-                  <img
-                    src={GithubLogo}
-                    alt="GitHub skill"
-                    title="GitHub skills"
-                  />
-                )}
-                {user.cli && (
-                  <img
-                    src={CLILogo}
-                    alt="Command line skill"
-                    title="CommandLineInterface skills"
-                  />
-                )}
+                {user.skills.map(skill => this.renderSkill(user.id, skill))}
               </div>
               <div className="details__languages">
                 {user.eng && (

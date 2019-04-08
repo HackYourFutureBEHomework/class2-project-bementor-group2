@@ -13,15 +13,24 @@ import { Link } from "react-router-dom";
 import { userDetails } from "../api/users";
 import Container from "./Container";
 
-import Ranking from "./Ranking";
+const skills = [
+  { name: "html", label: "HTML", img: HTMLLogo },
+  { name: "css", label: "CSS", img: cssLogo },
+  { name: "js", label: "JavaScript", img: JSLogo },
+  { name: "datab", label: "Database", img: DatabaseLogo },
+  { name: "node", label: "Node.js", img: NodeLogo },
+  { name: "react", label: "React.js", img: ReactLogo },
+  { name: "cli", label: "CLI", img: CLILogo },
+  { name: "git", label: "GitHub", img: GithubLogo }
+];
 
 class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: []
-      // myProfileId: "5c9cb17304131e3ebd0f80d7",
-      // myUpdatedProfile: []
+      user: {},
+      myProfileId: "5c9cb17304131e3ebd0f80d7",
+      myUpdatedProfile: []
     };
   }
 
@@ -32,26 +41,24 @@ class UserProfile extends Component {
     });
   }
 
-  // handleAddMentor = async () => {
-  //   console.log("Added:", this.state.user._id);
-  //   const myProfileId = "5c9cb17304131e3ebd0f80d7";
-  //   await userDetails(myProfileId).then(res => {
-  //     this.setState({ myUpdatedProfile: res });
-  //   });
-  //   const myUpdatedProfile = this.state.myUpdatedProfile.connectedAsMentee.push(
-  //     myProfileId
-  //   );
-  //   users.save(function(err) {
-  //     if (err) {
-  //       console.error("ERROR!");
-  //     }
-  //   });
-  // };
+  renderSkill(userId, userSkill) {
+    let skill = skills.find(e => e.name === userSkill.name);
+    if (!skill) {
+      return "";
+    }
 
-  //handleAddMentor = async () => {};
+    return (
+      <div
+        key={userId + "_" + userSkill.name}
+        title={"Level " + userSkill.level}
+      >
+        <img src={skill.img} alt={skill.label + " skill"} />
+        <span className="level">{userSkill.level}</span>
+      </div>
+    );
+  }
 
   render() {
-    console.log(this.state.myUpdatedProfile);
     const {
       _id,
       mentor,
@@ -62,23 +69,14 @@ class UserProfile extends Component {
       location,
       bio,
       interests,
-
-      html,
-      css,
-      js,
-      datab,
-      node,
-      react,
-      cli,
-      git,
+      skills = [],
       eng,
       fr,
       du,
       es,
       ar,
       tr,
-      rus,
-      ranking
+      rus
     } = this.state.user;
 
     return (
@@ -101,11 +99,9 @@ class UserProfile extends Component {
               </a>
             </div>
             <div className="detailsFull__information">
-              <Ranking id={_id} ranking={ranking} />
               <div className="detailsFull__name">
                 <span className="detailsFull__comment">Hi, my name is </span>
                 <span className="detailsFull__firstName">{firstName}</span>
-
                 <span className="detailsFull__lastName"> {lastName}</span>
               </div>
 
@@ -133,54 +129,7 @@ class UserProfile extends Component {
               <div className="skillsFull">
                 <div className="detailsFull__skills">
                   <span className="detailsFull__comment">My core skills</span>
-                  {css && (
-                    <img src={cssLogo} alt="CSS skill" title="CSS skills" />
-                  )}
-                  {html && (
-                    <img src={HTMLLogo} alt="HTML skill" title="HTML skills" />
-                  )}
-                  {js && (
-                    <img
-                      src={JSLogo}
-                      alt="JS skill"
-                      title="JavaScript skills"
-                    />
-                  )}
-                  {node && (
-                    <img
-                      src={NodeLogo}
-                      alt="NODE skill"
-                      title="NodeJS skills"
-                    />
-                  )}
-                  {react && (
-                    <img
-                      src={ReactLogo}
-                      alt="ReactJS skill"
-                      title="ReactJs skills"
-                    />
-                  )}
-                  {datab && (
-                    <img
-                      src={DatabaseLogo}
-                      alt="Database skill"
-                      title="Database skills"
-                    />
-                  )}
-                  {git && (
-                    <img
-                      src={GithubLogo}
-                      alt="GitHub skill"
-                      title="GitHub skills"
-                    />
-                  )}
-                  {cli && (
-                    <img
-                      src={CLILogo}
-                      alt="Command line skill"
-                      title="CommandLineInterface skills"
-                    />
-                  )}
+                  {skills.map(skill => this.renderSkill(_id, skill))}
                 </div>
                 <div className="detailsFull__languages">
                   <span className="detailsFull__comment">I speak</span>

@@ -6,20 +6,11 @@ const handleError = (err, res) => {
   });
 };
 
-// Allow to search for a text case insensitive
-const containNoCaseHandler = text => new RegExp(text, "i");
-
 exports.findAll = (req, res) => {
   User.find()
     .then(users => res.send(users))
     .catch(err => handleError(err, res));
 };
-
-// exports.find = (req, res) => {
-//   User.findById(req.params.id, req.body)
-//     .then(user => res.send(user))
-//     .catch(err => handleError(err, res));
-// };
 
 exports.update = (req, res) => {
   User.findByIdAndUpdate({ _id: req.params.id }, req.body)
@@ -47,45 +38,6 @@ exports.create = (req, res) => {
     .catch(err => handleError(err, res));
 };
 
-/*
-exports.search = (req, res) => {
-  const searchParams = {};
-  if (req.query.firstName) {
-    searchParams["firstName"] = containNoCaseHandler(req.query.firstName);
-  }
-  if (req.query.secondName) {
-    searchParams["secondName"] = containNoCaseHandler(req.query.secondName);
-  }
-  if (req.query.location) {
-    searchParams["location"] = containNoCaseHandler(req.query.location);
-  }
-  // TODO: query arrays
-  if (req.query.interests) {
-    searchParams["interests"] = containNoCaseHandler(req.query.interests);
-  }
-  if (req.query.skills) {
-    searchParams["skills"] = containNoCaseHandler(req.query.skills);
-  }
-  if (req.query.email) {
-    searchParams["e-mail"] = req.query.email;
-  }
-  console.debug("User.find:", searchParams);
-
-  User.find(searchParams)
-    .then(users => res.send(users))
-    .catch(errHandler);
-    .then(() => {
-      res.json(users);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message
-      });
-    });
-};
-
-*/
-
 exports.search = (req, res) => {
   const query = req.query.text;
   const users = User.find({ $text: { $search: query } })
@@ -102,8 +54,7 @@ function calculateRanking(scores) {
 }
 
 // User Rankings
-exports.updateRanking = (req, res) => {
-  console.log("req.params", req.params);
+exports.updateUserRanking = (req, res) => {
   const newScore = req.body.score;
   User.findById({ _id: req.params.id })
     .then(user => {
@@ -123,6 +74,36 @@ exports.updateRanking = (req, res) => {
               ranking: user.ranking,
               scores: user.scores
             }
+          })
+        )
+        .catch(err => handleError(err, res));
+    })
+    .catch(err => handleError(err, res));
+};
+
+exports.updateSkillLevel = (req, res) => {
+  console.log("req.params", req.params);
+  const { skillName, level } = req.body;
+
+  User.findById({ _id: req.params.id })
+    .then(user => {
+      // Prevent errors with previously created users
+      if (!user.skills) {
+        user.skills = [];
+      }
+
+      const skill = user.skills.find(s => s.name == skillName);
+      if (skill) {
+        skill.level = level;
+      } else {
+        skills.push({ skillName, level });
+      }
+
+      user
+        .save()
+        .then(() =>
+          res.json({
+            skills: user.skills
           })
         )
         .catch(err => handleError(err, res));

@@ -29,3 +29,11 @@ export const updateUserRanking = (id, score) => {
     body: JSON.stringify({ score })
   }).then(response => response.json());
 };
+
+export const updateSkillLevel = (id, skillName, level) => {
+  return fetch(`${API_URL}/user/${id}/skills`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ skillName, level })
+  }).then(response => response.json());
+};
