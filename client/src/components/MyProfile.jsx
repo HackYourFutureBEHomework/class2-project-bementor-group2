@@ -1,127 +1,98 @@
 import React, { Component } from "react";
 import Container from "./Container";
+
+import { createUser } from "../api/users";
+
 import "../assets/css/Profile.css";
+
+const DEFAULT_TITLE = "My Profile";
+const skills = [
+  { name: "html", label: "HTML" },
+  { name: "css", label: "CSS" },
+  { name: "js", label: "JavaScript" },
+  { name: "datab", label: "Database" },
+  { name: "node", label: "Node.js" },
+  { name: "react", label: "React.js" },
+  { name: "cli", label: "CLI" },
+  { name: "git", label: "GitHub" }
+];
+const languages = [
+  { name: "eng", label: "English" },
+  { name: "fr", label: "French" },
+  { name: "du", label: "Dutch" },
+  { name: "es", label: "Spanish" },
+  { name: "ar", label: "Arabic" },
+  { name: "tr", label: "Turkish" },
+  { name: "rus", label: "Russian" },
+  { name: "de", label: "German" }
+];
 
 class MyProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      Users: []
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {};
+  }
+
+  setTitle() {
+    let newTitle = "";
+    if (this.state.firstName) {
+      newTitle += this.state.firstName + " ";
+    }
+    if (this.state.lastName) {
+      newTitle += this.state.lastName;
+    }
+    if (newTitle) {
+      newTitle += " - ";
+    }
+    newTitle += DEFAULT_TITLE;
+    document.title = newTitle;
   }
 
   componentDidMount() {
-    document.title = this.state.firstName + " " + this.state.lastName;
-  }
-  componentDidUpdate() {
-    document.title = this.state.firstName + " " + this.state.lastName;
+    this.setTitle();
   }
 
-  handleInputChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
+  componentDidUpdate() {
+    this.setTitle();
+  }
+
+  handleInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleCheckboxChange = e => {
+    const propName = e.target.name;
+
+    this.setState({ [propName]: e.target.checked });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const newUser = { ...this.state };
+
+    // TODO: use a nice UI to inform the user
+    createUser(newUser)
+      .then(user => this.setState({ ...user }))
+      .then(() => alert("User was successfully created!"));
+  };
+
+  renderInputs(inputs) {
+    return inputs.map(({ name, label }) => {
+      return (
+        <label key={name} className="inline">
+          <input
+            type="checkbox"
+            value="true"
+            onChange={this.handleCheckboxChange}
+            name={name}
+            checked={this.state[name]}
+          />
+          {label}
+        </label>
+      );
     });
   }
-
-  handleSubmit = event => {
-    event.preventDefault();
-    const {
-      mentor,
-      mentee,
-      firstName,
-      lastName,
-      password,
-      email,
-      tagline,
-      location,
-      bio,
-      interests,
-      html,
-      css,
-      js,
-      datab,
-      node,
-      react,
-      cli,
-      git,
-      eng,
-      fr,
-      du,
-      es,
-      ar,
-      tr,
-      rus,
-      script
-    } = this.state;
-
-    fetch(`http://localhost:4000/user`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        mentor,
-        mentee,
-        firstName,
-        lastName,
-        password,
-        email,
-        tagline,
-        location,
-        bio,
-        interests,
-        html,
-        css,
-        js,
-        datab,
-        node,
-        react,
-        cli,
-        git,
-        eng,
-        fr,
-        du,
-        es,
-        ar,
-        tr,
-        rus,
-        script
-      })
-    })
-      .then(res => {
-        res.json();
-      })
-      .then(() => {
-        this.setState({
-          mentor,
-          mentee,
-          firstName,
-          lastName,
-          password,
-          email,
-          tagline,
-          location,
-          bio,
-          interests,
-          html,
-          css,
-          js,
-          datab,
-          node,
-          react,
-          cli,
-          git,
-          eng,
-          fr,
-          du,
-          es,
-          ar,
-          tr,
-          rus,
-          script
-        });
-      });
-  };
 
   render() {
     return (
@@ -136,27 +107,34 @@ class MyProfile extends Component {
                 alt="name"
               />
             </div>
-            <label htmlFor="mentorOrMentee">I would like to be...</label>
-            <input
-              className="mentor"
-              type="checkbox"
-              value={this.state.mentor}
-              onChange={this.handleInputChange}
-              name="mentor"
-            />
-            Mentor
-            <input
-              className="mentee"
-              type="checkbox"
-              value={this.state.mentee}
-              onChange={this.handleInputChange}
-            />
-            Mentee
+
+            <label>I would like to be...</label>
+            <label className="inline">
+              <input
+                type="checkbox"
+                value="true"
+                name="mentor"
+                onChange={this.handleCheckboxChange}
+                checked={this.state.mentor}
+              />
+              Mentor
+            </label>
+            <label className="inline">
+              <input
+                type="checkbox"
+                value="true"
+                name="mentee"
+                onChange={this.handleCheckboxChange}
+                checked={this.state.mentee}
+              />
+              Mentee
+            </label>
+
             <fieldset>
               <legend>
                 <span className="number">1</span>Your basic info
               </legend>
-              <label htmlFor="firstName">
+              <label className="required">
                 First Name
                 <input
                   name="firstName"
@@ -168,7 +146,7 @@ class MyProfile extends Component {
                   required
                 />
               </label>
-              <label htmlFor="lastName">
+              <label className="required">
                 Family Name
                 <input
                   name="lastName"
@@ -180,16 +158,19 @@ class MyProfile extends Component {
                   required
                 />
               </label>
-              <label htmlFor="e-mail">E-mail</label>
-              <input
-                className="email"
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-                name="email"
-                placeholder="Your e-mail will not be visible for others and used only for notification"
-              />
-              <label htmlFor="password">
+              <label className="required">
+                E-mail
+                <input
+                  className="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                  name="email"
+                  placeholder="Your e-mail will not be visible for others and used only for notification"
+                  required
+                />
+              </label>
+              <label className="required">
                 Password
                 <input
                   name="password"
@@ -206,169 +187,54 @@ class MyProfile extends Component {
               <legend>
                 <span className="number">2</span>Your profile
               </legend>
-              <label htmlFor="tagline">Tagline</label>
-              <input
-                className="tagline"
-                type="text"
-                value={this.state.tagline}
-                onChange={this.handleInputChange}
-                name="tagline"
-                placeholder="Your motto"
-              />
-              <label htmlFor="location">Location</label>
-              <input
-                className="location"
-                type="text"
-                value={this.state.location}
-                onChange={this.handleInputChange}
-                name="location"
-                placeholder="Where do you live ?"
-              />
-              <label htmlFor="bio">Bio</label>
-              <input
-                className="bio"
-                type="text"
-                value={this.state.bio}
-                onChange={this.handleInputChange}
-                name="bio"
-                placeholder="Describe yourself in few(or more) sentences that might be interesting for others"
-              />
-              <label htmlFor="interests">Interests</label>
-              <input
-                className="interests"
-                type="text"
-                value={this.state.interests}
-                onChange={this.handleInputChange}
-                name="interests"
-                placeholder="What are your interests ?"
-              />
-              <label htmlFor="skills">Skills</label>
-              <input
-                className="html"
-                type="checkbox"
-                value={this.state.html}
-                onChange={this.handleInputChange}
-                name="html"
-              />
-              HTML
-              <input
-                className="css"
-                type="checkbox"
-                value={this.state.css}
-                onChange={this.handleInputChange}
-                name="css"
-              />
-              CSS
-              <input
-                className="js"
-                type="checkbox"
-                value={this.state.js}
-                onChange={this.handleInputChange}
-                name="js"
-              />
-              JavaScript
-              <input
-                className="datab"
-                type="checkbox"
-                value={this.state.datab}
-                onChange={this.handleInputChange}
-                name="datab"
-              />
-              Database
-              <input
-                className="node"
-                type="checkbox"
-                value={this.state.node}
-                onChange={this.handleInputChange}
-                name="node"
-              />
-              Node.js
-              <input
-                className="react"
-                type="checkbox"
-                value={this.state.react}
-                onChange={this.handleInputChange}
-                name="react"
-              />
-              React.js
-              <input
-                className="cli"
-                type="checkbox"
-                value={this.state.cli}
-                onChange={this.handleInputChange}
-                name="cli"
-              />
-              CLI
-              <input
-                className="git"
-                type="checkbox"
-                value={this.state.git}
-                onChange={this.handleInputChange}
-              />
-              GitHub
-              <label className="languages" htmlFor="languages">
-                Languages
+              <label>
+                Tagline
+                <input
+                  className="tagline"
+                  type="text"
+                  value={this.state.tagline}
+                  onChange={this.handleInputChange}
+                  name="tagline"
+                  placeholder="Your motto"
+                />
               </label>
-              <input
-                className="eng"
-                type="checkbox"
-                value={this.state.eng}
-                onChange={this.handleInputChange}
-                name="eng"
-              />
-              English
-              <input
-                className="fr"
-                type="checkbox"
-                value={this.state.fr}
-                onChange={this.handleInputChange}
-                name="fr"
-              />
-              French
-              <input
-                className="du"
-                type="checkbox"
-                value={this.state.du}
-                onChange={this.handleInputChange}
-                name="du"
-              />
-              Dutch
-              <input
-                className="es"
-                type="checkbox"
-                value={this.state.es}
-                onChange={this.handleInputChange}
-                name="es"
-              />
-              Spanish
-              <input
-                className="ar"
-                type="checkbox"
-                value={this.state.ar}
-                onChange={this.handleInputChange}
-              />
-              Arabic
-              <input
-                className="tr"
-                type="checkbox"
-                value={this.state.tr}
-                onChange={this.handleInputChange}
-              />
-              Turkish
-              <input
-                className="rus"
-                type="checkbox"
-                value={this.state.rus}
-                onChange={this.handleInputChange}
-              />
-              Russian
-              <input
-                className="script"
-                type="checkbox"
-                value={this.state.script}
-                onChange={this.handleInputChange}
-              />
-              German
+              <label>
+                Location
+                <input
+                  className="location"
+                  type="text"
+                  value={this.state.location}
+                  onChange={this.handleInputChange}
+                  name="location"
+                  placeholder="Where do you live?"
+                />
+              </label>
+              <label>
+                Bio
+                <input
+                  className="bio"
+                  type="text"
+                  value={this.state.bio}
+                  onChange={this.handleInputChange}
+                  name="bio"
+                  placeholder="Describe yourself in few (or more) sentences that might be interesting for others"
+                />
+              </label>
+              <label>
+                Interests
+                <input
+                  className="interests"
+                  type="text"
+                  value={this.state.interests}
+                  onChange={this.handleInputChange}
+                  name="interests"
+                  placeholder="What are your interests?"
+                />
+              </label>
+              <label>Skills</label>
+              {this.renderInputs(skills)}
+              <label className="languages">Languages</label>
+              {this.renderInputs(languages)}
             </fieldset>
           </div>
           <button className="submit_button" type="submit" value="let me Be!">

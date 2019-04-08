@@ -12,15 +12,16 @@ import ArabFlag from "../assets/images/otherlogos/arableagueflag.svg";
 import { Link } from "react-router-dom";
 import { userDetails } from "../api/users";
 import Container from "./Container";
-import UserCardSmall from "./UserCardSmall";
+
+import Ranking from "./Ranking";
 
 class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: [],
-      myProfileId: "5c9cb17304131e3ebd0f80d7",
-      myUpdatedProfile: []
+      user: []
+      // myProfileId: "5c9cb17304131e3ebd0f80d7",
+      // myUpdatedProfile: []
     };
   }
 
@@ -47,11 +48,12 @@ class UserProfile extends Component {
   //   });
   // };
 
-  handleAddMentor = async () => {};
+  //handleAddMentor = async () => {};
 
   render() {
     console.log(this.state.myUpdatedProfile);
     const {
+      _id,
       mentor,
       mentee,
       firstName,
@@ -75,7 +77,8 @@ class UserProfile extends Component {
       es,
       ar,
       tr,
-      rus
+      rus,
+      ranking
     } = this.state.user;
 
     return (
@@ -98,6 +101,7 @@ class UserProfile extends Component {
               </a>
             </div>
             <div className="detailsFull__information">
+              <Ranking id={_id} ranking={ranking} />
               <div className="detailsFull__name">
                 <span className="detailsFull__comment">Hi, my name is </span>
                 <span className="detailsFull__firstName">{firstName}</span>

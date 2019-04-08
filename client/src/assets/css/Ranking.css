@@ -1,0 +1,92 @@
+/*
+=====
+LEVEL 1. CORE STYLES OF MODIFIERS
+=====
+*/
+
+.rating {
+  display: flex;
+  font-size: 20px;
+  color: #eee;
+  position: relative;
+}
+
+.rating__control {
+  position: absolute;
+  left: -9999px;
+}
+
+.rating__control:nth-of-type(1):focus ~ .rating__item:nth-of-type(1):before,
+.rating__control:nth-of-type(2):focus ~ .rating__item:nth-of-type(2):before,
+.rating__control:nth-of-type(3):focus ~ .rating__item:nth-of-type(3):before,
+.rating__control:nth-of-type(4):focus ~ .rating__item:nth-of-type(4):before,
+.rating__control:nth-of-type(5):focus ~ .rating__item:nth-of-type(5):before {
+  content: "";
+  box-shadow: 0 0 0 4px #ffcc00;
+
+  position: absolute;
+  top: -0.15em;
+  right: 0;
+  bottom: -0.15em;
+  left: 0;
+  z-index: -1;
+}
+
+.rating__item {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.rating__item {
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+}
+
+.rating__star {
+  display: block;
+  width: 1em;
+  height: 1em;
+
+  fill: currentColor;
+  stroke: #222;
+  stroke-width: 1px;
+}
+
+.rating__label {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+}
+
+.rating:hover,
+.rating__control:nth-of-type(1):checked ~ .rating__item:nth-of-type(1),
+.rating__control:nth-of-type(2):checked ~ .rating__item:nth-of-type(-n + 2),
+.rating__control:nth-of-type(3):checked ~ .rating__item:nth-of-type(-n + 3),
+.rating__control:nth-of-type(4):checked ~ .rating__item:nth-of-type(-n + 4),
+.rating__control:nth-of-type(5):checked ~ .rating__item:nth-of-type(-n + 5) {
+  color: #ffcc00;
+}
+
+.rating__item:hover ~ .rating__item {
+  color: #eee;
+}
+
+.hide {
+  display: none;
+}
+
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+  font-size: 1.2rem;
+}
+
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
