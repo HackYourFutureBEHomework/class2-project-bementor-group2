@@ -75,7 +75,7 @@ class Users extends Component {
             <i class="fa fa-spinner fa-spin" aria-hidden="true" />{" "}
           </div>
         )}
-        {!this.state.loading && <div className="users-container">{$users}</div>}
+        {!this.state.loading && <div className="container">{$users}</div>}
       </Container>
     );
   }
