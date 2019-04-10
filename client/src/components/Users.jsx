@@ -13,6 +13,7 @@ class Users extends Component {
     super(props);
 
     this.state = {
+      loading: false,
       users: [],
       initialQuery: this.getInitialQuery()
     };
@@ -31,15 +32,17 @@ class Users extends Component {
   }
 
   onSearch = async query => {
+    this.setState({ loading: true });
     const users = await searchUsers(query);
-    this.setState({ users });
+    this.setState({ users, loading: false });
   };
 
   async componentDidMount() {
+    this.setState({ loading: true });
     const users = this.state.initialQuery
       ? await searchUsers(this.state.initialQuery)
       : await getUsers();
-    this.setState({ users });
+    this.setState({ users, loading: false });
 
     this.mounted = true;
   }
@@ -51,9 +54,13 @@ class Users extends Component {
   render() {
     const { users, initialQuery } = this.state;
 
-    const $users = users.map(user => (
+    let $users = users.map(user => (
       <UserCardSmall key={user._id} user={user} />
     ));
+
+    if ($users.length < 1) {
+      $users = <p>No users were found.</p>;
+    }
 
     return (
       <Container>
@@ -61,7 +68,14 @@ class Users extends Component {
           <SearchUser initialQuery={initialQuery} onSearch={this.onSearch} />
         </div>
 
-        <div className="container">{$users}</div>
+        {this.state.loading && (
+          <div className="users-loader">
+            Loading users...
+            <br />
+            <i class="fa fa-spinner fa-spin" aria-hidden="true" />{" "}
+          </div>
+        )}
+        {!this.state.loading && <div className="users-container">{$users}</div>}
       </Container>
     );
   }
