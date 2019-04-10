@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Container from "./Container";
+import { Route } from "react-router-dom";
 
 import { createUser } from "../api/users";
 
@@ -31,7 +32,8 @@ class MyProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      skills: []
+      skills: [],
+      registerRequested: false
     };
   }
 
@@ -85,37 +87,46 @@ class MyProfile extends Component {
   /**
    * Updates the DB properties for mentee/mentor using the property position.
    *
-   * @param user
+  //  * @param user
    */
-  updateMenteeMentor(user) {
-    switch (user.position) {
-      case "mentee":
-        user["mentee"] = true;
-        user["mentor"] = false;
-        break;
-      case "mentor":
-        user["mentee"] = false;
-        user["mentor"] = true;
-        break;
-      default:
-        // Should not happen because the field is required
-        alert("Position is required, check the values.");
-        return;
-    }
-    delete user.position;
+  // updateMenteeMentor(user) {
+  //   switch (user.position) {
+  //     case "mentee":
+  //       user["mentee"] = true;
+  //       user["mentor"] = false;
+  //       break;
+  //     case "mentor":
+  //       user["mentee"] = false;
+  //       user["mentor"] = true;
+  //       break;
+  //     case "mentorAndMentee":
+  //       user["mentee"] = true;
+  //       user["mentor"] = true;
+  //       break;
+  //     default:
+  //       // Should not happen because the field is required
+  //       alert("Position is required, check the values.");
+  //       return;
+  //   }
+  //   delete user.position;
 
-    return user;
-  }
+  //   return user;
+  // }
 
   handleSubmit = e => {
     e.preventDefault();
 
     let newUser = { ...this.state };
 
-    newUser = this.updateMenteeMentor(newUser);
+    // newUser = this.updateMenteeMentor(newUser);
 
     // TODO: use a nice UI to inform the user
     createUser(newUser)
+      .then(
+        this.setState({
+          registerRequested: true
+        })
+      )
       .then(res => {
         if (res.message) {
           alert(`Error while creating user: '${res.message}'`);
@@ -167,6 +178,8 @@ class MyProfile extends Component {
   }
 
   render() {
+    const { registerRequested } = this.state;
+
     return (
       <Container>
         <form
@@ -208,8 +221,7 @@ class MyProfile extends Component {
               />
               Mentee
             </label>
-            <br />
-            <br />
+
             <fieldset>
               <legend>
                 <span className="number">1</span>Your basic info
@@ -317,6 +329,7 @@ class MyProfile extends Component {
               {this.renderLanguages()}
             </fieldset>
           </div>
+          {registerRequested && <Route to="/login" />}
           <button className="submit_button" type="submit" value="let me Be!">
             SUBMIT YOUR INFO
           </button>

@@ -25,17 +25,18 @@ const verifyJWT = token => {
 const containNoCaseHandler = text => new RegExp(text, "i");
 
 exports.findAll = (req, res) => {
+  console.log("Cookie", req.cookies);
   User.find()
     .then(users => res.send(users))
     .catch(err => handleError(err, res));
 };
 
 exports.update = (req, res) => {
-  if (!req.body.token)
+  if (!req.cookies.token)
     return res.status(401).send({
       message: "You need to be logged in to be able to update your profile"
     });
-  const decoded = verifyJWT(req.body.token);
+  const decoded = verifyJWT(req.cookies.token);
   if (!decoded) return res.status(401).send({ message: "Invalid token" });
   const { id } = req.params;
   if (!decoded._id !== id)
@@ -71,7 +72,6 @@ exports.search = (req, res) => {
     .then(users => res.send(users))
     .catch(err => res.status(500).send({ message: err.message }));
 };
-
 
 //Register users
 exports.register = (req, res) => {
@@ -113,98 +113,98 @@ exports.register = (req, res) => {
     })
     .then(user => {
       //send email and verify
-//       const transporter = nodemailer.createTransport({
-//         service: "Gmail",
-//         secure: false,
-//         port: 587,
-//         auth: {
-//           user: req.body.email,
-//           pass: password.hash
-//         },
-//         tls: {
-//           rejectUnauthorized: false
-//         }
-//       });
+      //       const transporter = nodemailer.createTransport({
+      //         service: "Gmail",
+      //         secure: false,
+      //         port: 587,
+      //         auth: {
+      //           user: req.body.email,
+      //           pass: password.hash
+      //         },
+      //         tls: {
+      //           rejectUnauthorized: false
+      //         }
+      //       });
 
-//       const mailtOptions = {
-//         from: "BeMentor.be",
-//         to: "hassanalihazaraa@gmail.com",
-//         subject: "Account activated",
-//         text: "Welcome to BEMENTOR"
-//       };
-//       transporter.sendMail(mailtOptions, (error, info) => {
-//         if (error) return console.log(error);
-//         console.log("The message was sent");
-//         console.log(info);
-         res.status(201).send({
-           message: "Your account has been created successfully"
+      //       const mailtOptions = {
+      //         from: "BeMentor.be",
+      //         to: "hassanalihazaraa@gmail.com",
+      //         subject: "Account activated",
+      //         text: "Welcome to BEMENTOR"
+      //       };
+      //       transporter.sendMail(mailtOptions, (error, info) => {
+      //         if (error) return console.log(error);
+      //         console.log("The message was sent");
+      //         console.log(info);
+      res.status(201).send({
+        message: "Your account has been created successfully"
       });
-        });
-        // });
-        // res.redirect('/user/login');
-    
-    };
+    });
+  // });
+  // res.redirect('/user/login');
+};
 
-  exports.login = (req, res) => {
-    let foundUser = null;
-    User.findOne({ email: req.body.email })
-      .select("+password")
-      .then(user => {
-        foundUser = user;
-        const storedHash = user.password;
-        return bcrypt.compare(req.body.password, storedHash);
-      })
-      .then(authenticationSuccessfull => {
-        if (!authenticationSuccessfull)
-          return res.status(401).send({
-            message: "Incorrect email or password"
-          });
-        return generateJWT({ _id: foundUser._id });
-      })
-      .then(token => {
-        res.status(500).send({
-          token: token,
-          message: "Login successful"
+exports.login = (req, res) => {
+  let foundUser = null;
+  User.findOne({ email: req.body.email })
+    .select("+password")
+    .then(user => {
+      foundUser = user;
+      const storedHash = user.password;
+      return bcrypt.compare(req.body.password, storedHash);
+    })
+    .then(authenticationSuccessfull => {
+      if (!authenticationSuccessfull)
+        return res.status(401).send({
+          message: "Incorrect email or password"
         });
+      return generateJWT({ _id: foundUser._id });
+    })
+    .then(token => {
+      res.cookie("token", token);
+      res.status(200).send({
+        token: token,
+        message: "Login successful"
       });
-  };
+    });
+};
 
-  function calculateRanking(scores) {
-    const totalScore = scores.reduce(
-      (accumulated, currentArrayValue) => accumulated + currentArrayValue,
-      0
-    );
-    return Math.round(totalScore / scores.length);
-  }
+function calculateRanking(scores) {
+  const totalScore = scores.reduce(
+    (accumulated, currentArrayValue) => accumulated + currentArrayValue,
+    0
+  );
+  return Math.round(totalScore / scores.length);
+}
 
-  // User Rankings
-  exports.updateRanking = (req, res) => {
-    console.log("req.params", req.params);
-    const newScore = req.body.score;
-    User.findById({ _id: req.params.id })
-      .then(user => {
-        // Prevent errors with previously created users
-        if (!user.scores) {
-          user.scores = [];
-        }
-        user.scores.push(newScore);
-        user.ranking = calculateRanking(user.scores);
+// User Rankings
+exports.updateRanking = (req, res) => {
+  console.log("req.params", req.params);
+  const newScore = req.body.score;
+  User.findById({ _id: req.params.id })
+    .then(user => {
+      // Prevent errors with previously created users
+      if (!user.scores) {
+        user.scores = [];
+      }
+      user.scores.push(newScore);
+      user.ranking = calculateRanking(user.scores);
 
-        user
-          .save()
-          .then(() =>
-            res.json({
-              message: "User ranking and scores were updated",
-              user: {
-                ranking: user.ranking,
-                scores: user.scores
-              }
-            })
-          )
-          .catch(err => handleError(err, res));
-      })
-      .catch(err => handleError(err, res));
-  };
+      user
+        .save()
+        .then(() =>
+          res.json({
+            message: "User ranking and scores were updated",
+            user: {
+              ranking: user.ranking,
+              scores: user.scores
+            }
+          })
+        )
+        .catch(err => handleError(err, res));
+    })
+    .catch(err => handleError(err, res));
+};
 
 exports.updateSkillLevel = (req, res) => {
   console.log("req.params", req.params);
@@ -233,5 +233,12 @@ exports.updateSkillLevel = (req, res) => {
         )
         .catch(err => handleError(err, res));
     })
+    .catch(err => handleError(err, res));
+};
+
+exports.deleteManyProf = (req, res) => {
+  console.log(req.params.qty);
+  User.remove({})
+    .then(() => res.json({ message: "Usersss was deleted" }))
     .catch(err => handleError(err, res));
 };

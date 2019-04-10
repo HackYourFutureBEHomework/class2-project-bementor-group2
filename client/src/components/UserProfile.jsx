@@ -29,8 +29,7 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       user: {},
-      myProfileId: "5c9cb17304131e3ebd0f80d7",
-      myUpdatedProfile: []
+      editingProfile: false
     };
   }
 
@@ -58,6 +57,14 @@ class UserProfile extends Component {
     );
   }
 
+  toggleEdit = () => {
+    this.setState(prevState => ({ editingProfile: !prevState.editingProfile }));
+  };
+
+  updateUser = user => {
+    this.setState({ user, editingProfile: false });
+  };
+
   render() {
     const {
       _id,
@@ -79,10 +86,18 @@ class UserProfile extends Component {
       rus
     } = this.state.user;
 
+    const loggedInUser = {
+      _id: "5cab65c1bc1756874ff4183"
+    };
     return (
       <Container>
         <div className="userFormFull">
           <Link className="backButton" to="/users" />
+          {loggedInUser._id === this.state.user._id && (
+            <button className="editProfile_button" onClick={this.toggleEdit}>
+              Edit profile
+            </button>
+          )}
 
           <div className="userFormFull_container">
             <div className="detailsFull__avatar">

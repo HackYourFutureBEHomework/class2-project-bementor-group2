@@ -15,7 +15,7 @@ export const userDetails = id => {
 };
 
 export const createUser = user => {
-  return fetch(`${API_URL}/user`, {
+  return fetch(`${API_URL}/user/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user)
@@ -36,4 +36,19 @@ export const updateSkillLevel = (id, skillName, level) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ skillName, level })
   }).then(response => response.json());
+};
+
+export const login = (email, password) => {
+  return fetch(`${API_URL}/user/login`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  }).then(response => response.json());
+};
+
+export const logout = () => {
+  fetch(`${API_URL}/user/logout`, this.getOptions("get")).then(
+    this.handleResponse
+  );
 };

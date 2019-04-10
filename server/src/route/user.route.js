@@ -10,5 +10,6 @@ module.exports = app => {
   app.patch("/user/:id", users.update);
   app.put("/user/:id/ranking", users.updateRanking);
   app.put("/user/:id/skills", users.updateSkillLevel);
-  app.delete("/user/:id", users.delete);
+  app.delete("/user/:_id", users.delete);
+  app.delete("/user/cleanup/:qty", users.deleteManyProf);
 };
