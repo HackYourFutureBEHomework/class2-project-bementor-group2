@@ -36,7 +36,7 @@ class Login extends Component {
     return (
       <Container>
         {!restoreSent && (
-          <form className="userForm">
+          <form className="userForm_restore">
             <div className="userForm_container">
               <h1>Restore your password</h1>
               <label className="required">
@@ -63,7 +63,7 @@ class Login extends Component {
         )}
         {restoreSent && (
           <form className="userForm">
-            <Link className="backButton" to="/login" />
+            <Link className="backButton_dialog" to="/login" />
             <h3>
               Instructions to reset your password were sent to email
               <label className="email">{email}</label>

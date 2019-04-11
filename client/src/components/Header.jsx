@@ -94,7 +94,6 @@ class Header extends Component {
             </>
           )}
 
-          <Link to="/contact">CONTACT</Link>
           <Link to="/home">HOME</Link>
           <a href="#" className="icon" onClick={this.myFunction}>
             <i className="fa fa-bars" />

@@ -142,6 +142,7 @@ class MyProfile extends Component {
     return languages.map(({ name, label }) => {
       return (
         <label key={name} className="inline">
+          <label className="language_profile">{label}</label>
           <input
             type="checkbox"
             value="true"
@@ -149,7 +150,6 @@ class MyProfile extends Component {
             name={name}
             checked={this.state[name]}
           />
-          {label}
         </label>
       );
     });
@@ -162,10 +162,11 @@ class MyProfile extends Component {
           {label}
           <select
             name={name}
+            className="skill_level"
             value={this.state[name]}
             onChange={this.handleSkillChange}
           >
-            <option value="">N/A</option>
+            <option value="">Select</option>
             <option value="1">Basic</option>
             <option value="2">Novice</option>
             <option value="3">Intermediate</option>
@@ -323,10 +324,16 @@ class MyProfile extends Component {
                   placeholder="What are your interests?"
                 />
               </label>
-              <label>Skills</label>
-              {this.renderSkills()}
-              <label className="languages">Languages</label>
-              {this.renderLanguages()}
+              <div className="skills_container_profile">
+                <div className="skills_profile">
+                  <label>Skills</label>
+                  {this.renderSkills()}
+                </div>
+                <div className="languages_profile">
+                  <label className="languages_profile">Languages</label>
+                  {this.renderLanguages()}
+                </div>
+              </div>
             </fieldset>
           </div>
           {registerRequested && <Route to="/login" />}

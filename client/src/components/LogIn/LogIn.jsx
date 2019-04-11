@@ -42,14 +42,17 @@ class Login extends Component {
 
     return (
       <Container>
-        }
-        <form method="post" className="userForm" onSubmit={this.handleSubmit}>
+        <form
+          method="post"
+          className="userForm_login"
+          onSubmit={this.handleSubmit}
+        >
           <div className="userForm_container">
             <h1>Welcome to BeMentor</h1>
             {!loginFail && (
               <label className="registerNotification">
-                Email or password are incorrect. try again or{" "}
-                <Link to="/myprofile">register</Link>
+                Incorrect email or password. Try again or
+                <Link to="/myprofile"> register</Link>
               </label>
             )}
             <label className="required">

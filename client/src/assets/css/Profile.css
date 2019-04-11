@@ -74,15 +74,51 @@ input[type="checkbox"] {
   padding: 30px;
 }
 
-.label-select {
+label.label-select {
   padding: 30px;
-  width: 95%;
+  width: 30%;
   margin: auto;
+}
+
+div.skills_profile {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+div.languages_profile {
+  width: 50%;
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+}
+
+label.languages_profile {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+label.language_profile {
+  margin: 0.5em;
+}
+
+select.skill_level {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 select {
   display: block;
   padding: 30px;
+  width: 10%;
+}
+
+.skills_container {
+  display: flex;
+  flex-direction: row;
+}
+
+label.inline {
+  margin: 0.5em;
 }
 
 button {
@@ -114,6 +150,11 @@ legend {
 label {
   display: block;
   margin-bottom: 8px;
+}
+
+label.label-select {
+  margin: 0;
+  padding: 1.2vh;
 }
 
 label.light {
@@ -159,10 +200,6 @@ label.light {
   right: 350px;
   width: 90px;
   height: 40px;
-}
-
-.inline {
-  display: inline;
 }
 
 form label.required:before {
