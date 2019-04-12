@@ -35,6 +35,10 @@ class UserRanking extends Component {
     const score = e.target.value;
 
     updateUserRanking(id, score).then(res => {
+      if (res.status === "ERROR") {
+        return alert(res.message);
+      }
+
       this.setState({
         score,
         newRanking: res.user.ranking

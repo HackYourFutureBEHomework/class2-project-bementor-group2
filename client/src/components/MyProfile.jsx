@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import Container from "./Container";
-import { Route } from "react-router-dom";
+import Cookies from "universal-cookie";
 
-import { createUser } from "../api/users";
+import { createUser, getLoggedUserDetails, updateUser } from "../api/users";
 
 import "../assets/css/Profile.css";
+
+const cookies = new Cookies();
 
 const DEFAULT_TITLE = "My Profile";
 const skills = [
@@ -31,9 +33,12 @@ const languages = [
 class MyProfile extends Component {
   constructor(props) {
     super(props);
+
+    const isAuthenticated = !!cookies.get("token");
+
     this.state = {
       skills: [],
-      registerRequested: false
+      isRegistration: !isAuthenticated
     };
   }
 
@@ -54,6 +59,16 @@ class MyProfile extends Component {
 
   componentDidMount() {
     this.setTitle();
+
+    if (!this.state.isRegistration) {
+      getLoggedUserDetails().then(res => {
+        if (res.status === "ERROR") {
+          alert(`Error fetching user data: '${res.message}'`);
+          return;
+        }
+        this.setState({ ...res });
+      });
+    }
   }
 
   componentDidUpdate() {
@@ -89,53 +104,71 @@ class MyProfile extends Component {
    *
   //  * @param user
    */
-  // updateMenteeMentor(user) {
-  //   switch (user.position) {
-  //     case "mentee":
-  //       user["mentee"] = true;
-  //       user["mentor"] = false;
-  //       break;
-  //     case "mentor":
-  //       user["mentee"] = false;
-  //       user["mentor"] = true;
-  //       break;
-  //     case "mentorAndMentee":
-  //       user["mentee"] = true;
-  //       user["mentor"] = true;
-  //       break;
-  //     default:
-  //       // Should not happen because the field is required
-  //       alert("Position is required, check the values.");
-  //       return;
-  //   }
-  //   delete user.position;
+  updateMenteeMentor(user) {
+    switch (user.position) {
+      case "mentee":
+        user["mentee"] = true;
+        user["mentor"] = false;
+        break;
+      case "mentor":
+        user["mentee"] = false;
+        user["mentor"] = true;
+        break;
+      case "mentorAndMentee":
+        user["mentee"] = true;
+        user["mentor"] = true;
+        break;
+      default:
+        // Should not happen because the field is required
+        alert("Position is required, check the values.");
+        return;
+    }
+    delete user.position;
 
-  //   return user;
-  // }
+    return user;
+  }
+
+  handleRegistration = () => {
+    let newUser = { ...this.state };
+
+    newUser = this.updateMenteeMentor(newUser);
+
+    createUser(newUser).then(res => {
+      if (res.status === "ERROR") {
+        alert(`Error while creating user: '${res.message}'`);
+        return;
+      }
+      this.setState({ ...res });
+
+      // TODO: use a nice UI to inform the user
+      alert("User was successfully created!");
+    });
+  };
+
+  handleUserUpdate = () => {
+    const updatedUser = { ...this.state };
+
+    updateUser(updatedUser).then(res => {
+      if (res.status === "ERROR") {
+        alert(`Error while updating user: '${res.message}'`);
+        return;
+      }
+      this.setState({ ...res });
+
+      // TODO: use a nice UI to inform the user
+      alert("User was successfully updated!");
+    });
+  };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    let newUser = { ...this.state };
-
-    // newUser = this.updateMenteeMentor(newUser);
-
-    // TODO: use a nice UI to inform the user
-    createUser(newUser)
-      .then(
-        this.setState({
-          registerRequested: true
-        })
-      )
-      .then(res => {
-        if (res.message) {
-          alert(`Error while creating user: '${res.message}'`);
-          return;
-        }
-        this.setState({ ...res });
-        alert("User was successfully created!");
-      })
-      .catch(err => alert(`Server error: '${err}'`));
+    if (this.state.isRegistration) {
+      this.handleRegistration();
+    } else {
+      // Edit user's data
+      this.handleUserUpdate();
+    }
   };
 
   renderLanguages() {
@@ -179,7 +212,7 @@ class MyProfile extends Component {
   }
 
   render() {
-    const { registerRequested } = this.state;
+    const { isRegistration } = this.state;
 
     return (
       <Container>
@@ -199,6 +232,7 @@ class MyProfile extends Component {
               />
             </div>
             {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
+            {!isRegistration && <h2>Update this form with your information</h2>}
             <label>I would like to be...</label>
             <label className="inline">
               <input
@@ -222,7 +256,8 @@ class MyProfile extends Component {
               />
               Mentee
             </label>
-
+            <br />
+            <br />
             <fieldset>
               <legend>
                 <span className="number">1</span>Your basic info
@@ -336,9 +371,9 @@ class MyProfile extends Component {
               </div>
             </fieldset>
           </div>
-          {registerRequested && <Route to="/login" />}
           <button className="submit_button" type="submit" value="let me Be!">
-            SUBMIT YOUR INFO
+            {isRegistration && "REGISTER YOUR INFO"}
+            {!isRegistration && "UPDATE YOUR INFO"}
           </button>
         </form>
         <button className="deleteUser_button" type="submit" value="delete_user">

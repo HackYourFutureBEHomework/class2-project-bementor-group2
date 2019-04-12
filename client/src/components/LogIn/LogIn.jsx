@@ -25,7 +25,12 @@ class Login extends Component {
     e.preventDefault();
 
     login(this.state.email, this.state.password)
-      .then(async () => {
+      .then(res => {
+        if (res && res["status"] === "ERROR") {
+          alert(`Error while login: '${res.message}'`);
+          return;
+        }
+
         this.props.history.push("/");
       })
 

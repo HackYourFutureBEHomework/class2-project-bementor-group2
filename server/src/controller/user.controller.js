@@ -1,24 +1,23 @@
 const bcrypt = require("bcrypt");
-const User = require("../model/user.model");
 const jwt = require("jsonwebtoken");
+
+const User = require("../model/user.model");
+const { isUserLoggedIn, isUser, decodeToken } = require("./user.auth");
+const {
+  handleClientOk,
+  handleServerError,
+  handleUserError,
+  handleLoginRequired,
+  handleInvalidAccess
+} = require("./common-handlers");
+
 // const nodemailer = require("nodemailer");
 
 const { JWT_SECRET } = process.env;
 
-const handleError = (err, res) => {
-  res.status(500).send({
-    message: err.message
-  });
-};
-
 //generate jsonwebtoken
 const generateJWT = payload => {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: "3 days" });
-};
-
-//verify jsonwebtoken
-const verifyJWT = token => {
-  return jwt.verify(token, JWT_SECRET);
 };
 
 // Allow to search for a text case insensitive
@@ -28,34 +27,50 @@ exports.findAll = (req, res) => {
   console.log("Cookie", req.cookies);
   User.find()
     .then(users => res.send(users))
-    .catch(err => handleError(err, res));
+    .catch(err => handleServerError(err, res));
 };
 
 exports.update = (req, res) => {
-  if (!req.cookies.token)
-    return res.status(401).send({
-      message: "You need to be logged in to be able to update your profile"
-    });
-  const decoded = verifyJWT(req.cookies.token);
-  if (!decoded) return res.status(401).send({ message: "Invalid token" });
-  const { id } = req.params;
-  if (!decoded._id !== id)
-    return res.status(403).send({ message: "authentication failed" });
-  User.findByIdAndUpdate({ _id: req.params.id }, req.body)
-    .then(() => res.json({ message: "User info was updated" }))
-    .catch(err => handleError(err, res));
+  if (!isUser(req, req.body._id)) {
+    return handleInvalidAccess(req, res);
+  }
+
+  const { password } = req.body;
+  bcrypt.hash(password, 10).then(hash => {
+    req.body.password = hash;
+
+    User.findByIdAndUpdate({ _id: req.body._id }, req.body)
+      .then(() => handleClientOk(res, "User info was updated"))
+      .catch(err => handleServerError(err, res));
+  });
 };
 
 exports.delete = (req, res) => {
+  if (!isUser(req, req.params.id)) {
+    return handleInvalidAccess(req, res);
+  }
+
   User.findOneAndDelete({ _id: req.params.id })
-    .then(() => res.json({ message: "User was deleted" }))
-    .catch(err => handleError(err, res));
+    .then(() => handleClientOk(res, "User was deleted"))
+    .catch(err => handleServerError(err, res));
 };
 
 exports.findUser = (req, res) => {
   User.findById(req.params._id)
     .then(user => res.send(user))
-    .catch(err => handleError(err, res));
+    .catch(err => handleServerError(err, res));
+};
+
+exports.getLoggedUserDetails = (req, res) => {
+  let decodedToken = decodeToken(req, res);
+
+  if (!decodedToken) {
+    return handleLoginRequired(req, res);
+  }
+
+  User.findById(decodedToken._id)
+    .then(user => res.send(user))
+    .catch(err => handleServerError(err, res));
 };
 
 exports.create = (req, res) => {
@@ -63,14 +78,14 @@ exports.create = (req, res) => {
   users
     .save()
     .then(user => res.send(user))
-    .catch(err => handleError(err, res));
+    .catch(err => handleServerError(err, res));
 };
 
 exports.search = (req, res) => {
   const query = req.query.text;
   const users = User.find({ $text: { $search: query } })
     .then(users => res.send(users))
-    .catch(err => res.status(500).send({ message: err.message }));
+    .catch(err => handleServerError(err, res));
 };
 
 //Register users
@@ -139,6 +154,13 @@ exports.register = (req, res) => {
       res.status(201).send({
         message: "Your account has been created successfully"
       });
+    })
+    .catch(err => {
+      if (err.message.indexOf("11000") != -1) {
+        handleUserError(res, "Duplicated email: " + req.body.email);
+      } else {
+        handleServerError(err, res);
+      }
     });
   // });
   // res.redirect('/user/login');
@@ -154,18 +176,16 @@ exports.login = (req, res) => {
       return bcrypt.compare(req.body.password, storedHash);
     })
     .then(authenticationSuccessfull => {
-      if (!authenticationSuccessfull)
-        return res.status(401).send({
-          message: "Incorrect email or password"
-        });
-      return generateJWT({ _id: foundUser._id });
-    })
-    .then(token => {
-      res.cookie("token", token);
-      res.status(200).send({
-        token: token,
-        message: "Login successful"
-      });
+      if (!authenticationSuccessfull) {
+        return handleUserError(res, "Incorrect email or password", 401);
+      }
+      let token = generateJWT({ _id: foundUser._id });
+      if (token) {
+        res.cookie("token", token);
+        handleClientOk(res, "Login successful", { token });
+      } else {
+        handleUserError(res, "Invalid token", 401);
+      }
     });
 };
 
@@ -179,7 +199,10 @@ function calculateRanking(scores) {
 
 // User Rankings
 exports.updateRanking = (req, res) => {
-  console.log("req.params", req.params);
+  if (!isUserLoggedIn(req)) {
+    return handleLoginRequired(req, res);
+  }
+
   const newScore = req.body.score;
   User.findById({ _id: req.params.id })
     .then(user => {
@@ -193,20 +216,23 @@ exports.updateRanking = (req, res) => {
       user
         .save()
         .then(() =>
-          res.json({
-            message: "User ranking and scores were updated",
+          handleClientOk(res, "User ranking and scores were updated", {
             user: {
               ranking: user.ranking,
               scores: user.scores
             }
           })
         )
-        .catch(err => handleError(err, res));
+        .catch(err => handleServerError(err, res));
     })
-    .catch(err => handleError(err, res));
+    .catch(err => handleServerError(err, res));
 };
 
 exports.updateSkillLevel = (req, res) => {
+  if (!isUser(req, req.params.id)) {
+    return handleInvalidAccess(req, res);
+  }
+
   console.log("req.params", req.params);
   const { skillName, level } = req.body;
 
@@ -231,14 +257,14 @@ exports.updateSkillLevel = (req, res) => {
             skills: user.skills
           })
         )
-        .catch(err => handleError(err, res));
+        .catch(err => handleServerError(err, res));
     })
-    .catch(err => handleError(err, res));
+    .catch(err => handleServerError(err, res));
 };
 
 exports.deleteManyProf = (req, res) => {
   console.log(req.params.qty);
   User.remove({})
-    .then(() => res.json({ message: "Usersss was deleted" }))
-    .catch(err => handleError(err, res));
+    .then(() => res.json({ message: "Users were deleted" }))
+    .catch(err => handleServerError(err, res));
 };

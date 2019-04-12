@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
+import Cookies from "universal-cookie";
+
 import "../assets/css/Header.css";
 
-import { login, logout } from "../api/users";
+const cookies = new Cookies();
+
 class Header extends Component {
   state = {
     isRegistering: false,
@@ -10,10 +13,7 @@ class Header extends Component {
   };
 
   doLogout = async () => {
-    // TODO show logout state
-    await logout();
-    this.context.setAuthenticatedUser(null);
-    // TODO show logout success
+    cookies.remove("token");
     this.props.history.push("/");
   };
 
@@ -55,8 +55,7 @@ class Header extends Component {
 
   render() {
     const { isRegistering, isLoggingIn } = this.state;
-    const currentUser = this.context.user;
-    const isAuthenticated = !!currentUser;
+    const isAuthenticated = !!cookies.get("token");
 
     return (
       <header>
@@ -86,9 +85,11 @@ class Header extends Component {
             </>
           )}
 
-          {!isAuthenticated && (
+          {isAuthenticated && (
             <>
-              <Link to="/logout">LOG OUT</Link>
+              <Link to="#" onClick={this.doLogout}>
+                LOG OUT
+              </Link>
               <Link to="/myprofile">MY PROFILE</Link>
               <Link to="/users">CONNECT</Link>
             </>
