@@ -12,35 +12,41 @@ class Users extends Component {
   constructor(props) {
     super(props);
 
+    let queryParams = this.getQueryParams(this.props.location);
     this.state = {
       loading: false,
       users: [],
-      initialQuery: this.getInitialQuery()
+      queryParams
     };
+
+    // Listen for changes in the URL (when the Header search component triggers a search)
+    this.props.history.listen((browserLocation, action) => {
+      // browserLocation is an object like window.location
+      let queryParams = this.getQueryParams(browserLocation);
+      this.onSearch(queryParams);
+    });
   }
 
-  getInitialQuery() {
-    let initialQuery = "";
-    if (this.props.location && this.props.location.search) {
-      const parsedSearch = queryString.parse(this.props.location.search);
-      if (parsedSearch.search) {
-        initialQuery = parsedSearch.search;
-      }
+  getQueryParams(browserLocation) {
+    let queryParams = {};
+
+    if (browserLocation && browserLocation.search) {
+      queryParams = queryString.parse(browserLocation.search);
     }
 
-    return initialQuery;
+    return queryParams;
   }
 
-  onSearch = async query => {
+  onSearch = async queryParams => {
     this.setState({ loading: true });
-    const users = await searchUsers(query);
+    const users = await searchUsers(queryParams);
     this.setState({ users, loading: false });
   };
 
   async componentDidMount() {
     this.setState({ loading: true });
-    const users = this.state.initialQuery
-      ? await searchUsers(this.state.initialQuery)
+    const users = this.state.queryParams
+      ? await searchUsers(this.state.queryParams)
       : await getUsers();
     this.setState({ users, loading: false });
 
@@ -52,7 +58,7 @@ class Users extends Component {
   }
 
   render() {
-    const { users, initialQuery } = this.state;
+    const { users, queryParams } = this.state;
 
     let $users = users.map(user => (
       <UserCardSmall key={user._id} user={user} />
@@ -65,7 +71,11 @@ class Users extends Component {
     return (
       <Container>
         <div className="searchField">
-          <SearchUser initialQuery={initialQuery} onSearch={this.onSearch} />
+          <SearchUser
+            q={queryParams.q}
+            location={queryParams.location}
+            onSearch={this.onSearch}
+          />
         </div>
 
         {this.state.loading && (
