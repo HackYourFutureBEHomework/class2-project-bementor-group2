@@ -6,3 +6,16 @@
   align-content: stretch;
   align-items: stretch;
 }
+
+.users-loader {
+  color: #00b265;
+  width: 100%;
+  -webkit-align-self: center;
+  align-self: center;
+  text-align: center;
+}
+
+.users-loader .fa-spinner {
+  margin: 15px 0;
+  font-size: 75px;
+}
