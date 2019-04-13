@@ -1,8 +1,38 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
+import Cookies from "universal-cookie";
+
 import "../assets/css/Header.css";
 
+const cookies = new Cookies();
+
 class Header extends Component {
+  state = {
+    isRegistering: false,
+    isLoggingIn: false
+  };
+
+  doLogout = async () => {
+    cookies.remove("token");
+    this.props.history.push("/");
+  };
+
+  startLogin = () => {
+    this.setState({ isLoggingIn: true });
+  };
+
+  startRegistration = () => {
+    this.setState({ isRegistering: true });
+  };
+
+  stopLogin = () => {
+    this.setState({ isLoggingIn: false });
+  };
+
+  stopRegistration = () => {
+    this.setState({ isRegistering: false });
+  };
+
   myFunction() {
     var x = document.getElementById("myTopnav");
     x.className = x.className === "topnav" ? "topnav responsive" : "topnav";
@@ -24,6 +54,9 @@ class Header extends Component {
   };
 
   render() {
+    const { isRegistering, isLoggingIn } = this.state;
+    const isAuthenticated = !!cookies.get("token");
+
     return (
       <header>
         <div className="header_image">
@@ -45,10 +78,23 @@ class Header extends Component {
             />
             <input id="search_submit" value="Search" type="submit" />
           </form>
-          <Link to="/myprofile">MY PROFILE</Link>
-          <Link to="/login">LOGIN</Link>
-          <Link to="/contact">CONTACT</Link>
-          <Link to="/users">SEARCH USERS</Link>
+          {!isAuthenticated && (
+            <>
+              <Link to="/login">LOGIN</Link>
+              <Link to="/myprofile">REGISTER</Link>
+            </>
+          )}
+
+          {isAuthenticated && (
+            <>
+              <Link to="#" onClick={this.doLogout}>
+                LOG OUT
+              </Link>
+              <Link to="/myprofile">MY PROFILE</Link>
+              <Link to="/users">CONNECT</Link>
+            </>
+          )}
+
           <Link to="/home">HOME</Link>
           <a href="#" className="icon" onClick={this.myFunction}>
             <i className="fa fa-bars" />

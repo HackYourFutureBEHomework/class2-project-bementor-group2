@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import Container from "./Container";
+import Cookies from "universal-cookie";
 
-import { createUser } from "../api/users";
+import { createUser, getLoggedUserDetails, updateUser } from "../api/users";
 
 import "../assets/css/Profile.css";
+
+const cookies = new Cookies();
 
 const DEFAULT_TITLE = "My Profile";
 const skills = [
@@ -30,8 +33,12 @@ const languages = [
 class MyProfile extends Component {
   constructor(props) {
     super(props);
+
+    const isAuthenticated = !!cookies.get("token");
+
     this.state = {
-      skills: []
+      skills: [],
+      isRegistration: !isAuthenticated
     };
   }
 
@@ -52,6 +59,16 @@ class MyProfile extends Component {
 
   componentDidMount() {
     this.setTitle();
+
+    if (!this.state.isRegistration) {
+      getLoggedUserDetails().then(res => {
+        if (res.status === "ERROR") {
+          alert(`Error fetching user data: '${res.message}'`);
+          return;
+        }
+        this.setState({ ...res });
+      });
+    }
   }
 
   componentDidUpdate() {
@@ -66,7 +83,7 @@ class MyProfile extends Component {
     const name = e.target.name;
     const level = e.target.value;
     let skills = [...this.state.skills];
-    const skill = skills.find(skill => skill.name == name);
+    const skill = skills.find(skill => skill.name === name);
     if (skill) {
       skill.level = level;
     } else {
@@ -85,7 +102,7 @@ class MyProfile extends Component {
   /**
    * Updates the DB properties for mentee/mentor using the property position.
    *
-   * @param user
+  //  * @param user
    */
   updateMenteeMentor(user) {
     switch (user.position) {
@@ -95,6 +112,10 @@ class MyProfile extends Component {
         break;
       case "mentor":
         user["mentee"] = false;
+        user["mentor"] = true;
+        break;
+      case "mentorAndMentee":
+        user["mentee"] = true;
         user["mentor"] = true;
         break;
       default:
@@ -107,30 +128,54 @@ class MyProfile extends Component {
     return user;
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-
+  handleRegistration = () => {
     let newUser = { ...this.state };
 
     newUser = this.updateMenteeMentor(newUser);
 
-    // TODO: use a nice UI to inform the user
-    createUser(newUser)
-      .then(res => {
-        if (res.message) {
-          alert(`Error while creating user: '${res.message}'`);
-          return;
-        }
-        this.setState({ ...res });
-        alert("User was successfully created!");
-      })
-      .catch(err => alert(`Server error: '${err}'`));
+    createUser(newUser).then(res => {
+      if (res.status === "ERROR") {
+        alert(`Error while creating user: '${res.message}'`);
+        return;
+      }
+      this.setState({ ...res });
+
+      // TODO: use a nice UI to inform the user
+      alert("User was successfully created!");
+    });
+  };
+
+  handleUserUpdate = () => {
+    const updatedUser = { ...this.state };
+
+    updateUser(updatedUser).then(res => {
+      if (res.status === "ERROR") {
+        alert(`Error while updating user: '${res.message}'`);
+        return;
+      }
+      this.setState({ ...res });
+
+      // TODO: use a nice UI to inform the user
+      alert("User was successfully updated!");
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    if (this.state.isRegistration) {
+      this.handleRegistration();
+    } else {
+      // Edit user's data
+      this.handleUserUpdate();
+    }
   };
 
   renderLanguages() {
     return languages.map(({ name, label }) => {
       return (
         <label key={name} className="inline">
+          <label className="language_profile">{label}</label>
           <input
             type="checkbox"
             value="true"
@@ -138,7 +183,6 @@ class MyProfile extends Component {
             name={name}
             checked={this.state[name]}
           />
-          {label}
         </label>
       );
     });
@@ -151,10 +195,11 @@ class MyProfile extends Component {
           {label}
           <select
             name={name}
+            className="skill_level"
             value={this.state[name]}
             onChange={this.handleSkillChange}
           >
-            <option value="">N/A</option>
+            <option value="">Select</option>
             <option value="1">Basic</option>
             <option value="2">Novice</option>
             <option value="3">Intermediate</option>
@@ -167,6 +212,8 @@ class MyProfile extends Component {
   }
 
   render() {
+    const { isRegistration } = this.state;
+
     return (
       <Container>
         <form
@@ -185,6 +232,7 @@ class MyProfile extends Component {
               />
             </div>
             {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
+            {!isRegistration && <h2>Update this form with your information</h2>}
             <label>I would like to be...</label>
             <label className="inline">
               <input
@@ -194,9 +242,9 @@ class MyProfile extends Component {
                 onChange={this.handleInputChange}
                 defaultChecked={this.state.mentor}
                 required
-              />{" "}
+              />
               Mentor
-            </label>{" "}
+            </label>
             <label className="inline">
               <input
                 type="radio"
@@ -205,7 +253,7 @@ class MyProfile extends Component {
                 onChange={this.handleInputChange}
                 defaultChecked={this.state.mentee}
                 required
-              />{" "}
+              />
               Mentee
             </label>
             <br />
@@ -311,14 +359,21 @@ class MyProfile extends Component {
                   placeholder="What are your interests?"
                 />
               </label>
-              <label>Skills</label>
-              {this.renderSkills()}
-              <label className="languages">Languages</label>
-              {this.renderLanguages()}
+              <div className="skills_container_profile">
+                <div className="skills_profile">
+                  <label>Skills</label>
+                  {this.renderSkills()}
+                </div>
+                <div className="languages_profile">
+                  <label className="languages_profile">Languages</label>
+                  {this.renderLanguages()}
+                </div>
+              </div>
             </fieldset>
           </div>
           <button className="submit_button" type="submit" value="let me Be!">
-            SUBMIT YOUR INFO
+            {isRegistration && "REGISTER YOUR INFO"}
+            {!isRegistration && "UPDATE YOUR INFO"}
           </button>
         </form>
         <button className="deleteUser_button" type="submit" value="delete_user">

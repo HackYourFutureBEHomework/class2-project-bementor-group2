@@ -24,7 +24,7 @@ class SkillLevel extends Component {
     const level = e.target.value;
 
     updateSkillLevel(userId, skillName, level).then(res => {
-      if (res && res.messsage) {
+      if (res.status === "ERROR") {
         alert(`Error updating skill level for ${skillName}: '${res.message}'`);
         return;
       }

@@ -9,7 +9,7 @@ const Container = props => {
       <div className="App">
         <main>
           <Header />
-          <div className="container">{props.children}</div>
+          <div className="container_body">{props.children}</div>
           <Footer />
         </main>
       </div>

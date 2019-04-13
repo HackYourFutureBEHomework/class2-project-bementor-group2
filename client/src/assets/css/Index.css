@@ -1,12 +1,19 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  position: relative;
+  min-height: 100vh;
 }
 
 *,
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+div#root {
+  margin: 0 auto;
+  width: 100%;
 }
 
 body {
@@ -32,4 +39,7 @@ h3 {
 .imgResponsive {
   width: 100%;
   height: auto;
+}
+
+div#root {
 }

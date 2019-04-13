@@ -13,8 +13,6 @@ import { Link } from "react-router-dom";
 import { userDetails } from "../api/users";
 import Container from "./Container";
 
-import Ranking from "./UserRanking";
-
 const skills = [
   { name: "html", label: "HTML", img: HTMLLogo },
   { name: "css", label: "CSS", img: cssLogo },
@@ -31,8 +29,7 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       user: {},
-      myProfileId: "5c9cb17304131e3ebd0f80d7",
-      myUpdatedProfile: []
+      editingProfile: false
     };
   }
 
@@ -42,31 +39,6 @@ class UserProfile extends Component {
       user: user
     });
   }
-
-  // handleAddMentor = async () => {
-  //   console.log("Added:", this.state.user._id);
-  //   const myProfileId = "5c9cb17304131e3ebd0f80d7";
-  //   await userDetails(myProfileId).then(res => {
-  //     this.setState({ myUpdatedProfile: res });
-  //   });
-  //   const myUpdatedProfile = this.state.myUpdatedProfile.connectedAsMentee.push(
-  //     myProfileId
-  //   );
-  //   users.save(function(err) {
-  //     if (err) {
-  //       console.error("ERROR!");
-  //     }
-  //   });
-  // };
-
-  handleAddMentor = async () => {};
-
-  // updateLevelHandler = (skillName, level) => {
-  //   const { user } = this.state;
-  //   const skill = user.skills.find(s => s.name == skillName);
-  //   skill.level = level;
-  //   this.setState({ user });
-  // };
 
   renderSkill(userId, userSkill) {
     let skill = skills.find(e => e.name === userSkill.name);
@@ -81,18 +53,19 @@ class UserProfile extends Component {
       >
         <img src={skill.img} alt={skill.label + " skill"} />
         <span className="level">{userSkill.level}</span>
-        {/* <SkillLevel
-          userId={userId}
-          skillName={userSkill.name}
-          level={userSkill.level}
-          updateLevelHandler={this.updateLevelHandler}
-        /> */}
       </div>
     );
   }
 
+  toggleEdit = () => {
+    this.setState(prevState => ({ editingProfile: !prevState.editingProfile }));
+  };
+
+  updateUser = user => {
+    this.setState({ user, editingProfile: false });
+  };
+
   render() {
-    // console.log(this.state.myUpdatedProfile);
     const {
       _id,
       mentor,
@@ -110,20 +83,27 @@ class UserProfile extends Component {
       es,
       ar,
       tr,
-      rus,
-      ranking
+      rus
     } = this.state.user;
 
+    const loggedInUser = {
+      _id: "5cab65c1bc1756874ff4183"
+    };
     return (
       <Container>
         <div className="userFormFull">
           <Link className="backButton" to="/users" />
+          {loggedInUser._id === this.state.user._id && (
+            <button className="editProfile_button" onClick={this.toggleEdit}>
+              Edit profile
+            </button>
+          )}
 
           <div className="userFormFull_container">
             <div className="detailsFull__avatar">
               <img
                 className="profileLogoFull"
-                src="https://source.unsplash.com/80x80/?face"
+                src="https://source.unsplash.com/90x90/?face"
                 alt="name"
               />
               <div className="detailsFull__tag">
@@ -137,19 +117,6 @@ class UserProfile extends Component {
               <div className="detailsFull__name">
                 <span className="detailsFull__comment">Hi, my name is </span>
                 <span className="detailsFull__firstName">{firstName}</span>
-
-                <Ranking id={_id} ranking={ranking} />
-
-                <div className="detailsFull__role">
-                  <span className="detailsFull__comment">...I'm a </span>
-                  {mentor && (
-                    <span className="detailsFull__mentor">Mentor</span>
-                  )}
-                  {mentee && (
-                    <span className="detailsFull__mentee">Mentee</span>
-                  )}
-                </div>
-
                 <span className="detailsFull__lastName"> {lastName}</span>
               </div>
 

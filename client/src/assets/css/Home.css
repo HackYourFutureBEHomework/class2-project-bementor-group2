@@ -5,6 +5,7 @@
   justify-content: space-around;
 }
 .container_mainPage > div {
-  width: 40%;
-  margin: 20px;
+  width: 30%;
+  margin: 10px;
+  min-width: 300px;
 }

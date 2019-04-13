@@ -5,6 +5,9 @@ import Search from "./components/Search";
 import Users from "./components/Users";
 import MyProfile from "./components/MyProfile";
 import UserProfile from "./components/UserProfile";
+import Login from "./components/LogIn/LogIn.jsx";
+import RestorePassword from "./components/RestorePassword";
+import ResetPassword from "./components/ResetPassword";
 
 const App = () => (
   <div className="App">
@@ -15,6 +18,10 @@ const App = () => (
         <Route path="/search" component={Search} />
         <Route path="/users" component={Users} />
         <Route path="/myprofile" component={MyProfile} />
+        <Route path="/login" component={Login} />
+        <Route path="/restore" component={RestorePassword} />
+        <Route path="/reset" component={ResetPassword} />
+
         <Route render={() => <p>Page not found</p>} />
       </Switch>
     </BrowserRouter>

@@ -15,8 +15,9 @@ a {
   margin: 5px;
   border: 1px black;
   /* border-style: solid; */
-  box-shadow: 9px 4px 8px 0 rgba(0, 178, 101, 0.12),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 1px 1px 1px 0 rgba(0, 178, 101, 0.12),
+    1px 1px 4px 0 rgba(0, 0, 0, 0.19);
+
   max-width: 270px;
 }
 
@@ -39,11 +40,11 @@ a {
   height: 90px;
   overflow: hidden;
   position: center;
-  margin-right: 20px;
 }
 
 .details__name {
   font-size: 1.2em;
+  margin-left: 7px;
 }
 
 .details__firstName {
@@ -119,7 +120,7 @@ a {
   flex: 1;
   flex-flow: wrap;
   flex-direction: row;
-  padding-left: 2em;
+  padding-left: 0.3em;
   justify-content: center;
 }
 
@@ -127,13 +128,18 @@ a {
   margin: 2px;
 }
 
+.details__skills span {
+  width: 30%;
+  height: 2.5em;
+}
+
 .details__skills .level {
   position: relative;
-  left: -15px;
-  text-shadow: 1px 1px 2px grey;
+  left: 20px;
+  top: -17px;
   color: #212529;
   background-color: #f8f9fa;
-  display: inline-block;
+  /* display: inline-block; */
   padding: 0.25em 0.4em;
   font-size: 75%;
   font-weight: 700;

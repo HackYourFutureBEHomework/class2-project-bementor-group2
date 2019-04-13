@@ -1,15 +1,12 @@
-.body {
+.container_body {
   display: flex;
   position: relative;
   flex-direction: column;
   padding: 0;
   width: 100%;
+  padding-top: 20rem;
+  padding-bottom: 12rem;
 }
 img.content {
   padding: 2rem;
-}
-
-.container {
-  padding-top: 20rem;
-  width: 150rem;
 }

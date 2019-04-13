@@ -138,12 +138,6 @@ class UserCardSmall extends Component {
             </div>
           </div>
         </a>
-        <button
-          className="userCardSmall__deleteButton"
-          onClick={() => this.deleteUser(user)}
-        >
-          Delete user
-        </button>
       </div>
     );
   }
