@@ -9,9 +9,11 @@
   justify-content: center;
 }
 
-.searchUser input[type="text"] {
-  width: 40%;
+.searchUser input[type="text"],
+.searchUser input[type="search"] {
+  width: 25%;
   height: 30%;
+  margin: 0 10px;
 }
 
 .searchUser input[type="submit"] {

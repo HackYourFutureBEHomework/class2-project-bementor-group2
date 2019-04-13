@@ -82,10 +82,22 @@ exports.create = (req, res) => {
 };
 
 exports.search = (req, res) => {
-  const query = req.query.text;
-  const users = User.find({ $text: { $search: query } })
+  const searchParams = {};
+
+  // q is the text to be searched for, as in google.com?q=potato
+  if (req.query.q) {
+    searchParams["$text"] = {
+      $search: req.query.q
+    };
+  }
+
+  if (req.query.location) {
+    searchParams["location"] = containNoCaseHandler(req.query.location);
+  }
+
+  User.find(searchParams)
     .then(users => res.send(users))
-    .catch(err => handleServerError(err, res));
+    .catch(err => handleError(err, res));
 };
 
 //Register users

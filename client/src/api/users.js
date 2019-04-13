@@ -1,3 +1,5 @@
+import queryString from "query-string";
+
 const API_URL = "http://localhost:4000";
 
 const handleOperationError = err => console.error(err);
@@ -6,8 +8,10 @@ export const getUsers = () => {
   return fetch(`${API_URL}/users`).then(response => response.json());
 };
 
-export const searchUsers = query => {
-  return fetch(`${API_URL}/user/search?text=${query}`)
+export const searchUsers = queryParams => {
+  let queryTxt = queryString.stringify(queryParams);
+
+  return fetch(`${API_URL}/user/search?${queryTxt}`)
     .then(response => response.json())
     .catch(handleOperationError);
 };

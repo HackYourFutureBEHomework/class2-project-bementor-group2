@@ -7,10 +7,15 @@ import "../assets/css/Header.css";
 const cookies = new Cookies();
 
 class Header extends Component {
-  state = {
-    isRegistering: false,
-    isLoggingIn: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      q: "",
+      isRegistering: false,
+      isLoggingIn: false
+    };
+  }
 
   doLogout = async () => {
     cookies.remove("token");
@@ -40,16 +45,18 @@ class Header extends Component {
 
   handleHeaderSubmit = event => {
     event.preventDefault();
-    this.props.history.push(
-      "./users?search=" + encodeURIComponent(this.state.query)
-    );
+    if (!this.state.q) {
+      return;
+    }
+
+    this.props.history.push("./users?q=" + encodeURIComponent(this.state.q));
     console.log(this.state);
     console.log(this.props);
   };
 
   handleHeaderInputChanged = event => {
     this.setState({
-      query: event.target.value
+      q: event.target.value
     });
   };
 
@@ -71,7 +78,7 @@ class Header extends Component {
           >
             <input
               id="search_input"
-              name="search"
+              name="q"
               type="search"
               placeholder="Find your Mentor"
               onChange={this.handleHeaderInputChanged}
