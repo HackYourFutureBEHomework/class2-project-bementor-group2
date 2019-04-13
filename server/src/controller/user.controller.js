@@ -131,6 +131,9 @@ exports.register = async (req, res) => {
       res.status(201).send({
         message: "Your account has been created successfully"
       });
+    })
+    .catch(err => {
+      handleServerError(err, res);
     });
 };
 
