@@ -1,6 +1,5 @@
 import queryString from "query-string";
-
-const API_URL = "http://localhost:4000";
+import API_URL from "../config";
 
 const handleOperationError = err => console.error(err);
 

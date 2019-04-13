@@ -70,21 +70,6 @@ class Header extends Component {
           <div className="header_title">BeMentor.</div>
         </div>
         <div className="topnav" id="myTopnav">
-          <form
-            className="search__form"
-            action=""
-            autoComplete="on"
-            onSubmit={this.handleHeaderSubmit}
-          >
-            <input
-              id="search_input"
-              name="q"
-              type="search"
-              placeholder="Find your Mentor"
-              onChange={this.handleHeaderInputChanged}
-            />
-            <input id="search_submit" value="Search" type="submit" />
-          </form>
           {!isAuthenticated && (
             <>
               <Link to="/login">LOGIN</Link>
@@ -94,6 +79,21 @@ class Header extends Component {
 
           {isAuthenticated && (
             <>
+              <form
+                className="search__form"
+                action=""
+                autoComplete="on"
+                onSubmit={this.handleHeaderSubmit}
+              >
+                <input
+                  id="search_input"
+                  name="q"
+                  type="search"
+                  placeholder="Find your Mentor"
+                  onChange={this.handleHeaderInputChanged}
+                />
+                <input id="search_submit" value="Search" type="submit" />
+              </form>
               <Link to="#" onClick={this.doLogout}>
                 LOG OUT
               </Link>

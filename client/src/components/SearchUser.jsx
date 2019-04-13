@@ -30,7 +30,7 @@ class SearchUser extends Component {
           value={q}
           onChange={this.handleInputChanged}
           placeholder="Find your Mentor or Mentee"
-        />{" "}
+        />
         <input
           type="text"
           name="location"

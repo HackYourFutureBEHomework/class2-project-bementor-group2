@@ -102,8 +102,8 @@ exports.search = (req, res) => {
 
 //Register users
 exports.register = async (req, res) => {
-  const { password, email, lastName, firstName } = req.body;
   //form validation
+  const { password, email, lastName, firstName } = req.body;
   const existsUser = await User.findOne({ email });
   if (existsUser) {
     return handleUserError(res, "Email is already in use", 403);
@@ -131,13 +131,6 @@ exports.register = async (req, res) => {
       res.status(201).send({
         message: "Your account has been created successfully"
       });
-    })
-    .catch(err => {
-      if (err.message.indexOf("11000") != -1) {
-        handleUserError(res, "Duplicated email: " + req.body.email);
-      } else {
-        handleServerError(err, res);
-      }
     });
 };
 

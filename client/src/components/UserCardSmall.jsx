@@ -29,21 +29,6 @@ class UserCardSmall extends Component {
     this.state = { users: [] };
   }
 
-  deleteUser = userToDelete => {
-    fetch(`http://localhost:4000/user/${userToDelete._id}`, {
-      method: "DELETE"
-    })
-      .then(res => res.json())
-      .then(res => {
-        const users = [...this.state.users];
-        const index = users.findIndex(user => {
-          return users._id === userToDelete._id;
-        });
-        users.splice(index, 1);
-        this.setState({ users });
-      });
-  };
-
   renderSkill(userId, userSkill) {
     let skill = skills.find(e => e.name === userSkill.name);
     if (!skill) {

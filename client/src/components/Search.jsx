@@ -20,20 +20,6 @@ class Search extends Component {
     this.search(searchText);
   }
 
-  // search(searchText) {
-  //   const queryString = "firstName=" + searchText.toLowerCase().trim();
-
-  //   fetch(`${API_PREFIX_URL}/users?${queryString}`)
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       console.log("search: result: ", result);
-  //       this.setState({
-  //         users: result
-  //       });
-  //     })
-  //     .catch(error => console.error(error));
-  // }
-
   generateItems() {
     return this.state.users.map(
       ({ _id, firstName, secondName, location, skills, email }) => {
@@ -71,7 +57,6 @@ class Search extends Component {
           />
         </div>
         <div className="clist__contacts">
-          {/* Search results */}
           {this.generateItems()}
         </div>
       </div>
