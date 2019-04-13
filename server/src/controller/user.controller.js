@@ -91,7 +91,7 @@ exports.search = (req, res) => {
 //Register users
 exports.register = async (req, res) => {
   const { password, email, lastName, firstName } = req.body;
-  //formgit validation
+  //form validation
   const existsUser = await User.findOne({ email });
   if (existsUser) {
     return res.status(403).send({
