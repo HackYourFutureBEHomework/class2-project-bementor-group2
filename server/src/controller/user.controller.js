@@ -89,34 +89,29 @@ exports.search = (req, res) => {
 };
 
 //Register users
-exports.register = (req, res) => {
-  // const { firstName, lastName, email, password, password2 } = req.body;
-  // let errors = [];
-  // if ((!firstName || !lastName || !email || !password, !password2)) {
-  //   errors.push({ message: "Please enter all fields" });
-  // }
-  // if (password != password2) {
-  //   errors.push({ msg: 'Passwords do not match' });
-  // }
-
-  // if (password.length < 6) {
-  //   errors.push({ msg: 'Password must be at least 6 characters' });
-  // }
-
-  // if (errors.length > 0) {
-  //   res.render('register', {
-  //     errors,
-  //     name,
-  //     email,
-  //     password,
-  //     password2
-  //   });
-  const { password } = req.body;
-  //validate if email exists
-  //validate if email is valid
-  //validate if password is not in plaintext
-  //validate if lastname is passed
-  //validate if lastname is passed
+exports.register = async (req, res) => {
+  const { password, email, lastName, firstName } = req.body;
+  //formgit validation
+  const existsUser = await User.findOne({ email });
+  if (existsUser) {
+    return res.status(403).send({
+      message: "Email is already in use"
+    });
+  }
+  if (!firstName || !lastName || !email || !password) {
+    return res.status(401).send({ message: "Please enter all fields" });
+  }
+  if (password.length < 8) {
+    return res
+      .status(401)
+      .send({ message: "Password must be at least 6 characters" });
+  }
+  const pattern = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@[*[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+]*/;
+  if (!pattern.test(email)) {
+    return res
+      .status(401)
+      .send({ message: "Please provide a valid email address" });
+  }
   bcrypt
     .hash(password, 10)
     .then(hash => {
@@ -127,30 +122,6 @@ exports.register = (req, res) => {
       return user.save();
     })
     .then(user => {
-      //send email and verify
-      //       const transporter = nodemailer.createTransport({
-      //         service: "Gmail",
-      //         secure: false,
-      //         port: 587,
-      //         auth: {
-      //           user: req.body.email,
-      //           pass: password.hash
-      //         },
-      //         tls: {
-      //           rejectUnauthorized: false
-      //         }
-      //       });
-
-      //       const mailtOptions = {
-      //         from: "BeMentor.be",
-      //         to: "hassanalihazaraa@gmail.com",
-      //         subject: "Account activated",
-      //         text: "Welcome to BEMENTOR"
-      //       };
-      //       transporter.sendMail(mailtOptions, (error, info) => {
-      //         if (error) return console.log(error);
-      //         console.log("The message was sent");
-      //         console.log(info);
       res.status(201).send({
         message: "Your account has been created successfully"
       });
@@ -162,8 +133,6 @@ exports.register = (req, res) => {
         handleServerError(err, res);
       }
     });
-  // });
-  // res.redirect('/user/login');
 };
 
 exports.login = (req, res) => {
