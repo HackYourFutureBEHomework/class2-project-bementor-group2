@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Container from "../Container";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { login } from "../../api/users";
 

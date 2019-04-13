@@ -66,7 +66,9 @@ class MyProfile extends Component {
           alert(`Error fetching user data: '${res.message}'`);
           return;
         }
-        this.setState({ ...res });
+        let user = { ...res };
+        user = this.mapDatabaseToUi(user);
+        this.setState({ ...user });
       });
     }
   }
@@ -102,9 +104,9 @@ class MyProfile extends Component {
   /**
    * Updates the DB properties for mentee/mentor using the property position.
    *
-  //  * @param user
+   * @param user
    */
-  updateMenteeMentor(user) {
+  mapUiToDatabase = user => {
     switch (user.position) {
       case "mentee":
         user["mentee"] = true;
@@ -121,17 +123,35 @@ class MyProfile extends Component {
       default:
         // Should not happen because the field is required
         alert("Position is required, check the values.");
-        return;
+        return user;
     }
     delete user.position;
 
     return user;
-  }
+  };
+
+  mapDatabaseToUi = user => {
+    if (user.mentee && user.mentor) {
+      user["position"] = "mentorAndMentee";
+    } else if (user.mentee) {
+      user["position"] = "mentee";
+    } else if (user.mentor) {
+      user["position"] = "mentor";
+    } else {
+      alert("Unknown value for user mentor/mentee.");
+    }
+
+    user.skills.forEach(skill => {
+      user[skill.name] = skill.level;
+    });
+
+    return user;
+  };
 
   handleRegistration = () => {
     let newUser = { ...this.state };
 
-    newUser = this.updateMenteeMentor(newUser);
+    newUser = this.mapUiToDatabase(newUser);
 
     createUser(newUser).then(res => {
       if (res.status === "ERROR") {
@@ -146,7 +166,9 @@ class MyProfile extends Component {
   };
 
   handleUserUpdate = () => {
-    const updatedUser = { ...this.state };
+    let updatedUser = { ...this.state };
+
+    updatedUser = this.mapUiToDatabase(updatedUser);
 
     updateUser(updatedUser).then(res => {
       if (res.status === "ERROR") {
@@ -174,7 +196,7 @@ class MyProfile extends Component {
   renderLanguages() {
     return languages.map(({ name, label }) => {
       return (
-        <label key={name} className="inline">
+        <label key={name} className="inline col">
           <label className="language_profile">{label}</label>
           <input
             type="checkbox"
@@ -191,7 +213,7 @@ class MyProfile extends Component {
   renderSkills() {
     return skills.map(({ name, label }) => {
       return (
-        <label key={name} className="label-select">
+        <label key={name} className="label-select col">
           {label}
           <select
             name={name}
@@ -240,7 +262,7 @@ class MyProfile extends Component {
                 value="mentor"
                 name="position"
                 onChange={this.handleInputChange}
-                defaultChecked={this.state.mentor}
+                checked={this.state.position === "mentor"}
                 required
               />
               Mentor
@@ -251,10 +273,21 @@ class MyProfile extends Component {
                 value="mentee"
                 name="position"
                 onChange={this.handleInputChange}
-                defaultChecked={this.state.mentee}
+                checked={this.state.position === "mentee"}
                 required
               />
               Mentee
+            </label>
+            <label className="inline">
+              <input
+                type="radio"
+                value="mentorAndMentee"
+                name="position"
+                onChange={this.handleInputChange}
+                checked={this.state.position === "mentorAndMentee"}
+                required
+              />
+              Both
             </label>
             <br />
             <br />
@@ -298,7 +331,7 @@ class MyProfile extends Component {
                   required
                 />
               </label>
-              <label className="required">
+              <label className={isRegistration ? "required" : ""}>
                 Password
                 <input
                   name="password"
@@ -307,7 +340,7 @@ class MyProfile extends Component {
                   onChange={this.handleInputChange}
                   value={this.state.password}
                   placeholder="password"
-                  required
+                  required={isRegistration}
                 />
               </label>
             </fieldset>
@@ -360,11 +393,11 @@ class MyProfile extends Component {
                 />
               </label>
               <div className="skills_container_profile">
-                <div className="skills_profile">
+                <div className="skills_profile flex-grid">
                   <label>Skills</label>
                   {this.renderSkills()}
                 </div>
-                <div className="languages_profile">
+                <div className="languages_profile flex-grid">
                   <label className="languages_profile">Languages</label>
                   {this.renderLanguages()}
                 </div>

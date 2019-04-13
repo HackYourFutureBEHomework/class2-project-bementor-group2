@@ -51,7 +51,7 @@ export const updateUserRanking = (id, score) => {
 };
 
 export const updateUser = user => {
-  return fetch(`${API_URL}/user/${user.id}`, {
+  return fetch(`${API_URL}/user/${user._id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user),

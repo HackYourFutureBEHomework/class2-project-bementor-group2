@@ -51,7 +51,11 @@ class Home extends Component {
             />
             <p>
               BeMentor was created in cooperation with &nbsp;
-              <a href="http://hackyourfuture.be" target="_blank">
+              <a
+                href="http://hackyourfuture.be"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 HackYourFuture Belgium
               </a>
               , the coding school for refugees. The application was realized

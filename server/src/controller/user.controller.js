@@ -36,13 +36,16 @@ exports.update = (req, res) => {
   }
 
   const { password } = req.body;
-  bcrypt.hash(password, 10).then(hash => {
+  if (password) {
+    hash = bcrypt.hashSync(password, 10);
     req.body.password = hash;
+  } else {
+    delete req.body.password;
+  }
 
-    User.findByIdAndUpdate({ _id: req.body._id }, req.body)
-      .then(() => handleClientOk(res, "User info was updated"))
-      .catch(err => handleServerError(err, res));
-  });
+  User.findByIdAndUpdate({ _id: req.body._id }, req.body)
+    .then(() => handleClientOk(res, "User info was updated"))
+    .catch(err => handleServerError(err, res));
 };
 
 exports.delete = (req, res) => {
@@ -131,6 +134,9 @@ exports.register = async (req, res) => {
       res.status(201).send({
         message: "Your account has been created successfully"
       });
+    })
+    .catch(err => {
+      handleServerError(err, res);
     });
 };
 
