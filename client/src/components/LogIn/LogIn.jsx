@@ -56,7 +56,6 @@ class Login extends Component {
             <h1>Welcome to BeMentor</h1>
             {!loginFail && (
               <label className="registerNotification">
-                Incorrect email or password. Try again or
                 <Link to="/myprofile"> register</Link>
               </label>
             )}
