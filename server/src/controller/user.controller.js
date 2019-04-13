@@ -94,23 +94,17 @@ exports.register = async (req, res) => {
   //form validation
   const existsUser = await User.findOne({ email });
   if (existsUser) {
-    return res.status(403).send({
-      message: "Email is already in use"
-    });
+    return handleUserError(res, "Email is already in use", 403);
   }
   if (!firstName || !lastName || !email || !password) {
-    return res.status(401).send({ message: "Please enter all fields" });
+    return handleUserError(res, "Please enter all fields", 401);
   }
   if (password.length < 8) {
-    return res
-      .status(401)
-      .send({ message: "Password must be at least 6 characters" });
+    return handleUserError(res, "Password must be at least 8 characters", 401);
   }
   const pattern = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@[*[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+]*/;
   if (!pattern.test(email)) {
-    return res
-      .status(401)
-      .send({ message: "Please provide a valid email address" });
+    return handleUserError(res, "Please provide a valid email address", 401);
   }
   bcrypt
     .hash(password, 10)
