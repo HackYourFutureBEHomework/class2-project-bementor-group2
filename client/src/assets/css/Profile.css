@@ -80,16 +80,23 @@ label.label-select {
   margin: auto;
 }
 
-div.skills_profile {
-  width: 50%;
+.flex-grid {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
-div.languages_profile {
-  width: 50%;
-  display: flex;
-  margin: 0;
-  flex-direction: column;
+
+.col {
+  flex: 1;
+}
+
+@media screen and (max-width: 600px) {
+  label.label-select {
+    width: 100%;
+  }
+
+  .flex-grid {
+    display: block;
+  }
 }
 
 label.languages_profile {

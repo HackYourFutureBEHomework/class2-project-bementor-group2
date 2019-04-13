@@ -196,7 +196,7 @@ class MyProfile extends Component {
   renderLanguages() {
     return languages.map(({ name, label }) => {
       return (
-        <label key={name} className="inline">
+        <label key={name} className="inline col">
           <label className="language_profile">{label}</label>
           <input
             type="checkbox"
@@ -213,7 +213,7 @@ class MyProfile extends Component {
   renderSkills() {
     return skills.map(({ name, label }) => {
       return (
-        <label key={name} className="label-select">
+        <label key={name} className="label-select col">
           {label}
           <select
             name={name}
@@ -393,11 +393,11 @@ class MyProfile extends Component {
                 />
               </label>
               <div className="skills_container_profile">
-                <div className="skills_profile">
+                <div className="skills_profile flex-grid">
                   <label>Skills</label>
                   {this.renderSkills()}
                 </div>
-                <div className="languages_profile">
+                <div className="languages_profile flex-grid">
                   <label className="languages_profile">Languages</label>
                   {this.renderLanguages()}
                 </div>
