@@ -87,7 +87,7 @@ class Header extends Component {
 
           {isAuthenticated && (
             <>
-              <Link to="#" onClick={this.doLogout}>
+              <Link to="/logout" onClick={this.doLogout}>
                 LOG OUT
               </Link>
               <Link to="/myprofile">MY PROFILE</Link>

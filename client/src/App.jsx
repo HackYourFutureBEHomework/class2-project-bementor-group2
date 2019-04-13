@@ -6,6 +6,8 @@ import Users from "./components/Users";
 import MyProfile from "./components/MyProfile";
 import UserProfile from "./components/UserProfile";
 import Login from "./components/LogIn/LogIn.jsx";
+import Logout from "./components/LogIn/Logout.jsx";
+
 import RestorePassword from "./components/RestorePassword";
 import ResetPassword from "./components/ResetPassword";
 
@@ -19,6 +21,7 @@ const App = () => (
         <Route path="/users" component={Users} />
         <Route path="/myprofile" component={MyProfile} />
         <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
         <Route path="/restore" component={RestorePassword} />
         <Route path="/reset" component={ResetPassword} />
 

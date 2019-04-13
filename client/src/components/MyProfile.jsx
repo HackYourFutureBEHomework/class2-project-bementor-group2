@@ -165,6 +165,7 @@ class MyProfile extends Component {
 
     if (this.state.isRegistration) {
       this.handleRegistration();
+      this.props.history.push("/");
     } else {
       // Edit user's data
       this.handleUserUpdate();
@@ -174,7 +175,7 @@ class MyProfile extends Component {
   renderLanguages() {
     return languages.map(({ name, label }) => {
       return (
-        <label key={name} className="inline">
+        <label key={name} className="inline_profile">
           <label className="language_profile">{label}</label>
           <input
             type="checkbox"
@@ -191,11 +192,13 @@ class MyProfile extends Component {
   renderSkills() {
     return skills.map(({ name, label }) => {
       return (
-        <label key={name} className="label-select">
-          {label}
+        <div className="oneskill">
+          <label key={name} className="label-select_profile">
+            {label}
+          </label>
           <select
             name={name}
-            className="skill_level"
+            className="skill_level_profile"
             value={this.state[name]}
             onChange={this.handleSkillChange}
           >
@@ -206,7 +209,7 @@ class MyProfile extends Component {
             <option value="4">Advanced</option>
             <option value="5">Expert</option>
           </select>
-        </label>
+        </div>
       );
     });
   }
@@ -223,7 +226,11 @@ class MyProfile extends Component {
           onSubmit={this.handleSubmit}
         >
           <div className="userForm_container">
-            <h1>Welcome to BeMentor</h1>
+            {isRegistration && <h1>Welcome to BeMentor</h1>}
+            {!isRegistration && (
+              <h1>{this.state.firstName + " " + this.state.lastName}</h1>
+            )}
+
             <div className="avatar">
               <img
                 className="profileLogo"
@@ -232,7 +239,7 @@ class MyProfile extends Component {
               />
             </div>
             {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
-            {!isRegistration && <h2>Update this form with your information</h2>}
+            {!isRegistration && <h2>You may update your profile</h2>}
             <label>I would like to be...</label>
             <label className="inline">
               <input
@@ -286,30 +293,34 @@ class MyProfile extends Component {
                   required
                 />
               </label>
-              <label className="required">
-                E-mail
-                <input
-                  className="email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.handleInputChange}
-                  name="email"
-                  placeholder="Your e-mail will not be visible for others and used only for notification"
-                  required
-                />
-              </label>
-              <label className="required">
-                Password
-                <input
-                  name="password"
-                  className="password"
-                  type="password"
-                  onChange={this.handleInputChange}
-                  value={this.state.password}
-                  placeholder="password"
-                  required
-                />
-              </label>
+              {isRegistration && (
+                <div>
+                  <label className="required">
+                    E-mail
+                    <input
+                      className="email"
+                      type="email"
+                      value={this.state.email}
+                      onChange={this.handleInputChange}
+                      name="email"
+                      placeholder="Your e-mail will not be visible for others and used only for notification"
+                      required
+                    />
+                  </label>
+                  <label className="required">
+                    Password
+                    <input
+                      name="password"
+                      className="password"
+                      type="password"
+                      onChange={this.handleInputChange}
+                      value={this.state.password}
+                      placeholder="password"
+                      required
+                    />
+                  </label>
+                </div>
+              )}
             </fieldset>
             <fieldset>
               <legend>
@@ -361,7 +372,7 @@ class MyProfile extends Component {
               </label>
               <div className="skills_container_profile">
                 <div className="skills_profile">
-                  <label>Skills</label>
+                  <label className="skills_label_profile">Skills</label>
                   {this.renderSkills()}
                 </div>
                 <div className="languages_profile">
@@ -372,16 +383,10 @@ class MyProfile extends Component {
             </fieldset>
           </div>
           <button className="submit_button" type="submit" value="let me Be!">
-            {isRegistration && "REGISTER YOUR INFO"}
-            {!isRegistration && "UPDATE YOUR INFO"}
+            {isRegistration && "Let me Be!"}
+            {!isRegistration && "Update my profile"}
           </button>
         </form>
-        <button className="deleteUser_button" type="submit" value="delete_user">
-          Delete user
-        </button>
-        <button className="updateUser_button" type="submit" value="update_user">
-          Update user
-        </button>
       </Container>
     );
   }

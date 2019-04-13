@@ -30,7 +30,6 @@ class Login extends Component {
           alert(`Error while login: '${res.message}'`);
           return;
         }
-
         this.props.history.push("/");
       })
 
@@ -44,6 +43,7 @@ class Login extends Component {
 
   render() {
     const { loginFail } = this.state;
+    console.log(loginFail);
 
     return (
       <Container>
@@ -54,7 +54,7 @@ class Login extends Component {
         >
           <div className="userForm_container">
             <h1>Welcome to BeMentor</h1>
-            {!loginFail && (
+            {loginFail && (
               <label className="registerNotification">
                 Incorrect email or password. Try again or
                 <Link to="/myprofile"> register</Link>
@@ -88,7 +88,7 @@ class Login extends Component {
               Forgot your password?
             </Link>
           </div>
-          <button className="submit_button" type="submit" value="let me Be!">
+          <button className="submit_button" type="submit" value="I am back!">
             I am back!
           </button>
         </form>

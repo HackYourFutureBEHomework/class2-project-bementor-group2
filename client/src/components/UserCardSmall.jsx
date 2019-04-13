@@ -83,7 +83,7 @@ class UserCardSmall extends Component {
                 <span className="details__separator"> and </span>
               )}
               {user.mentee && <span className="details__mentee">Mentee</span>}
-              <UserRanking id={user._id} ranking={user.ranking} />
+              {/*<UserRanking id={user._id} ranking={user.ranking} />*/}
             </div>
           </div>
           <span className="details__tagline">{user.tagline}</span>

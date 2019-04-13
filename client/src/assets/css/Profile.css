@@ -13,7 +13,7 @@ body {
 }
 
 .userForm {
-  width: 80%;
+  width: 70%;
 }
 
 form.userForm {
@@ -74,16 +74,26 @@ input[type="checkbox"] {
   padding: 30px;
 }
 
-label.label-select {
-  padding: 30px;
+label.label-select_profile {
+  display: inline-block;
   width: 30%;
-  margin: auto;
+  float: left;
+  margin-top: 4px;
+  padding-right: 0.5em;
+}
+label.label-select {
+  padding: 0px;
+}
+
+select.skill_level_profile {
+  width: 30%;
 }
 
 div.skills_profile {
   width: 50%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 div.languages_profile {
   width: 50%;
@@ -97,7 +107,10 @@ label.languages_profile {
   margin-bottom: 1em;
 }
 label.language_profile {
-  margin: 0.5em;
+  width: 30%;
+  display: inline-block;
+  /* width: 140px; */
+  text-align: right;
 }
 
 select.skill_level {
@@ -107,18 +120,31 @@ select.skill_level {
 }
 
 select {
-  display: block;
+  /* display: block;
   padding: 30px;
-  width: 10%;
+  width: 10%; */
 }
 
 .skills_container {
   display: flex;
   flex-direction: row;
 }
+.skills_container_profile {
+  display: flex;
+  flex-direction: row;
+}
 
+label.inline_profile {
+  margin: 0em;
+}
 label.inline {
   margin: 0.5em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.skills_label_profile {
+  margin-bottom: 1em;
 }
 
 button {
@@ -148,8 +174,6 @@ legend {
 }
 
 label {
-  display: block;
-  margin-bottom: 8px;
 }
 
 label.label-select {

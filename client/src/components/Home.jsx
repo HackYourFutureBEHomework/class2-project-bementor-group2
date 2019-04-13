@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Container from "./Container";
 import Foto from "../assets/images/ticket.jpg";
 import HYFClass from "../assets/images/hyf-group-picture.jpg";
-import SecondClass from "../assets/images/secondclass.JPG";
+import SecondClass from "../assets/images/secondclass.jpg";
 
 import "../assets/css/Body.css";
 import "../assets/css/Home.css";
