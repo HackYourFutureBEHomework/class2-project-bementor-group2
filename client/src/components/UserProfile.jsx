@@ -109,7 +109,7 @@ class UserProfile extends Component {
               <div className="detailsFull__tag">
                 <span className="detailsFull__tagline">{tagline}</span>
               </div>
-              <a className="addButton" href="#" onClick={this.handleAddMentor}>
+              <a className="addButton" href="." onClick={this.handleAddMentor}>
                 Add as mentor
               </a>
             </div>

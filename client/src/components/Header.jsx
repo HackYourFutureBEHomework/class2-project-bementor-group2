@@ -38,7 +38,9 @@ class Header extends Component {
     this.setState({ isRegistering: false });
   };
 
-  myFunction() {
+  myFunction(event) {
+    event.preventDefault();
+
     var x = document.getElementById("myTopnav");
     x.className = x.className === "topnav" ? "topnav responsive" : "topnav";
   }
@@ -61,7 +63,7 @@ class Header extends Component {
   };
 
   render() {
-    const { isRegistering, isLoggingIn } = this.state;
+    // const { isRegistering, isLoggingIn } = this.state;
     const isAuthenticated = !!cookies.get("token");
 
     return (
@@ -103,7 +105,7 @@ class Header extends Component {
           )}
 
           <Link to="/home">HOME</Link>
-          <a href="#" className="icon" onClick={this.myFunction}>
+          <a href="." className="icon" onClick={this.myFunction}>
             <i className="fa fa-bars" />
           </a>
         </div>

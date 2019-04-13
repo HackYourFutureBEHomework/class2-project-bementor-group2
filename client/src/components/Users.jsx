@@ -82,7 +82,7 @@ class Users extends Component {
           <div className="users-loader">
             Loading users...
             <br />
-            <i class="fa fa-spinner fa-spin" aria-hidden="true" />{" "}
+            <i className="fa fa-spinner fa-spin" aria-hidden="true" />{" "}
           </div>
         )}
         {!this.state.loading && <div className="container">{$users}</div>}

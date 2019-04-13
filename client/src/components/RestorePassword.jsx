@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Container from "./Container";
 import { Link } from "react-router-dom";
 
-import { login } from "../api/users";
+// import { login } from "../api/users";
 
 import "../assets/css/Login.css";
 
