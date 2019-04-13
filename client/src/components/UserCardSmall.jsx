@@ -23,6 +23,15 @@ const skills = [
   { name: "git", label: "GitHub", img: GithubLogo }
 ];
 
+const levelNames = [
+  "None",
+  "Basic",
+  "Novice",
+  "Intermediate",
+  "Advanced",
+  "Expert"
+];
+
 class UserCardSmall extends Component {
   constructor(props) {
     super(props);
@@ -34,13 +43,11 @@ class UserCardSmall extends Component {
     if (!skill) {
       return "";
     }
+    const skillTitle = skill.label + ": " + levelNames[userSkill.level];
 
     return (
-      <span
-        key={userId + "_" + userSkill.name}
-        title={"Level " + userSkill.level}
-      >
-        <img src={skill.img} alt={skill.label + " skill"} />{" "}
+      <span key={userId + "_" + userSkill.name} title={skillTitle}>
+        <img src={skill.img} alt={skillTitle} />{" "}
         <span className="level">{userSkill.level}</span>
       </span>
     );
@@ -85,38 +92,44 @@ class UserCardSmall extends Component {
                 {user.eng && (
                   <img
                     src="https://www.countryflags.io/gb/shiny/32.png"
-                    alt="english"
+                    alt="English"
+                    title="English"
                   />
                 )}
                 {user.fr && (
                   <img
                     src="https://www.countryflags.io/fr/shiny/32.png"
-                    alt="french"
+                    alt="French"
+                    title="French"
                   />
                 )}
                 {user.du && (
                   <img
                     src="https://www.countryflags.io/nl/shiny/32.png"
-                    alt="dutch"
+                    alt="Dutch"
+                    title="Dutch"
                   />
                 )}
                 {user.es && (
                   <img
                     src="https://www.countryflags.io/es/shiny/32.png"
-                    alt="spanish"
+                    alt="Spanish"
+                    title="Spanish"
                   />
                 )}
-                {user.ar && <img src={ArabFlag} alt="spanish" />}
+                {user.ar && <img src={ArabFlag} alt="Arabic" title="Arabic" />}
                 {user.rus && (
                   <img
                     src="https://www.countryflags.io/ru/shiny/32.png"
-                    alt="russian"
+                    alt="Russian"
+                    title="Russian"
                   />
                 )}
                 {user.tr && (
                   <img
                     src="https://www.countryflags.io/tr/shiny/32.png"
-                    alt="turkish"
+                    alt="Turkish"
+                    title="Turkish"
                   />
                 )}
               </div>
